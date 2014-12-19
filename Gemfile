@@ -3,9 +3,13 @@ ruby '2.1.0'
 
 # Uncomment the database that you have configured in config/database.yml
 # ----------------------------------------------------------------------
-# gem 'mysql2'
+gem 'mysql2'
 # gem 'sqlite3'
-gem 'pg'
+# gem 'pg'
+
+gem 'haml-rails', '~> 0.4.0'
+gem 'ajax-chosen-rails'
+gem 'chosen-rails'
 
 # Removes a gem dependency
 def remove(name)
