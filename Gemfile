@@ -8,8 +8,6 @@ gem 'mysql2'
 # gem 'pg'
 
 gem 'haml-rails', '~> 0.4.0'
-gem 'ajax-chosen-rails'
-gem 'chosen-rails'
 
 # Removes a gem dependency
 def remove(name)
