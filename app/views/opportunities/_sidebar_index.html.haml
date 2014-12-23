@@ -17,4 +17,11 @@
     %div{:style => "float:right;"}
       %b= @opportunity_stage_total[:all]
     %b #{t :total_opportunities}
+
+
+
+  .check_box
+    %div{:style => "float:right;"}
+      %b= @opportunity_stage_total[:all] - @opportunity_stage_total[:other]
+    %b #{t "Total minus other"}
   = hook(:index_opportunity_sidebar_bottom, self)
