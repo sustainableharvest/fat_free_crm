@@ -19,9 +19,10 @@
     %b #{t :total_opportunities}
 
 
-
+  / My addition. Should probably make a scope or method
   .check_box
     %div{:style => "float:right;"}
-      %b= @opportunity_stage_total[:all] - @opportunity_stage_total[:other]
-    %b #{t "Total minus other"}
+      %b= @opportunity_stage_total[:all] - @opportunity_stage_total[:closed_lost] - @opportunity_stage_total[:closed_won]
+    %b #{t "Total Active"}
+
   = hook(:index_opportunity_sidebar_bottom, self)
