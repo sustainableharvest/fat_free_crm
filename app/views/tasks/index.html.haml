@@ -5,6 +5,12 @@
   .title
     = t(:completed_tasks)
     = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
+
+- elsif @view == "all"
+  - buckets = @all_tasks
+  = render "title"
+  - binding.pry
+
 - else
   - buckets = Setting.unroll(:task_bucket)
   = render "title"
