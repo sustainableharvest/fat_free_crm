@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   def index
     @view = view
     @tasks = Task.find_all_grouped(current_user, @view)
-    @all_tasks = Task.all
+    @all_tasks = Task.find_all(@view)
 
     respond_with @tasks do |format|
       format.xls { render :layout => 'header' }

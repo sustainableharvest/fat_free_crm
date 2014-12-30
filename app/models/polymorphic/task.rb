@@ -178,6 +178,16 @@ class Task < ActiveRecord::Base
     ]
   end
 
+  def self.find_all(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    settings = Setting.task_bucket
+    Hash[
+      settings.map do |key, value|
+        [key, send(key).send(view)]
+      end
+    ]
+  end
+
   # Returns bucket if it's empty (i.e. we have to hide it), nil otherwise.
   #----------------------------------------------------------------------------
   def self.bucket_empty?(bucket, user, view = "pending")
