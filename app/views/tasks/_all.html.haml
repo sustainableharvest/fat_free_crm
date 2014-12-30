@@ -1,24 +1,30 @@
-%li.highlight
-  / .strip
-  /   ="test"
-
-  .indentwide
-    = all.name
-    &ndash;
-    = "Created by " + all.user.name
-    = (", assigned to " + all.assignee.name) if all.assigned_to
+%li.highlight[all]
   / - unless all.category.blank?
   /   .strip{:class => all.category}= t(all.category)
   / - else
   /   .strip.white #{t :other}
 
-/   .tools
+  .tools
+    = "Hello."
 
+  .indentwide
+    = all.name
+    = "| "
+    %tt
+      = link_to(all.user.name, user_path(all.user))
+      - if all.assigned_to
+        = ", assigned to"
+        = link_to(all.assignee.name, user_path(all.assignee))
+      = "| "
 
-/   .indent
-/     =all.name
-/     &ndash;
-/     %tt
-/     - unless all.background_info.blank?
-/       %div
-/         %dt= all.background_info
+      - if all.bucket == "due_asap"
+        %span.urgent= t(:task_due_now)
+
+      - else
+        - if all.at_specific_time?
+          - if all.due_at < Time.now
+            %span.urgent= t("Overdue")
+          - else
+            = t(:task_due_in, distance_of_time_in_words(Time.now, all.due_at))
+            = '(' << l(all.due_at.localtime, :format => :mmddhhss) << ')'
+
