@@ -14,6 +14,7 @@ class TasksController < ApplicationController
     @view = view
     @tasks = Task.find_all_grouped(current_user, @view)
     @all_tasks = Task.find_all(@view)
+    @all_tasks_by_user = Task.find_all_by_user(@view)
 
     respond_with @tasks do |format|
       format.xls { render :layout => 'header' }

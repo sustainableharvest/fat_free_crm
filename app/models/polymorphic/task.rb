@@ -178,8 +178,8 @@ class Task < ActiveRecord::Base
     ]
   end
 
-# CREATED BY SCOTT - Returns list of all non-completed tasks, regardless of user.
-#--------------------------------------------------------------------------------
+  # CREATED BY SCOTT - Returns list of all non-completed tasks, regardless of user.
+  #--------------------------------------------------------------------------------
   def self.find_all(view)
     return {} unless ALLOWED_VIEWS.include?(view)
     settings = Setting.task_bucket
@@ -188,6 +188,18 @@ class Task < ActiveRecord::Base
         [key, send(key).pending]
       end
     ]
+  end
+
+  # CREATED BY SCOTT - Returns all non-completed tasks by user
+  #--------------------------------------------------------------------------------
+  def self.find_all_by_user(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    users_arr = User.all
+    users = Hash[users_arr.collect { |v| [v]}]
+    users.each_pair do |user, value|
+      tasks = Task.where(:user_id => user.id, :completed_at => nil)
+      users[user] = tasks
+    end
   end
 
   # Returns bucket if it's empty (i.e. we have to hide it), nil otherwise.
