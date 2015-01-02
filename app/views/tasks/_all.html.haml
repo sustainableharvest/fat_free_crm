@@ -1,8 +1,8 @@
 %li.highlight[all]
-  / - unless all.category.blank?
-  /   .strip{:class => all.category}= t(all.category)
-  / - else
-  /   .strip.white #{t :other}
+  - unless all.category.blank?
+    .strip{:class => all.category}= t(all.category)
+  - else
+    .strip.white #{t :other}
 
   .tools
     = "Hello."
@@ -12,11 +12,9 @@
       %strike= all.name
     - else
       = all.name
-    = "| "
     %tt
-      = link_to(all.user.name, user_path(all.user))
       - if all.assigned_to
-        = ", assigned to"
+        = " | Assigned to"
         = link_to(all.assignee.name, user_path(all.assignee))
       = "| "
 

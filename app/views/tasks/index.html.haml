@@ -20,13 +20,22 @@
       = render "empty"
 
 - else
-  .log#tasks
-  / - binding.pry
-  - buckets.each do |value, key|
-    %div{ :id => "list_#{key}" }
-      %h3{:class => key}= t(value)
-      .bucket{:id => key}= render :partial => @view, :collection => @all_tasks[key] || [], :locals => { :bucket => key }
-  - if @all_tasks.values.flatten.blank?
-    = render "empty"
+  .log
+    %h2= t("Created by: ")
+    - @all_tasks_by_user.each_key do |user|
+      %div{ :id => "list_#{user.name}"}
+        %h3=t(user.name.titleize)
+        .bucket{:id => user}= render :partial => @view, :collection => @all_tasks_by_user[user] || []
+      - if @all_tasks_by_user.values.flatten.blank?
+        = render "empty"
 
-#export= render "shared/export"
+/ Works for listing by due status
+/
+/   - buckets.each do |value, key|
+/     %div{ :id => "list_#{key}" }
+/       %h3{:class => key}= t(value)
+/       .bucket{:id => key}= render :partial => @view, :collection => @all_tasks[key] || [], :locals => { :bucket => key }
+/   - if @all_tasks.values.flatten.blank?
+/     = render "empty"
+
+/ #export= render "shared/export"
