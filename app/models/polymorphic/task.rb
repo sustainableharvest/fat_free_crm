@@ -178,12 +178,14 @@ class Task < ActiveRecord::Base
     ]
   end
 
+# CREATED BY SCOTT - Returns list of all non-completed tasks, regardless of user.
+#--------------------------------------------------------------------------------
   def self.find_all(view)
     return {} unless ALLOWED_VIEWS.include?(view)
     settings = Setting.task_bucket
     Hash[
       settings.map do |key, value|
-        [key, send(key).send(view)]
+        [key, send(key).pending]
       end
     ]
   end

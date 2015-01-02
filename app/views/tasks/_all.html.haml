@@ -8,7 +8,10 @@
     = "Hello."
 
   .indentwide
-    = all.name
+    - if all.completed?
+      %strike= all.name
+    - else
+      = all.name
     = "| "
     %tt
       = link_to(all.user.name, user_path(all.user))
