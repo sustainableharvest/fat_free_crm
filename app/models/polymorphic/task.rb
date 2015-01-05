@@ -202,6 +202,14 @@ class Task < ActiveRecord::Base
     end
   end
 
+
+  # CREATED BY SCOTT - Returns total number of non-completed tasks
+  #--------------------------------------------------------------------------------
+  def self.count_all_tasks(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    task_total = Task.pending.count
+  end
+
   # Returns bucket if it's empty (i.e. we have to hide it), nil otherwise.
   #----------------------------------------------------------------------------
   def self.bucket_empty?(bucket, user, view = "pending")

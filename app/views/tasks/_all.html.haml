@@ -5,7 +5,7 @@
     .strip.white #{t :other}
 
   .tools
-    = "Hello."
+    = link_to(t(:edit), edit_task_path(all, :view => @view, :previous => "crm.find_form('edit_task')"), :method => :get, :remote => true)
 
   .indentwide
     - if all.completed?
