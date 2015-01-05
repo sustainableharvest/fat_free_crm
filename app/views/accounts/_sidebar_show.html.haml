@@ -40,6 +40,9 @@
   %li
     %dt= @account.assigned_to ? truncate(@account.assignee.full_name, :length => 16) : nil
     %tt #{t :assigned_to}:
+  %li
+    %dt= @account.status ? t(@account.status) : nil
+    %tt #{t :status}:
 
   - unless @account.background_info.blank?
     .caption #{t :background_info}
