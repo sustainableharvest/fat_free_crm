@@ -38,6 +38,8 @@ en-US:
   partner: Partner
   reseller: Reseller
   vendor: Vendor
+  roaster: Roaster
+  other: Others
   planned: Planned
   started: Started
   on_hold: On Hold
@@ -510,7 +512,7 @@ en-US:
   assign_to: Assign to
   assigned_tab: Assigned
   assigned_tasks: Assigned Tasks
-  category: Category
+  category: Type
   completed_tab: Completed
   completed_tasks: Completed Tasks
   create_task: Create Task
