@@ -6,13 +6,26 @@
         %div{:style => "float:right;"}
           = @task_total[key]
         = task_filter_checkbox(@view, key, @task_total[key]) << " " << t(value)
-  - else # @view == "completed"
+  - elsif @view == "completed"
     - Setting.unroll(:task_completed).each do |value, key|
       .check_box{:style => "border-bottom: 1px silver dotted;"}
         %div{:style => "float:right;"}
           = @task_total[key]
         = task_filter_checkbox(@view, key, @task_total[key]) << " " << t(value)
-  .check_box
-    %div{:style => "float:right;"}
-      %b= @task_total[:all]
-    %b== #{t(:total_tasks, t(@view + '_tasks'))}
+  - else #@view == "all"
+    - @all_tasks_by_user.each_key do |user, key|
+      .check_box{:style => "border-bottom: 1px silver dotted;"}
+        %div{:style => "float:right;"}
+          = @all_tasks_by_user[user].count
+        = task_filter_checkbox(@view, key, @all_tasks_by_user[user].count) << " " << t(user.name.titleize)
+
+  - if @view != "all"      
+    .check_box
+      %div{:style => "float:right;"}
+        %b= @task_total[:all]
+      %b== #{t(:total_tasks, t(@view + '_tasks'))}
+  - else # if @view == "all"
+    .check_box
+      %div{:style => "float:right;"}
+        %b= @total_number_of_tasks
+      %b== #{t(:total_tasks, t('tasks'))}

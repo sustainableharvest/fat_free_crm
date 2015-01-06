@@ -5,16 +5,37 @@
   .title
     = t(:completed_tasks)
     = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
+
 - else
   - buckets = Setting.unroll(:task_bucket)
   = render "title"
 
-.log#tasks
-  - buckets.each do |value, key|
-    %div{ hidden_if(filtered_out?(@view, key)), :id => "list_#{key}" }
-      %h3{:class => key}= t(value)
-      .bucket{:id => key}= render :partial => @view, :collection => @tasks[key] || [], :locals => { :bucket => key }
-  - if @tasks.values.flatten.blank?
-    = render "empty"
+- if @view != "all"
+  .log#tasks
+    - buckets.each do |value, key|
+      %div{ hidden_if(filtered_out?(@view, key)), :id => "list_#{key}" }
+        %h3{:class => key}= t(value)
+        .bucket{:id => key}= render :partial => @view, :collection => @tasks[key] || [], :locals => { :bucket => key }
+    - if @tasks.values.flatten.blank?
+      = render "empty"
+
+- else
+  .log
+    %h2= t("Created by: ")
+    - @all_tasks_by_user.each_key do |user|
+      %div{ :id => "list_#{user.name}"}
+        %h3=t(user.name.titleize)
+        .bucket{:id => user}= render :partial => @view, :collection => @all_tasks_by_user[user] || []
+      - if @all_tasks_by_user.values.flatten.blank?
+        = render "empty"
+
+/ Works for listing by due status
+/
+/   - buckets.each do |value, key|
+/     %div{ :id => "list_#{key}" }
+/       %h3{:class => key}= t(value)
+/       .bucket{:id => key}= render :partial => @view, :collection => @all_tasks[key] || [], :locals => { :bucket => key }
+/   - if @all_tasks.values.flatten.blank?
+/     = render "empty"
 
 #export= render "shared/export"

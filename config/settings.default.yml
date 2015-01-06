@@ -391,6 +391,15 @@ task_bucket:
   - :due_next_week
   - :due_later
 
+all_tasks:
+  - :overdue
+  - :due_asap
+  - :due_today
+  - :due_tomorrow
+  - :due_this_week
+  - :due_next_week
+  - :due_later
+
 task_completed:
   - :completed_today
   - :completed_yesterday

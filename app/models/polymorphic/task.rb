@@ -27,7 +27,7 @@
 
 class Task < ActiveRecord::Base
   attr_accessor :calendar
-  ALLOWED_VIEWS = %w(pending assigned completed)
+  ALLOWED_VIEWS = %w(pending assigned completed all)
 
   belongs_to :user
   belongs_to :assignee, :class_name => "User", :foreign_key => :assigned_to
@@ -176,6 +176,38 @@ class Task < ActiveRecord::Base
         [ key, view == "assigned" ? assigned_by(user).send(key).pending : my(user).send(key).send(view) ]
       end
     ]
+  end
+
+  # CREATED BY SCOTT - Returns list of all non-completed tasks, regardless of user.
+  #--------------------------------------------------------------------------------
+  def self.find_all(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    settings = Setting.task_bucket
+    Hash[
+      settings.map do |key, value|
+        [key, send(key).pending]
+      end
+    ]
+  end
+
+  # CREATED BY SCOTT - Returns all non-completed tasks by user
+  #--------------------------------------------------------------------------------
+  def self.find_all_by_user(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    users_arr = User.all
+    users = Hash[users_arr.collect { |v| [v]}]
+    users.each_pair do |user, value|
+      tasks = Task.where(:user_id => user.id, :completed_at => nil).sort_by! { |task| [task.due_at ? 0 : 1, task.due_at] }
+      users[user] = tasks
+    end
+  end
+
+
+  # CREATED BY SCOTT - Returns total number of non-completed tasks
+  #--------------------------------------------------------------------------------
+  def self.count_all_tasks(view)
+    return {} unless ALLOWED_VIEWS.include?(view)
+    task_total = Task.pending.count
   end
 
   # Returns bucket if it's empty (i.e. we have to hide it), nil otherwise.

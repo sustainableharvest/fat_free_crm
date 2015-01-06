@@ -13,6 +13,9 @@ class TasksController < ApplicationController
   def index
     @view = view
     @tasks = Task.find_all_grouped(current_user, @view)
+    @all_tasks = Task.find_all(@view)
+    @all_tasks_by_user = Task.find_all_by_user(@view)
+    @total_number_of_tasks = Task.count_all_tasks(@view)
 
     respond_with @tasks do |format|
       format.xls { render :layout => 'header' }
@@ -183,6 +186,7 @@ private
   def update_sidebar
     @view = view
     @task_total = Task.totals(current_user, @view)
+    @all_tasks_total = Task.find_all(@view)
 
     # Update filters session if we added, deleted, or completed a task.
     if @task
