@@ -197,7 +197,7 @@ class Task < ActiveRecord::Base
     users_arr = User.all
     users = Hash[users_arr.collect { |v| [v]}]
     users.each_pair do |user, value|
-      tasks = Task.where(:user_id => user.id, :completed_at => nil)
+      tasks = Task.where(:user_id => user.id, :completed_at => nil).sort_by! { |task| [task.due_at ? 0 : 1, task.due_at] }
       users[user] = tasks
     end
   end
