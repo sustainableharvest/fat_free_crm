@@ -81,7 +81,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier',     '>= 1.0.3'
   gem 'execjs'
-  gem 'therubyracer', :platform => :ruby unless ENV["CI"]
+  gem 'therubyracer', '~> 0.12', :platform => :ruby unless ENV["CI"]
 end
 
 gem 'turbo-sprockets-rails3'
