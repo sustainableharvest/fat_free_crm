@@ -1,0 +1,17 @@
+opportunity_default_stage: :initial_interest
+
+opportunity_stage:
+  - :initial_interest
+  - :sampling
+  - :reviewing_offer
+  - :negotiation
+  - :closed_won
+  - :closed_lost
+
+opportunity_stage_color:
+  :initial_interest : Silver
+  :sampling         : PaleGoldenRod
+  :reviewing_offer  : Salmon
+  :negotiation      : Gold
+  :closed_won       : Orchid
+  :closed_lost      : Turquoise
