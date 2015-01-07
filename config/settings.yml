@@ -15,3 +15,11 @@ opportunity_stage_color:
   :negotiation      : Gold
   :closed_won       : Orchid
   :closed_lost      : Turquoise
+
+account_category:
+  - :roaster
+  - :other
+
+account_category_color:
+  :roaster  : skyblue
+  :other    : bisque
