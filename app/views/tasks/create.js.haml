@@ -17,11 +17,6 @@
       crm.flash('notice', true);
       $('#recently').replaceWith('#{ j render(:partial => "shared/recently") }');
 
-    / - elsif @view == "all"
-    /   $('#flash').html('#{j t(:task_created)');
-    /   crm.flash('notice', true);
-    /   $('#recently').replaceWith('#{ j render(:partial => "shared/recently") }');
-
     - else # Show newly created task by inserting its div into appropriate bucket; then update tasks sidebar.
       - bucket = @task.computed_bucket
       $('#list_#{bucket}').show();

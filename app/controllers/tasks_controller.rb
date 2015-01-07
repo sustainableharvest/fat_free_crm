@@ -72,6 +72,7 @@ class TasksController < ApplicationController
   def create
     @view = view
     @task = Task.new(params[:task]) # NOTE: we don't display validation messages for tasks.
+    @all_tasks_by_user = Task.find_all_by_user(@view)
 
     respond_with(@task) do |format|
       if @task.save
