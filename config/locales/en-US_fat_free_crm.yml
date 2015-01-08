@@ -507,7 +507,7 @@ en-US:
     probability'
   past_due: past due, was expected to close %{value} ago
   probability: Probability
-  probability_number: and %{value} probability
+  probability_number: '%{value} probability'
   save_opportunity: Save Opportunity
   stage: Stage
   total_opportunities: Total Opportunities
