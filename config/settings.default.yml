@@ -71,8 +71,8 @@
   :enable_starttls_auto       : true
   :port                       : "587"
   :authentication             : :plain
-  :user_name                  : ENV['EMAIL_USER_NAME']
-  :password                   : ENV['EMAIL_PASSWORD']
+  :user_name                  : 
+  :password                   : 
 
 # Settings for the Email dropbox (IMAP)
 # - Connection settings for the IMAP account, server and folders.
