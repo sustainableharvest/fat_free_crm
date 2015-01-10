@@ -66,14 +66,13 @@
 # Uncomment to set up for your specific mailer
 #------------------------------------------------------------------------------
 :smtp:
-  :address                    : "smtp.gmail.com"        # e.g. smtp.gmail.com
-  :from                       : "scott@sustainableharvest.com"        # e.g. no-reply@your-domain.com
-  :enable_starttls_auto       : true
-  :port                       : "587"
-  :authentication             : :plain
-  :user_name                  : "scott@sustainableharvest.com"
-  :password                   : "mdCictyD321"
-
+  :address                    :  # e.g. smtp.gmail.com
+  :from                       :  # e.g. no-reply@your-domain.com
+  :enable_starttls_auto       : 
+  :port                       : 
+  :authentication             : 
+  :user_name                  : 
+  :password                   : 
 # Settings for the Email dropbox (IMAP)
 # - Connection settings for the IMAP account, server and folders.
 #------------------------------------------------------------------------------

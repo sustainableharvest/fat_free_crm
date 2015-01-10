@@ -3,18 +3,21 @@
   - @stage.each do |value, key|
     .check_box{:style => "border-bottom: 1px silver dotted;"}
       %div{:style => "float:right;"}
+        = number_to_currency(@opportunity_amount_total[key] || 0, :precision => 0) + " | "
         = @opportunity_stage_total[key]
       = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
       = label_tag(key, value)
 
   .check_box{:style => "border-bottom: 1px silver dotted;"}
     %div{:style => "float:right;"}
+      = number_to_currency(@opportunity_amount_total[:other] || 0, :precision => 0) + " | "
       = @opportunity_stage_total[:other]
     = opportunity_stage_checkbox("other", @opportunity_stage_total[:other])
     = label_tag(:other, t(:other))
 
   .check_box
     %div{:style => "float:right;"}
+      %t= number_to_currency(@opportunity_amount_total[:all] || 0, :precision => 0)
       %b= @opportunity_stage_total[:all]
     %b #{t :total_opportunities}
   = hook(:index_opportunity_sidebar_bottom, self)
