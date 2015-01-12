@@ -165,6 +165,19 @@ class Opportunity < ActiveRecord::Base
     opportunity
   end
 
+  # CREATED BY SCOTT
+  # Returns total amount for all opportunities, or for all opportunities with a certain stage
+  # ------------------------------------------------------------------------------------------------
+  def self.total_amounts(scope = all)
+    result = 0
+    if scope == all
+      Opportunity.my.each { |opp| result += opp.amount if opp.amount }
+    else
+      Opportunity.my.where(:stage => scope.to_s ).each { |opp| result += opp.amount if opp.amount }
+    end
+    result
+  end
+
   private
   # Make sure at least one user has been selected if the contact is being shared.
   #----------------------------------------------------------------------------

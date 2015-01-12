@@ -197,11 +197,16 @@ private
       instance_variable_set("@#{related}", @opportunity.send(related)) if called_from_landing_page?(related.to_s.pluralize)
     else
       @opportunity_stage_total = { :all => Opportunity.my.count, :other => 0 }
+      @opportunity_amount_total = {:all => Opportunity.total_amounts}
+      staged_total = 0
       @stage.each do |value, key|
         @opportunity_stage_total[key] = Opportunity.my.where(:stage => key.to_s).count
+        @opportunity_amount_total[key] = Opportunity.total_amounts(key)
+        staged_total += Opportunity.total_amounts(key)
         @opportunity_stage_total[:other] -= @opportunity_stage_total[key]
       end
       @opportunity_stage_total[:other] += @opportunity_stage_total[:all]
+      @opportunity_amount_total[:other] = @opportunity_amount_total[:all] - staged_total
     end
   end
 
