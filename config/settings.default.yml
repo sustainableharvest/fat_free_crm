@@ -67,13 +67,13 @@
 #------------------------------------------------------------------------------
 :smtp:
 
-  :address                    :  # e.g. smtp.gmail.com
-  :from                       :  # e.g. no-reply@your-domain.com
-  :enable_starttls_auto       : 
-  :port                       : 
-  :authentication             : 
-  :user_name                  : 
-  :password                   : 
+  :address                    : smtp.gmail.com # e.g. smtp.gmail.com
+  :from                       : scott@sustainableharvest.com # e.g. no-reply@your-domain.com
+  :enable_starttls_auto       : true
+  :port                       : 587
+  :authentication             : 'plain'
+  :user_name                  : <%= ENV['GMAIL_USER_NAME'] %>
+  :password                   : <%= ENV['GMAIL_PASSWORD'] %>
 # Settings for the Email dropbox (IMAP)
 # - Connection settings for the IMAP account, server and folders.
 #------------------------------------------------------------------------------
