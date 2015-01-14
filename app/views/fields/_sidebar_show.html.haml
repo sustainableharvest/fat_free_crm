@@ -7,3 +7,8 @@
       - fg.each do |field|
         - if (value = field.render_value(asset)).present?
           == #{field.label}:<br /> <b>#{truncate(value, :length => 35)}</b><br />
+  - else
+    %div
+    - unless field_group.name == 'custom_fields'
+      .caption #{field_group.label_i18n}
+      = "No " + field_group.name + " information"
