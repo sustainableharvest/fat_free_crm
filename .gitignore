@@ -23,6 +23,8 @@ Gemfile.ci.lock
 public/avatars/**/*
 public/assets
 
+latest.dump
+
 tmp
 Design
 .bundle
