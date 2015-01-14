@@ -86,6 +86,8 @@ class Opportunity < ActiveRecord::Base
 
   validates_presence_of :cf_sample_shipment_date, :if => :sample_shipped?
 
+  before_save :default_follow_up
+
   after_create  :increment_opportunities_count
   after_destroy :decrement_opportunities_count
 
@@ -185,6 +187,15 @@ class Opportunity < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def sample_shipped?
     cf_sample_status.present?
+  end
+
+  # CREATED BY SCOTT
+  # Assigns default follow-up date if none entered
+  #----------------------------------------------------------------------------
+  def default_follow_up
+    if self.sample_shipped?
+      self.cf_follow_up_date = (self.cf_sample_shipment_date + 14) if self.cf_follow_up_date.nil?
+    end
   end
 
   private
