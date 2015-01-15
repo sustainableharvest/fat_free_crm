@@ -186,7 +186,7 @@ class Opportunity < ActiveRecord::Base
   # Checks if a sample has been shipped
   #----------------------------------------------------------------------------
   def sample_shipped?
-    cf_sample_status.present?
+    cf_sample_status.present? && cf_sample_status != "Sample Requested"
   end
 
   # CREATED BY SCOTT
