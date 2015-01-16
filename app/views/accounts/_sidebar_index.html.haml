@@ -1,3 +1,4 @@
+
 .filters#filters
   .caption= t :account_categories
   - Setting.account_category.each do |key|
@@ -15,4 +16,8 @@
 
   .caption= t :account_statuses
   - Setting.account_status.each do |key|
-    = t key
+    .check_box{:style => "border-bottom: 1px silver dotted;"}
+      %div{:style => "float:right;"}
+        = @account_status_total[key]
+      = account_category_checkbox(key, @account_status_total[key])
+      = label_tag(key, t(key))

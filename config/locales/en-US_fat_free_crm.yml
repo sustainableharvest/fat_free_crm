@@ -39,7 +39,8 @@ en-US:
   reseller: Reseller
   vendor: Vendor
   roaster: Roaster
-  other: Others
+  non_roaster: Non Roaster
+  other: Other
   planned: Planned
   started: Started
   on_hold: On Hold
@@ -56,7 +57,6 @@ en-US:
   self: Self Generated
   web: Website
   word_of_mouth: Word of Mouth
-  other: Other
   prospecting: Prospecting
   analysis: Analysis
   presentation: Presentation

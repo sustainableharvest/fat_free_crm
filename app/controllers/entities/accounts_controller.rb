@@ -153,6 +153,13 @@ private
     ]
     categorized = @account_category_total.values.sum
     @account_category_total[:all] = Account.my.count
-    @account_category_total[:other] = @account_category_total[:all] - categorized
+    # @account_category_total[:other] = @account_category_total[:all] - categorized
+
+    @account_status_total = Hash[
+      Setting.account_status.map do |key|
+        [key, Account.my.where(:cf_status => key.to_s.titleize).count ]
+      end  
+    ]
+
   end
 end

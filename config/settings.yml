@@ -18,7 +18,7 @@ opportunity_stage_color:
 
 account_category:
   - :roaster
-  - :other
+  - :non_roaster
 
 account_category_color:
   :roaster  : skyblue
