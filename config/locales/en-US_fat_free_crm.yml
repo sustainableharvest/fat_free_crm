@@ -343,6 +343,8 @@ en-US:
   phone_small: phone
   phone_toll_free: Toll-free
   pipeline: Pipeline
+  prospect: Prospect
+  qualified_lead: Qualified Lead
   same_as_billing: same as billing
   save_account: Save Account
   share_with: Share it with the following people
@@ -354,6 +356,7 @@ en-US:
 
   # Views -> Campaigns.
   #----------------------------------------------------------------------------
+  account_statuses: Account Statuses
   actual: Actual
   actual_performance: Actual Performance
   budget: Budget

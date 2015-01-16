@@ -12,3 +12,7 @@
       %b= @account_category_total[:all]
     %b #{t :total_accounts}
   = hook(:index_account_sidebar_bottom, self)
+
+  .caption= t :account_statuses
+  - Setting.account_status.each do |key|
+    = t key

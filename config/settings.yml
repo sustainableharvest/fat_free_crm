@@ -23,3 +23,9 @@ account_category:
 account_category_color:
   :roaster  : skyblue
   :other    : bisque
+
+account_status:
+  - :prospect
+  - :qualified_lead
+  - :target
+  - :customer
