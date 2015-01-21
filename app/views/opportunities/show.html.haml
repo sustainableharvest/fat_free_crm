@@ -5,22 +5,8 @@
   -# default view
 
   = styles_for :task, :contact
-
   = render 'opportunities/title_bar', :opportunity => @opportunity
-  %div{ :style => "width:100%;" }
-    %div{ :style => "width:33%; float:left;"}
-      %ul
-      - @opportunity.attributes.each_pair do |att, value|
-        %li= att + ": " + value.to_s
-    %div{ :style => "width:33%; display:inline-block;"}
-      %ul
-      - @opportunity.attributes.each_pair do |att, value|
-        %li= att
-    %div{ :style => "width:33%; float:right;"}
-      %ul
-      - @opportunity.attributes.each_pair do |att, value|
-        %li= att
-
+  = render 'opportunities/overview', :opportunity => @opportunity
 
   = render "comments/new", :commentable => @opportunity
   = render :partial => "shared/timeline", :collection => @timeline

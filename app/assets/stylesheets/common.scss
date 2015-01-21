@@ -460,7 +460,7 @@ $sidebar_width: 210px;
 
 // Sidebar, filters, and selectors.
 //------------------------------------------------------------------------------
-.filters, .panel {
+.filters, .panel, .overview {
   background: snow;
   margin: 0px 0px 12px 0px;
   padding: 6px 8px 6px 8px;
@@ -506,6 +506,36 @@ $sidebar_width: 210px;
       font-size: 11px; }
     &.last {
       border-bottom: none; } }
+  &#recently {
+    background: floralwhite; }
+  &#summary {
+    background: oldlace;
+    p {
+      margin: 4px 0px 4px 0px; } } }
+
+.overview {
+  overflow: auto;
+  background: oldlace;
+  h4 {
+    font-size: 13px;
+    font-weight: bold; }
+  ul {
+    float: left;
+    width: 25%;
+    li {
+      border-bottom: 1px silver dotted;
+      font-size: 12px;
+      list-style: none;
+      dt {
+        font-size: 11px;
+        font-weight: bold;
+        float: right;
+        margin-right: 10%; }
+      tt {
+        font-size: 11px; }
+      &.last {
+        border-bottom: none; } }
+  }
   &#recently {
     background: floralwhite; }
   &#summary {
