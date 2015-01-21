@@ -1,0 +1,30 @@
+%br
+.overview
+  %ul
+    %li
+      %tt #{t :stage}:
+      %dt= @opportunity.stage ? t(@opportunity.stage) : t(:other)
+    %li 
+      %tt #{t :amount}:
+      %dt= @opportunity.amount ? number_to_currency(@opportunity.amount, :precision => 2) : t(:n_a)
+  %ul
+    %li
+      %tt #{t :close_date}:
+      %dt= @opportunity.closes_on ? t(@opportunity.closes_on.strftime("%m/%d/%Y")) : t(:n_a)
+    %li
+      %tt #{t :weighted_amount}:
+      %dt= @opportunity.weighted_amount ? number_to_currency(@opportunity.weighted_amount, :precision => 2) : t(:n_a)
+  %ul
+    %li
+      %tt #{t :probability}:
+      %dt= @opportunity.probability ? t(@opportunity.probability) : t(:n_a)
+    %li
+      %tt #{t :assigned_to}:
+      %dt= @opportunity.assigned_to ? truncate(@opportunity.assignee.full_name, :length => 16) : nil
+  %ul
+    %li
+      %tt #{t :account}:
+      %dt= @opportunity.account ? t(@opportunity.account) : t(:n_a)
+    %li
+      %tt #{t :campaign}:
+      %dt= @opportunity.campaign ? t(@opportunity.campaign) : t(:n_a)
