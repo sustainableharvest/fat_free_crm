@@ -84,7 +84,7 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [ :probability, :amount, :discount ], :allow_nil => true
   validate :users_for_shared_access
 
-  validates_presence_of :cf_sample_shipment_date, :if => :sample_shipped?
+  validates_presence_of :cf_sample_shipment_date, :if => :sample_shipped?, :message => "-> Must enter a shipment date if sample has been shipped."
 
   before_save :default_follow_up
 
