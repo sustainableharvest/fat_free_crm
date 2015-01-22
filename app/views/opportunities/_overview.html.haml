@@ -24,7 +24,7 @@
   %ul
     %li
       %tt #{t :account}:
-      %dt= @opportunity.account ? t(@opportunity.account) : t(:n_a)
+      %dt= @opportunity.account ? t(truncate(@opportunity.account.name, :length => 20)) : t(:n_a)
     %li
       %tt #{t :campaign}:
-      %dt= @opportunity.campaign ? t(@opportunity.campaign) : t(:n_a)
+      %dt= @opportunity.campaign ? t(truncate(@opportunity.campaign.name, :length => 20)) : t(:n_a)
