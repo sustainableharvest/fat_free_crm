@@ -207,6 +207,14 @@ private
       end
       @opportunity_stage_total[:other] += @opportunity_stage_total[:all]
       @opportunity_amount_total[:other] = @opportunity_amount_total[:all] - staged_total
+
+      @samples = { 
+        :not_sent => Opportunity.my.where(:cf_sample_status => "").count,
+        :sample_requested => Opportunity.my.where(:cf_sample_status => "Sample Requested").count,
+        :sample_sent => Opportunity.my.where(:cf_sample_status => "Sample Sent").count,
+        :sample_approved => Opportunity.my.where(:cf_sample_status => "Sample Approved").count,
+        :sample_rejected => Opportunity.my.where(:cf_sample_status => "Sample Rejected").count
+      }
     end
   end
 

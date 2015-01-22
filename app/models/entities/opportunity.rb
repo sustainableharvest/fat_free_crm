@@ -84,6 +84,10 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [ :probability, :amount, :discount ], :allow_nil => true
   validate :users_for_shared_access
 
+  validates_presence_of :cf_sample_shipment_date, :if => :sample_shipped?, :message => "-> Must enter a shipment date if sample has been shipped."
+
+  before_save :default_follow_up
+
   after_create  :increment_opportunities_count
   after_destroy :decrement_opportunities_count
 
@@ -176,6 +180,22 @@ class Opportunity < ActiveRecord::Base
       Opportunity.my.where(:stage => scope.to_s ).each { |opp| result += opp.amount if opp.amount }
     end
     result
+  end
+
+  # CREATED BY SCOTT
+  # Checks if a sample has been shipped
+  #----------------------------------------------------------------------------
+  def sample_shipped?
+    cf_sample_status.present? && cf_sample_status != "Sample Requested"
+  end
+
+  # CREATED BY SCOTT
+  # Assigns default follow-up date if none entered
+  #----------------------------------------------------------------------------
+  def default_follow_up
+    if self.sample_shipped?
+      self.cf_follow_up_date = (self.cf_sample_shipment_date + 14) if self.cf_follow_up_date.nil?
+    end
   end
 
   private
