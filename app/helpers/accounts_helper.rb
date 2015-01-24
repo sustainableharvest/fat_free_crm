@@ -11,6 +11,20 @@ module AccountsHelper
     entity_filter_checkbox(:category, category, count)
   end
 
+  def account_status_checkbox(status, count)
+    checked = (session["#{controller_name}_filter"].present? ? session["#{controller_name}_filter"].split(",").include?(status.to_s) : count.to_i > 0)
+    url = url_for(:action => :filter)
+    onclick = %Q{
+      $('#loading').show();
+      $.post('#{url}', {status: this.value, checked: this.checked}, function () {
+        $('#loading').hide();
+      });
+    }.html_safe
+
+    # binding.pry
+    check_box_tag("#{status}[]", status.to_s, checked, :id => status.to_s, :onclick => onclick)
+  end
+
   # Quick account summary for RSS/ATOM feeds.
   #----------------------------------------------------------------------------
   def account_summary(account)

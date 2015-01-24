@@ -115,7 +115,10 @@ class AccountsController < EntitiesController
   #----------------------------------------------------------------------------
   def filter
     session[:accounts_filter] = params[:category]
+    session[:accounts_filter] = params[:status] if params[:status]
     @accounts = get_accounts(:page => 1, :per_page => params[:per_page])
+
+    # binding.pry
 
     respond_with(@accounts) do |format|
       format.js { render :index }

@@ -12,12 +12,12 @@
     %div{:style => "float:right;"}
       %b= @account_category_total[:all]
     %b #{t :total_accounts}
-  = hook(:index_account_sidebar_bottom, self)
 
   .caption= t :account_statuses
   - Setting.account_status.each do |key|
     .check_box{:style => "border-bottom: 1px silver dotted;"}
       %div{:style => "float:right;"}
         = @account_status_total[key]
-      = account_category_checkbox(key, @account_status_total[key])
+      = account_status_checkbox(key, @account_status_total[key])
       = label_tag(key, t(key))
+  = hook(:index_account_sidebar_bottom, self)

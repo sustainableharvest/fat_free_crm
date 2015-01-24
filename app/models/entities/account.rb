@@ -46,6 +46,7 @@ class Account < ActiveRecord::Base
   scope :state, ->(filters) {
     where('category IN (?)' + (filters.delete('other') ? ' OR category IS NULL' : ''), filters)
   }
+  scope :other_state, ->(filters) { where(:cf_status => filters)}
   scope :created_by,  ->(user) { where(:user_id => user.id) }
   scope :assigned_to, ->(user) { where(:assigned_to => user.id) }
 

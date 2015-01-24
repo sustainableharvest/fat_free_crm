@@ -137,15 +137,15 @@ private
     self.current_query = query
     advanced_search = params[:q].present?
     wants = request.format
-
+    # binding.pry
     scope = entities.merge(ransack_search.result(:distinct => true))
-
+    # binding.pry
     # Get filter from session, unless running an advanced search
     unless advanced_search
       filter = session[:"#{controller_name}_filter"].to_s.split(',')
       scope = scope.state(filter) if filter.present?
     end
-
+    binding.pry
     scope = scope.text_search(query)              if query.present?
     scope = scope.tagged_with(tags, :on => :tags) if tags.present?
 
@@ -154,7 +154,7 @@ private
       order = current_user.pref[:"#{controller_name}_sort_by"] || klass.sort_by
       scope = scope.order(order)
     end
-
+    # binding.pry
     @search_results_count = scope.count
 
     # Pagination is disabled for xls and csv requests
@@ -166,7 +166,7 @@ private
       end
       scope = scope.paginate(:page => current_page, :per_page => per_page)
     end
-
+    # binding.pry
     scope
   end
 

@@ -400,6 +400,7 @@ module ApplicationHelper
         $('#loading').hide();
       });
     }.html_safe
+    # binding.pry
     check_box_tag("#{name}[]", value, checked, :id => value, :onclick => onclick)
   end
 
