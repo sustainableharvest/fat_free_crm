@@ -43,10 +43,19 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :billing_address,  :allow_destroy => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
   accepts_nested_attributes_for :shipping_address, :allow_destroy => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
 
-  scope :state, ->(filters) {
+  scope :first_state, ->(filters) {
     where('category IN (?)' + (filters.delete('other') ? ' OR category IS NULL' : ''), filters)
   }
-  scope :other_state, ->(filters) { where(:cf_status => filters)}
+  scope :other_state, -> (filters) { where(:cf_status => filters) }
+  scope :state, ->(filters) { 
+    if filters.include?("roaster") || filters.include?("non_roaster")
+      first_state(filters).where(:cf_status => filters).empty? ? 
+      first_state(filters) : first_state(filters).where(:cf_status => filters)
+    else
+      other_state(filters)
+    end
+  }
+
   scope :created_by,  ->(user) { where(:user_id => user.id) }
   scope :assigned_to, ->(user) { where(:assigned_to => user.id) }
 

@@ -138,14 +138,24 @@ private
     advanced_search = params[:q].present?
     wants = request.format
     # binding.pry
+    stuff = entities.merge(ransack_search.result(:distinct => true))
     scope = entities.merge(ransack_search.result(:distinct => true))
     # binding.pry
     # Get filter from session, unless running an advanced search
     unless advanced_search
       filter = session[:"#{controller_name}_filter"].to_s.split(',')
+      cf_statuses = ["prospect", "qualified_lead", "target", "customer"]
+      filter.each do |f|
+        if cf_statuses.include?(f)
+          filter[filter.index(f)] = f.titleize
+        end
+      end
+      # binding.pry
       scope = scope.state(filter) if filter.present?
+
+      # scope << entities.merge(ransack_search.result(:distinct => true)).other_state(filter) if filter.present?
     end
-    binding.pry
+    # binding.pry
     scope = scope.text_search(query)              if query.present?
     scope = scope.tagged_with(tags, :on => :tags) if tags.present?
 
