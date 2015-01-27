@@ -20,11 +20,11 @@
       %dt= @opportunity.probability ? t(@opportunity.probability) : t(:n_a)
     %li
       %tt #{t :assigned_to}:
-      %dt= @opportunity.assigned_to ? truncate(@opportunity.assignee.full_name, :length => 16) : nil
+      %dt= @opportunity.assigned_to ? link_to(truncate(@opportunity.assignee.full_name, :length => 16), user_path(@opportunity.assignee)) : nil
   %ul
     %li
       %tt #{t :account}:
-      %dt= @opportunity.account ? t(truncate(@opportunity.account.name, :length => 20)) : t(:n_a)
+      %dt= @opportunity.account ? link_to(t(truncate(@opportunity.account.name, :length => 20)), account_path(@opportunity.account)) : t(:n_a)
     %li
       %tt #{t :campaign}:
-      %dt= @opportunity.campaign ? t(truncate(@opportunity.campaign.name, :length => 20)) : t(:n_a)
+      %dt= @opportunity.campaign ? link_to(t(truncate(@opportunity.campaign.name, :length => 20)), campaign_path(@opportunity.campaign)) : t(:n_a)
