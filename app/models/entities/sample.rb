@@ -11,7 +11,7 @@ class Sample < ActiveRecord::Base
   has_paper_trail :ignore => [ :subscribed_users ]
   has_fields
   exportable
-  # sortable :by => []
+  sortable :by => ["created_at DESC"], :default => "created_at DESC"
 
   has_ransackable_associations %w(opportunities tags comments)
   ransack_can_autocomplete

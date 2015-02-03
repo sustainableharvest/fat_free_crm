@@ -1,0 +1,7 @@
+%li.highlight[sample]
+  - if sample.state
+    .strip{:class => sample.state}= t(sample.state)
+  - else
+    .strip.white #{t :other}
+
+  = hook(:sample_bottom, self, :sample => sample)

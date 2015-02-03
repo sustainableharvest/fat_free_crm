@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150203175254) do
+ActiveRecord::Schema.define(:version => 20150203190411) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -353,20 +353,22 @@ ActiveRecord::Schema.define(:version => 20150203175254) do
   add_index "preferences", ["user_id", "name"], :name => "index_preferences_on_user_id_and_name"
 
   create_table "samples", :force => true do |t|
-    t.string  "state",                     :limit => 32
-    t.integer "opportunity_id"
-    t.string  "type",                      :limit => 32
-    t.string  "description"
-    t.integer "rits_purchase_contract_id"
-    t.string  "pricing_type",              :limit => 12
-    t.string  "producer",                  :limit => 64
-    t.decimal "quoted_price",                            :precision => 8, :scale => 2
-    t.decimal "sh_margin",                               :precision => 8, :scale => 2
-    t.decimal "sh_fee",                                  :precision => 8, :scale => 2
-    t.decimal "differential",                            :precision => 8, :scale => 2
-    t.date    "delivery_month"
-    t.decimal "fob_price",                               :precision => 8, :scale => 2
-    t.integer "user_id"
+    t.string   "state",                     :limit => 32
+    t.integer  "opportunity_id"
+    t.string   "type",                      :limit => 32
+    t.string   "description"
+    t.integer  "rits_purchase_contract_id"
+    t.string   "pricing_type",              :limit => 12
+    t.string   "producer",                  :limit => 64
+    t.decimal  "quoted_price",                            :precision => 8, :scale => 2
+    t.decimal  "sh_margin",                               :precision => 8, :scale => 2
+    t.decimal  "sh_fee",                                  :precision => 8, :scale => 2
+    t.decimal  "differential",                            :precision => 8, :scale => 2
+    t.date     "delivery_month"
+    t.decimal  "fob_price",                               :precision => 8, :scale => 2
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", :force => true do |t|

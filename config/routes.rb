@@ -126,6 +126,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :samples, :id => /\d+/ do
+    collection do
+      
+    end
+    member do
+
+    end
+  end
+
   resources :tasks, :id => /\d+/ do
     collection do
       post :filter
