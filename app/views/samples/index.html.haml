@@ -1,8 +1,9 @@
 = render 'entities/title_bar'
 
-- if @samples.any?
-  = render @samples
-- else
-  = render "shared/empty"
+.list#samples
+  - if @samples.any?
+    = render @samples
+  - else
+    = render "shared/empty"
 
 = hook(:sample_index_after, self)

@@ -4,4 +4,10 @@
   - else
     .strip.white #{t :other}
 
+  %ul.tools
+    = "Edit | Delete"
+
+  .indent
+    %tt
+      = "Sample " + sample.id.to_s
   = hook(:sample_bottom, self, :sample => sample)
