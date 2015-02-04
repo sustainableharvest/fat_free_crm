@@ -1,0 +1,16 @@
+= simple_form_for(@sample, :html => one_submit_only, :remore => true) do |f|
+  = link_to_close new_sample_path
+  = f.hidden_field :user_id
+
+  = f.error_messages :object_name => t('sample')
+
+  = render "samples/top_section", :f => f
+  = render "fields/edit_custom_field_group", :f => f
+  = render "shared/add_comment",        :f => f
+  = render "fields/groups",             :f => f
+  / = render "entities/permissions",      :f => f, :entity => @sample
+
+  .buttonbar
+    = f.submit t(:create_sample)
+    #{t :or}
+    = link_to_cancel new_sample_path

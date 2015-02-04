@@ -1,0 +1,25 @@
+= hook(:sample_top_section, self, :f => f) do
+  .section
+    %table
+      %tr
+        %td
+          .label.req.top #{t :state}:
+          = f.select :state, @state
+        %td
+          .label #{t :pricing_type}:
+          .radio_box_long
+            = f.radio_button :pricing_type, "Spot"
+            = f.label "Spot"
+            %br
+            = "Forward Pricing:"
+            %br
+            = f.radio_button :pricing_type, "Open"
+            = f.label "Open"
+            %br
+            = f.radio_button :pricing_type, "Outright"
+            = f.label "Outright"
+
+      %tr
+        %td
+          .label #{t :description}
+          = f.text_area :description, :style => "width:500px; height:120px"

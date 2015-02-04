@@ -8,6 +8,13 @@ opportunity_stage:
   - :closed_won
   - :closed_lost
 
+sample_state:
+  - :sample_requested
+  - :sample_shipped
+  - :pending_approval
+  - :rejected
+  - :approved
+
 opportunity_stage_color:
   :initial_interest : Silver
   :sampling         : PaleGoldenRod

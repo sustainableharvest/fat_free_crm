@@ -93,6 +93,16 @@ en-US:
   closed_won: Closed/Won
   closed_lost: Closed/Lost
 
+  sample_state: Sample State
+  sample_requested: Sample Requested
+  sample_shipped: Sample Shipped
+  pending_approval: Pending Approval
+  rejected: Rejected
+  approved: Approved
+  pricing_type: Pricing Type
+
+  description: Description
+
   testing: TESTING
 
 
@@ -477,6 +487,13 @@ en-US:
   total_leads: Total Leads
   show_status_info_small: Show status information for this lead.
   show_contact_info_small: Show contact information for this lead.
+
+  # Views -> Samples
+  #----------------------------------------------------------------------------
+  sample: Sample
+  samples: Samples
+  create_sample: Create Sample
+  select_sample: Select Sample
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
