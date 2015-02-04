@@ -4,11 +4,14 @@
       %tr
         %td
           .label.req.top #{t :state}:
-          = f.select :state, @state
+          = f.select :state, @state, :style => "width:110px"
+        %td
+          .label #{t :quoted_price} #{t :currency}:
+          = f.text_field :quoted_price, :style => "width:110px; text-align:right;"
         %td
           .label_bold #{t :pricing_type}:
           .radio_box_long
-            = f.radio_button :pricing_type, "Spot"
+            = f.radio_button :pricing_type, "Spot", :checked => "checked"
             = f.label "Spot"
             %br
             = "Forward Pricing:"

@@ -6,4 +6,4 @@ crm.flip_form('create_sample');
   $('#create_task').html('#{ j render(:partial => "new") }');
   crm.set_title('create_sample', '#{j t(:create_sample) }');
 - else
-  crm.set_title('create_sample', '#{ @view == "assigned" ? t(:assigned_tasks) : t(:tasks) }');
+  crm.set_title('create_sample', '#{ @view == "assigned" ? t(:assigned_tasks) : t(:samples) }');

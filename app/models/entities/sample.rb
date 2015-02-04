@@ -18,5 +18,6 @@ class Sample < ActiveRecord::Base
 
   validates_presence_of :state
   validates :description, length: { maximum: 255 }
+  validates_numericality_of :quoted_price, :allow_nil => true
 
 end
