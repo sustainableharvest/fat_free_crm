@@ -6,7 +6,7 @@
           .label.req.top #{t :state}:
           = f.select :state, @state
         %td
-          .label #{t :pricing_type}:
+          .label_bold #{t :pricing_type}:
           .radio_box_long
             = f.radio_button :pricing_type, "Spot"
             = f.label "Spot"
