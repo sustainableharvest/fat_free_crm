@@ -1,6 +1,6 @@
 %li.highlight[sample]
   - if sample.state
-    .strip{:class => sample.state}= t(sample.state)
+    .strip{:class => sample.state}= t(short_state)
   - else
     .strip.white #{t :other}
 

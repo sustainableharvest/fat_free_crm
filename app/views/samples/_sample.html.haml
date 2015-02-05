@@ -2,4 +2,4 @@
   = render(template, :sample => sample)
 - else
   -# default view
-  = render 'samples/index_long', :sample => sample
+  = render 'samples/index_long', :sample => sample, :short_state => sample.short_state

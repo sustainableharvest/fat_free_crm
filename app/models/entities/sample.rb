@@ -36,4 +36,9 @@ class Sample < ActiveRecord::Base
     pricing_type != "spot"
   end
 
+  def short_state
+    short = state.gsub("sample_", "")
+    short = short.gsub("_approval", "").titleize.truncate(13)
+  end
+
 end
