@@ -11,11 +11,20 @@ class SamplesController < EntitiesController
   end
 
   def new
-    
+    opp = params[:related].split('_').last.to_i
+    binding.pry
+    @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
   end
 
   def create
-    
+    binding.pry
+    @comment_body = params[:comment_body]
+
+    respond_with(@sample) do |format|
+      if @sample.save
+        @sample.add_comment_by_user(@comment_body, current_user)
+      end
+    end
   end
 
   def edit

@@ -1,6 +1,7 @@
 - entity_name = controller.controller_name.singularize.underscore
 - @entity = instance_variable_get("@#{entity_name}")
 - create_id = "create_#{entity_name}"
+- binding.pry
 
 - if @entity.valid?
   $('##{create_id}_arrow').html(crm.COLLAPSED);

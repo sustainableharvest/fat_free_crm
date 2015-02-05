@@ -494,6 +494,14 @@ en-US:
   samples: Samples
   create_sample: Create Sample
   select_sample: Select Sample
+  quoted_price: Quoted Price
+  spot_pricing: Spot Pricing
+  forward_pricing: Forward Pricing
+  rits_id: RITS PC ID #
+  producer: Producer
+  differential: Differential
+  sh_fee: SH Fee
+  delivery_date: Delivery Date
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

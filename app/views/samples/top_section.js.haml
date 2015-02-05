@@ -1,0 +1,15 @@
+$(function() {
+  var toggle_quotedPrice = function(visible) {
+      if (visible){
+        $("#quotedPrice").show();
+      } else {
+        $("#quotedPrice").hide();
+      }
+  }
+
+  $("#pricing_type input").change(function(){
+    toggle_quotedPrice($(this).val()=="Open")
+  })
+
+
+})();

@@ -5,9 +5,7 @@
         %td
           .label.req.top #{t :state}:
           = f.select :state, @state, :style => "width:110px"
-        %td
-          .label #{t :quoted_price} #{t :currency}:
-          = f.text_field :quoted_price, :style => "width:110px; text-align:right;"
+        %td= spacer
         %td
           .label_bold #{t :pricing_type}:
           .radio_box_long
@@ -21,7 +19,38 @@
             %br
             = f.radio_button :pricing_type, "Outright"
             = f.label "Outright"
-
+        %td= spacer
+      %tr
+        %td
+          .label_bold #{t :spot_pricing}:
+      %tr
+        %td
+          .label #{t :rits_id}:
+          = f.text_field :rits_purchase_contract_id
+        %td= spacer
+        %td
+          .label #{t :quoted_price} #{t :currency}:
+          = f.text_field :quoted_price, :style => "width:110px; text-align:right;"
+      %tr
+        %td
+          .label_bold #{t :forward_pricing}:
+      %tr
+        %td
+          .label #{t :producer}:
+          = f.text_field :producer
+        %td= spacer
+        %td
+          .label #{t :differential} #{t :currency}:
+          = f.text_field :differential, :style => "width:110px; text-align:right;"
+        %td= spacer
+        %td
+          .label #{t :sh_fee} #{t :currency}:
+          = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
+        %td= spacer
+        %td
+          .label #{t :delivery_date}:
+          = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date'
+    %table
       %tr
         %td
           .label #{t :description}
