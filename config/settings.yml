@@ -15,6 +15,11 @@ sample_state:
   - :rejected
   - :approved
 
+sample_pricing:
+  - :spot
+  - :forward_open
+  - :forward_outright
+
 opportunity_stage_color:
   :initial_interest : Silver
   :sampling         : PaleGoldenRod

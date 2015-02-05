@@ -17,7 +17,23 @@ class Sample < ActiveRecord::Base
   ransack_can_autocomplete
 
   validates_presence_of :state
+  validates_presence_of :pricing_type
   validates :description, length: { maximum: 255 }
-  validates_numericality_of :quoted_price, :allow_nil => true
+
+  validates_numericality_of :quoted_price, :allow_nil => true, :if => :spot?
+  validates :rits_purchase_contract_id, :presence => true, :if => :spot?
+
+  validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
+  validates :sh_fee, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
+  validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
+  validates :producer, :presence => true, :if => :not_spot?
+
+  def spot?
+    pricing_type == "spot"
+  end
+
+  def not_spot?
+    pricing_type != "spot"
+  end
 
 end

@@ -502,6 +502,9 @@ en-US:
   differential: Differential
   sh_fee: SH Fee
   delivery_date: Delivery Date
+  spot: Spot
+  forward_open: Open
+  forward_outright: Outright
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

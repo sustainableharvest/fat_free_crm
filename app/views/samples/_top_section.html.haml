@@ -9,16 +9,23 @@
         %td
           .label_bold #{t :pricing_type}:
           .radio_box_long
-            = f.radio_button :pricing_type, "Spot", :checked => "checked"
-            = f.label "Spot"
-            %br
-            = "Forward Pricing:"
-            %br
-            = f.radio_button :pricing_type, "Open"
-            = f.label "Open"
-            %br
-            = f.radio_button :pricing_type, "Outright"
-            = f.label "Outright"
+            - @pricing.each_with_index do |item, index|
+              - if index == 0
+                = f.radio_button :pricing_type, item[1], :checked => "checked"
+                = f.label item[0]
+                %br
+                = "Forward Pricing:"
+                %br
+              - else
+                = f.radio_button :pricing_type, item[1]
+                = f.label item[0]
+                %br
+            / %br
+            / = f.radio_button :pricing_type, "Open"
+            / = f.label "Open"
+            / %br
+            / = f.radio_button :pricing_type, "Outright"
+            / = f.label "Outright"
         %td= spacer
       %tr
         %td

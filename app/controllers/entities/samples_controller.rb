@@ -12,12 +12,13 @@ class SamplesController < EntitiesController
 
   def new
     opp = params[:related].split('_').last.to_i
-    binding.pry
+    # binding.pry
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
+    @pricing = Setting.unroll(:sample_pricing)
   end
 
   def create
-    binding.pry
+    # binding.pry
     @comment_body = params[:comment_body]
 
     respond_with(@sample) do |format|
