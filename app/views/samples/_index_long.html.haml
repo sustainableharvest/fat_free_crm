@@ -10,4 +10,10 @@
   .indent
     %tt
       = "Sample " + sample.id.to_s
+      &ndash;
+      - user_name = sample.user.try(:full_name)
+      - if user_name
+        = t(:added_by, :time_ago => timeago(sample.created_at), :user => h(user_name)).html_safe
+      - else
+        = t(:added_ago, :value => timeago(sample.created_at)).html_safe
   = hook(:sample_bottom, self, :sample => sample)
