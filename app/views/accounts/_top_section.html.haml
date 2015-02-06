@@ -16,7 +16,7 @@
         %td= spacer
         %td
           .label #{t :type}
-          = f.select :account_type, Setting.unroll(:account_type), {:selected => (@account.account_type || "roaster").to_sym}, { :style => "width:160px" }
+          = f.select :account_type, Setting.unroll(:account_type), {:selected => ("roaster").to_sym}, { :style => "width:160px" }
         %td= spacer
         %td
           .label #{t :type}
