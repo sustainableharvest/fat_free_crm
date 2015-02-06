@@ -8,18 +8,6 @@ opportunity_stage:
   - :closed_won
   - :closed_lost
 
-sample_state:
-  - :sample_requested
-  - :sample_shipped
-  - :pending_approval
-  - :rejected
-  - :approved
-
-sample_pricing:
-  - :spot
-  - :forward_open
-  - :forward_outright
-
 opportunity_stage_color:
   :initial_interest : Silver
   :sampling         : PaleGoldenRod
@@ -27,6 +15,25 @@ opportunity_stage_color:
   :negotiation      : Gold
   :closed_won       : Orchid
   :closed_lost      : Turquoise
+
+sample_state:
+  - :sample_requested
+  - :sample_shipped
+  - :pending_approval
+  - :rejected
+  - :approved
+
+sample_state_color:
+  :sample_requested  : Silver
+  :sample_shipped    : Orchid
+  :pending_approval  : Salmon
+  :rejected          : PaleGoldenRod
+  :approved          : Gold
+
+sample_pricing:
+  - :spot
+  - :forward_open
+  - :forward_outright
 
 account_category:
   - :roaster

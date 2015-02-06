@@ -17,6 +17,10 @@
     - Setting.opportunity_stage_color.each do |key, value|
       li.opportunity .#{key} { background:#{value}; }
 
+  - if models.include?(:sample)
+    - Setting.sample_state_color.each do |key, value|
+      li.sample .#{key} { background:#{value}; }
+
   - if models.include?(:task)
     - Setting.task_category_color.each do |key, value|
       li.task .#{key} { background:#{value}; }
