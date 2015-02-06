@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141126031837) do
+ActiveRecord::Schema.define(:version => 20150206215037) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(:version => 20141126031837) do
     t.integer  "rating",                          :default => 0,        :null => false
     t.string   "category",         :limit => 32
     t.text     "subscribed_users"
+    t.string   "account_type",     :limit => 32
+    t.string   "status",           :limit => 32
+    t.string   "rits_id",          :limit => 64
+    t.text     "google_docs"
+    t.string   "salesforce_id",    :limit => 32
   end
 
   add_index "accounts", ["assigned_to"], :name => "index_accounts_on_assigned_to"
@@ -173,10 +178,27 @@ ActiveRecord::Schema.define(:version => 20141126031837) do
     t.string   "background_info"
     t.string   "skype",            :limit => 128
     t.text     "subscribed_users"
+    t.string   "salesforce_id",    :limit => 32
   end
 
   add_index "contacts", ["assigned_to"], :name => "index_contacts_on_assigned_to"
   add_index "contacts", ["user_id", "last_name", "deleted_at"], :name => "id_last_name_deleted", :unique => true
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "emails", :force => true do |t|
     t.string   "imap_message_id",                                       :null => false
@@ -335,6 +357,25 @@ ActiveRecord::Schema.define(:version => 20141126031837) do
   end
 
   add_index "preferences", ["user_id", "name"], :name => "index_preferences_on_user_id_and_name"
+
+  create_table "samples", :force => true do |t|
+    t.string   "state",                     :limit => 32
+    t.integer  "opportunity_id"
+    t.string   "type",                      :limit => 32
+    t.string   "description"
+    t.integer  "rits_purchase_contract_id"
+    t.string   "pricing_type",              :limit => 12
+    t.string   "producer",                  :limit => 64
+    t.decimal  "quoted_price",                            :precision => 8, :scale => 2
+    t.decimal  "sh_margin",                               :precision => 8, :scale => 2
+    t.decimal  "sh_fee",                                  :precision => 8, :scale => 2
+    t.decimal  "differential",                            :precision => 8, :scale => 2
+    t.date     "delivery_month"
+    t.decimal  "fob_price",                               :precision => 8, :scale => 2
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

@@ -351,6 +351,20 @@ en-US:
   website: Website
   account_with_title_department: ! '%{title}, %{department} at %{account}'
   account_with_title: ! '%{title} at %{account}'
+  international: International
+  local: Local
+  regional: Regional
+  national: National
+  type: Type
+  importer: Importer
+  roaster: Roaster
+  other: Other
+  customer: Customer
+  target: Target
+  qualified_lead: Qualified Lead
+  prospect: Prospect
+  dormant: Dormant
+
 
   # Views -> Campaigns.
   #----------------------------------------------------------------------------
@@ -523,7 +537,7 @@ en-US:
   assign_to: Assign to
   assigned_tab: Assigned
   assigned_tasks: Assigned Tasks
-  category: Type
+  category: Category
   completed_tab: Completed
   completed_tasks: Completed Tasks
   create_task: Create Task
