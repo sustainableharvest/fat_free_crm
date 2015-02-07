@@ -35,12 +35,3 @@
           = @opportunity_stage_total[key]
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)
-
-.filters#filters
-  .caption= "Sample Status"
-  - @samples.each do |value, key|
-    .check_box
-      %div{:style => "float:right;"}
-        = key
-      = value.to_s.titleize
-  / -binding.pry
