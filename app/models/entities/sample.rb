@@ -30,12 +30,24 @@ class Sample < ActiveRecord::Base
   validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
   validates :producer, :presence => true, :if => :not_spot?
 
+  # Validations for Shipment and Follow Up
+  validates :shipment_date, :presence => true, :if => :sample_shipped?
+
+
+  def sample_shipped?
+    self.state != "sample_requested"
+  end
+
+  # def shipment_and_follow_up_dates
+  #   if (self.shipment_date)
+  # end
+
   def spot?
-    pricing_type == "spot"
+    self.pricing_type == "spot"
   end
 
   def not_spot?
-    pricing_type != "spot"
+    self.pricing_type != "spot"
   end
 
   def short_state

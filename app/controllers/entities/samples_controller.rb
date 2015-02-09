@@ -21,11 +21,10 @@ class SamplesController < EntitiesController
     # binding.pry
     @comment_body = params[:comment_body]
 
-    respond_with(@sample) do |format|
-      if @sample.save
-        @sample.add_comment_by_user(@comment_body, current_user)
-      end
+    if @sample.save
+      @sample.add_comment_by_user(@comment_body, current_user)
     end
+    redirect_to opportunity_path(@sample.opportunity)
   end
 
   def edit

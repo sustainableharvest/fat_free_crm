@@ -519,6 +519,7 @@ en-US:
   spot: Spot
   forward_open: Open
   forward_outright: Outright
+  sample_shipment_date: Shipment Date
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
