@@ -20,9 +20,11 @@ class Sample < ActiveRecord::Base
   validates_presence_of :pricing_type
   validates :description, length: { maximum: 255 }
 
+  # Validations for Spot Pricing
   validates_numericality_of :quoted_price, :allow_nil => true, :if => :spot?
   validates :rits_purchase_contract_id, :presence => true, :if => :spot?
 
+  # Validations for Forward Pricing
   validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
   validates :sh_fee, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
   validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?

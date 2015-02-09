@@ -85,7 +85,7 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [ :probability, :amount, :discount ], :allow_nil => true
   validate :users_for_shared_access
 
-  before_save :default_follow_up
+  # before_save :default_follow_up
 
   after_create  :increment_opportunities_count
   after_destroy :decrement_opportunities_count
