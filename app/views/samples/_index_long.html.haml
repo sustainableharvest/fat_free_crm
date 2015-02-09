@@ -5,11 +5,15 @@
     .strip.white #{t :other}
 
   %ul.tools
-    = "Edit | Delete"
+    / - if can?(:update, sample)
+    /   %li= link_to_edit(sample)
+
+    - if can?(:destroy, sample)
+      %li= link_to (t :delete), sample_path(sample, :from => "opportunity"), method: :delete
 
   .indent
     %tt
-      = "Sample " + sample.id.to_s
+      = link_to "Sample " + sample.id.to_s, sample_path(sample)
       &ndash;
       - user_name = sample.user.try(:full_name)
       - if user_name

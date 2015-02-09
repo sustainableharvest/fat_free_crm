@@ -32,7 +32,11 @@ class SamplesController < EntitiesController
   end
 
   def destroy
-    
+    # binding.pry
+    opportunity = @sample.opportunity
+    @sample.destroy
+
+    redirect_to :back
   end
 
   private
