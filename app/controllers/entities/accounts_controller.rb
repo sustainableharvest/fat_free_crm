@@ -54,6 +54,7 @@ class AccountsController < EntitiesController
   #----------------------------------------------------------------------------
   def create
     @comment_body = params[:comment_body]
+
     respond_with(@account) do |format|
       if @account.save
         @account.add_comment_by_user(@comment_body, current_user)

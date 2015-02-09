@@ -12,7 +12,15 @@
         %td= spacer
         %td
           .label #{t :category}:
-          = f.select :category, Setting.unroll(:account_category), { :selected => (@account.category || "roaster").to_sym}, { :style => "width:160px" }
+          = f.select :category, Setting.unroll(:account_category), { :selected => (@account.category || :regional).to_sym}, { :style => "width:160px" }
+        %td= spacer
+        %td
+          .label #{t :type}
+          = f.select :account_type, Setting.unroll(:account_type), {:selected => (@account.account_type || "roaster").to_sym}, { :style => "width:160px" }
+        %td= spacer
+        %td
+          .label #{t :status}
+          = f.select :status, Setting.unroll(:account_status), {:selected => (@account.status || "customer").to_sym}, { :style => "width:160px" }
 
       - if Setting.background_info && Setting.background_info.include?(:account)
         %tr

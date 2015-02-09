@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150203190411) do
+
+ActiveRecord::Schema.define(:version => 20150206215037) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -48,6 +49,11 @@ ActiveRecord::Schema.define(:version => 20150203190411) do
     t.integer  "rating",                          :default => 0,        :null => false
     t.string   "category",         :limit => 32
     t.text     "subscribed_users"
+    t.string   "account_type",     :limit => 32
+    t.string   "status",           :limit => 32
+    t.string   "rits_id",          :limit => 64
+    t.text     "google_docs"
+    t.string   "salesforce_id",    :limit => 32
   end
 
   add_index "accounts", ["assigned_to"], :name => "index_accounts_on_assigned_to"
@@ -173,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20150203190411) do
     t.string   "background_info"
     t.string   "skype",            :limit => 128
     t.text     "subscribed_users"
+    t.string   "salesforce_id",    :limit => 32
   end
 
   add_index "contacts", ["assigned_to"], :name => "index_contacts_on_assigned_to"

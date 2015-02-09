@@ -36,9 +36,25 @@ sample_pricing:
   - :forward_outright
 
 account_category:
+  - :international
+  - :local
+  - :regional
+  - :national
+
+account_category_color:
+  :international  : Skyblue
+  :local          : Bisque
+  :regional       : PaleGoldenRod
+  :national       : Orchid
+
+account_type:
+  - :importer
   - :roaster
   - :other
 
-account_category_color:
-  :roaster  : skyblue
-  :other    : bisque
+account_status:
+  - :customer
+  - :target
+  - :qualified_lead
+  - :prospect
+  - :dormant
