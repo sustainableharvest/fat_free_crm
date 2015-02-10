@@ -3,6 +3,12 @@
   %li
     %dt= @sample.state ? t(@sample.state) : t(:other)
     %tt #{t :state}:
+  %li
+    %dt= @sample.shipment_date ? t(@sample.shipment_date.strftime("%m/%d/%Y")) : t(:n_a)
+    %tt #{t :shipment_date}:
+  %li
+    %dt= @sample.follow_up_date ? t(@sample.follow_up_date.strftime("%m/%d/%Y")) : t(:n_a)
+    %tt #{t :follow_up_date}:
   - if @sample.pricing_type == "spot"
     %li
       %dt= @sample.pricing_type ? t(@sample.pricing_type) : t(:other)
