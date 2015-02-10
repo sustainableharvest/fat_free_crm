@@ -3,8 +3,32 @@
   %li
     %dt= @sample.state ? t(@sample.state) : t(:other)
     %tt #{t :state}:
-  %li
-    %dt= @sample.rits_purchase_contract_id ? t(@sample.rits_purchase_contract_id.to_s) : t(:n_a)
+  - if @sample.pricing_type == "spot"
+    %li
+      %dt= @sample.pricing_type ? t(@sample.pricing_type) : t(:other)
+      %tt #{t :pricing_type}:
+    %li
+      %dt= @sample.rits_purchase_contract_id ? t(@sample.rits_purchase_contract_id) : t(:n_a)
+      %tt #{t :rits_id}:
+    %li
+      %dt= @sample.quoted_price ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)
+      %tt #{t :quoted_price}
+  - else
+    %li
+      %dt= @sample.pricing_type ? "Forward " + t(@sample.pricing_type) : t(:other)
+      %tt #{t :pricing_type}:
+    %li
+      %dt= @sample.producer ? t(@sample.producer) : t(:n_a)
+      %tt #{t :producer}:
+    %li
+      %dt= @sample.differential ? number_to_currency(@sample.differential, :precision => 2) : t(:n_a)
+      %tt #{t :differential}:
+    %li
+      %dt= @sample.sh_fee ? number_to_currency(@sample.sh_fee, :precision => 2) : t(:n_a)
+      %tt #{t :sh_fee}:
+    %li
+      %dt= @sample.delivery_month ? t(@sample.delivery_month.strftime("%B %Y")) : t(:n_a)
+      %tt #{t :delivery_month}:
 
   = render "fields/sidebar_show", :asset => @sample
 

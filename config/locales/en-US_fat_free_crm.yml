@@ -521,6 +521,7 @@ en-US:
   forward_outright: Outright
   sample_shipment_date: Shipment Date
   sample_summary: Sample at a Glance
+  delivery_month: Delivery Month
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
