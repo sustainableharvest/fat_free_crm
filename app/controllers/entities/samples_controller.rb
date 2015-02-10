@@ -26,10 +26,8 @@ class SamplesController < EntitiesController
 
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
-      redirect_to opportunity_path(@sample.opportunity)
     else
-      binding.pry
-      redirect_to :action => "new", :controller => "samples", :sample => params[:sample]
+      @pricing = Setting.unroll(:sample_pricing)
     end
   end
 
