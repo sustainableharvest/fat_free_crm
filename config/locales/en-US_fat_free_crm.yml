@@ -520,6 +520,7 @@ en-US:
   forward_open: Open
   forward_outright: Outright
   sample_shipment_date: Shipment Date
+  sample_summary: Sample at a Glance
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

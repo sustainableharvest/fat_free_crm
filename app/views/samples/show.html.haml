@@ -1,0 +1,9 @@
+= styles_for :task, :contact
+= render 'samples/title_bar', :sample => @sample
+
+/ = render "comments/new", :commentable => @samples
+/ = render :partial => "shared/timeline", :collection => @timeline
+
+= render "tasks/tasks", :object => @sample
+
+/ = render "contacts/contacts", :object => @sample

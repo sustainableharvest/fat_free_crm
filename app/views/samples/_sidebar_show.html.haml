@@ -1,0 +1,15 @@
+.panel#summary
+  .caption #{t :sample_summary}
+  %li
+    %dt= @sample.state ? t(@sample.state) : t(:other)
+    %tt #{t :state}:
+  %li
+    %dt= @sample.rits_purchase_contract_id ? t(@sample.rits_purchase_contract_id.to_s) : t(:n_a)
+
+  = render "fields/sidebar_show", :asset => @sample
+
+  - if @sample.tag_list.present?
+    %dt
+      .tags= tags_for_index(@sample)
+
+  = hook(:show_sample_sidebar_bottom, self, :sample => @sample)
