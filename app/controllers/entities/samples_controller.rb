@@ -11,7 +11,6 @@ class SamplesController < EntitiesController
   end
 
   def new
-    # binding.pry
     if params[:related]
       opp = params[:related].split('_').last.to_i
     end
@@ -21,7 +20,6 @@ class SamplesController < EntitiesController
   end
 
   def create
-    # binding.pry
     @comment_body = params[:comment_body]
 
     if @sample.save
@@ -36,13 +34,11 @@ class SamplesController < EntitiesController
   end
 
   def update
-    binding.pry
     @sample.update_attributes(params[:sample])
   end
 
   def destroy
-    # binding.pry
-    # opportunity = @sample.opportunity
+
     @sample.destroy
 
     respond_with(@sample) do |format|
@@ -61,7 +57,6 @@ class SamplesController < EntitiesController
   end
 
   def respond_to_destroy(method)
-    # binding.pry
     if method == :ajax
       puts 'UH OH SPAGHETTIO'
     else
