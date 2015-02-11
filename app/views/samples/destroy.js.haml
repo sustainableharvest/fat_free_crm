@@ -1,0 +1,5 @@
+- entity_name = controller.controller_name.singularize.underscore
+- @entity = instance_variable_get("@#{entity_name}")
+
+$('##{dom_id(@entity)}').css('background-color', '#ffe4e1').slideUp(250)
+$('#recently').replaceWith('#{ j render(:partial => "shared/recently") }');

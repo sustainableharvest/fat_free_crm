@@ -37,10 +37,13 @@ class SamplesController < EntitiesController
 
   def destroy
     # binding.pry
-    opportunity = @sample.opportunity
+    # opportunity = @sample.opportunity
     @sample.destroy
 
-    redirect_to :back
+    respond_with(@sample) do |format|
+      format.html { respond_to_destroy(:html) }
+      # format.js   { respond_to_destroy(:ajax) }
+    end
   end
 
   private
@@ -50,6 +53,21 @@ class SamplesController < EntitiesController
   #----------------------------------------------------------------------------
   def load_settings
     @state = Setting.unroll(:sample_state)
+  end
+
+  def respond_to_destroy(method)
+    # binding.pry
+    if method == :ajax
+      puts 'UH OH SPAGHETTIO'
+    else
+      if @sample.producer.empty?
+        flash[:notice] = t(:msg_asset_deleted, @sample.rits_purchase_contract_id)
+      else
+        flash[:notice] = t(:msg_asset_deleted, @sample.producer)
+      end
+    redirect_to opportunity_path(@sample.opportunity)
+    end
+
   end
 
 end
