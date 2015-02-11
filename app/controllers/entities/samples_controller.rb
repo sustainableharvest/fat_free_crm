@@ -36,9 +36,8 @@ class SamplesController < EntitiesController
   end
 
   def update
-    respond_with(@sample) do |format|
-      
-    end
+    binding.pry
+    @sample.update_attributes(params[:sample])
   end
 
   def destroy
