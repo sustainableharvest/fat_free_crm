@@ -32,7 +32,13 @@ class SamplesController < EntitiesController
   end
 
   def edit
+    @pricing = Setting.unroll(:sample_pricing)
+  end
 
+  def update
+    respond_with(@sample) do |format|
+      
+    end
   end
 
   def destroy
