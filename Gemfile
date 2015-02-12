@@ -7,6 +7,9 @@ ruby '2.1.0'
 # gem 'sqlite3'
 gem 'pg'
 
+gem 'twitter-typeahead-rails'
+gem 'bootstrap-multiselect-rails'
+
 # Removes a gem dependency
 def remove(name)
   @dependencies.reject! {|d| d.name == name }

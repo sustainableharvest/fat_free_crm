@@ -40,6 +40,8 @@ GEM
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
+    bootstrap-multiselect-rails (0.0.4)
+      railties (>= 3.2.0, < 5.0)
     builder (3.0.4)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -321,6 +323,10 @@ GEM
     turbo-sprockets-rails3 (0.3.14)
       railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.2.0)
+    twitter-typeahead-rails (0.10.5)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (0.3.42)
     uglifier (2.7.0)
       execjs (>= 0.3.0)
@@ -347,6 +353,7 @@ DEPENDENCIES
   acts_as_fu
   acts_as_list (~> 0.1.4)
   authlogic (= 3.1.0)
+  bootstrap-multiselect-rails
   byebug
   cancan
   capistrano
@@ -399,6 +406,7 @@ DEPENDENCIES
   thor
   timecop
   turbo-sprockets-rails3
+  twitter-typeahead-rails
   uglifier (>= 1.0.3)
   unicorn
   valium

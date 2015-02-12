@@ -47,6 +47,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def typeahead
+    render json: Accounts.where(name: params[:query])
+  end
+
 private
 
   #

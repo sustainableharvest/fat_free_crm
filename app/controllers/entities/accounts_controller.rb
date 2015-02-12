@@ -123,6 +123,10 @@ class AccountsController < EntitiesController
     end
   end
 
+  def typeahead
+    render json: Account.where(name: params[:query])
+  end
+
 private
 
   #----------------------------------------------------------------------------

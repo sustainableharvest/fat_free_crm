@@ -206,4 +206,6 @@ Rails.application.routes.draw do
     resources :plugins,  :only => :index
   end
 
+  get 'typeahead/:query' => 'accounts#typeahead'
+
 end
