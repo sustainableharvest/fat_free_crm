@@ -14,7 +14,6 @@ class SamplesController < EntitiesController
     if params[:related]
       opp = params[:related].split('_').last.to_i
     end
-    # binding.pry
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
     @pricing = Setting.unroll(:sample_pricing)
   end
