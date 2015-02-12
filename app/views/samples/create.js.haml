@@ -7,6 +7,12 @@
   / $('##{create_id}_title').html('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
   $('##{create_id}').slideUp(250);
   $('##{entity_name.pluralize}').prepend('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
+
+  - if called_from_index_page?
+    = refresh_sidebar(:index, :fitlers)
+  - else
+    - @opportunity.reload
+    = refresh_sidebar_for(:opportunities, :show, :summary)
   crm.flick('empty', 'remove');
 - else
   $('##{create_id}').html('#{ j render(:partial => "new") }');

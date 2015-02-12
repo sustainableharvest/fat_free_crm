@@ -20,6 +20,7 @@ class SamplesController < EntitiesController
 
   def create
     @comment_body = params[:comment_body]
+    @opportunity = @sample.opportunity
 
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)

@@ -524,6 +524,7 @@ en-US:
   delivery_month: Delivery Month
   shipment_date: Date Shipped
   follow_up_date: Follow Up Date
+  sample_count: Sample Count
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

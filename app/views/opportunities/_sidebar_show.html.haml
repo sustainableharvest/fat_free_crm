@@ -1,5 +1,9 @@
 .panel#summary
   .caption #{t :opportunity_summary}
+  %li
+    %dt= @opportunity.samples.blank? ? t(:n_a) : t(@opportunity.samples.count)
+    %tt #{t :sample_count}:
+
   / %li
   /   %dt= @opportunity.stage ? t(@opportunity.stage) : t(:other)
   /   %tt #{t :stage}:
