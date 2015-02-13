@@ -1,6 +1,22 @@
 = styles_for :account
 
-%input#typeahead{:type => "text"}
+%input.typeahead{:type => "text"}
+:javascript
+  var accounts = #{@names}
+  var numbers = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: accounts
+  });
+
+  // initialize the bloodhound suggestion engine
+  numbers.initialize();
+
+  // instantiate the typeahead UI
+  $('.typeahead').typeahead(null, {
+    displayKey: 'name',
+    source: numbers.ttAdapter()
+  });
 
 = render 'entities/title_bar'
 

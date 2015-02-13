@@ -1,7 +1,7 @@
 %input.typeahead{:type => "text"}
 
 :javascript
-  var accounts = '#{@accounts}'
+  var accounts = #{@names}
   var numbers = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -13,6 +13,6 @@
 
   // instantiate the typeahead UI
   $('.typeahead').typeahead(null, {
-    displayKey: 'num',
+    displayKey: 'name',
     source: numbers.ttAdapter()
   });

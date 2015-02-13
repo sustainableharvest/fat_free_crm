@@ -10,6 +10,11 @@ class AccountsController < EntitiesController
   #----------------------------------------------------------------------------
   def index
     @accounts = get_accounts(:page => params[:page], :per_page => params[:per_page])
+    @names = []
+    Account.all.each do |acc|
+      @names << {:name => acc.name}
+    end
+    @names = @names.to_json
 
     respond_with @accounts do |format|
       format.xls { render :layout => 'header' }
@@ -124,11 +129,12 @@ class AccountsController < EntitiesController
   end
 
   def typeahead
-    render json: Account.where(name: params[:query])
-  end
-
-  def typeahead
     @accounts = Account.all
+    @names = []
+    @accounts.each do |acc|
+      @names << {:name => acc.name}
+    end
+    @names = @names.to_json
   end
 
 private
