@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       post :unsubscribe
       get  :contacts
       get  :opportunities
+      get  :typeahead
     end
   end
 
@@ -205,7 +206,5 @@ Rails.application.routes.draw do
     resources :settings, :only => :index
     resources :plugins,  :only => :index
   end
-
-  get 'typeahead/:query' => 'accounts#typeahead'
 
 end
