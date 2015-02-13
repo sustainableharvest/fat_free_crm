@@ -128,7 +128,7 @@ class AccountsController < EntitiesController
   end
 
   def typeahead
-    
+    @accounts = Account.all
   end
 
 private

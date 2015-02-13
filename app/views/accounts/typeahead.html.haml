@@ -1,21 +1,11 @@
 %input.typeahead{:type => "text"}
 
 :javascript
+  var accounts = '#{@accounts}'
   var numbers = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('num'),
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: [
-      { num: 'one' },
-      { num: 'two' },
-      { num: 'three' },
-      { num: 'four' },
-      { num: 'five' },
-      { num: 'six' },
-      { num: 'seven' },
-      { num: 'eight' },
-      { num: 'nine' },
-      { num: 'ten' }
-    ]
+    local: accounts
   });
 
   // initialize the bloodhound suggestion engine
