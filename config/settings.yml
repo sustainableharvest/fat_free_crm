@@ -21,6 +21,7 @@ account_category:
   - :local
   - :regional
   - :national
+  - :other
 
 account_category_color:
   :international  : Skyblue

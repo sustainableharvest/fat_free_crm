@@ -25,6 +25,11 @@ public/assets
 
 latest.dump
 
+cust.json
+customers.json
+customers.txt
+"errors = [].txt"
+
 tmp
 Design
 .bundle

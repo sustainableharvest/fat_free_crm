@@ -1,0 +1,14 @@
+errors = {}
+a.each do |b|
+  x = Account.new(:user => User.first, :name => b["name"], :website => b["website"], :phone => b["phone"], :fax => b["fax"], :email => b["email"], :category => b["category"], :salesforce_id => b["salesforce_id"])
+  if !x.save
+    errors[x['salesforce_id']] = x.errors
+  end
+  b["contacts"].each do |c|
+    Contact.create(:user => User.first, :first_name => c["first_name"], :last_name => c["last_name"], :email => c["email"], :phone => c["phone"], :mobile => c["mobile"], :fax => c["fax"], :skype => c["skype"], :account => x)
+  end
+end
+
+
+
+Account.all.each { |n| n.destroy } && Contact.all.each { |n| n.destroy }
