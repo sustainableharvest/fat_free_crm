@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150218004252) do
+ActiveRecord::Schema.define(:version => 20150218203055) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20150218004252) do
     t.string   "rits_id",          :limit => 64
     t.text     "google_docs"
     t.string   "salesforce_id",    :limit => 32
+    t.string   "source",           :limit => 64
   end
 
   add_index "accounts", ["assigned_to"], :name => "index_accounts_on_assigned_to"

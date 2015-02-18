@@ -40,3 +40,14 @@ account_status:
   - :qualified_lead
   - :prospect
   - :dormant
+
+account_source:
+  - :campaign
+  - :cold_call
+  - :conference
+  - :online_marketing
+  - :referral
+  - :self_generated
+  - :website
+  - :word_of_mouth
+  - :other
