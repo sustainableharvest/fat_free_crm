@@ -28,6 +28,7 @@
 #  rits_id         :string
 #  google_docs     :text
 #  salesforce_id   :string
+#  source          :string
 #
 
 class Account < ActiveRecord::Base

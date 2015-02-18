@@ -21,6 +21,10 @@
         %td
           .label #{t :status}
           = f.select :status, Setting.unroll(:account_status), {:selected => (@account.status || "customer").to_sym}, { :style => "width:160px" }
+      %tr
+        %td
+          .label #{t :source}:
+          = f.select :source, Setting.unroll(:account_source), {:selected => (@account.source || "other").to_sym}, { :style => "width:160px"}
 
       - if Setting.background_info && Setting.background_info.include?(:account)
         %tr
