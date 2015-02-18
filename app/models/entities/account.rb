@@ -23,6 +23,11 @@
 #  background_info :string(255)
 #  rating          :integer         default(0), not null
 #  category        :string(32)
+#  account_type    :string
+#  status          :string
+#  rits_id         :string
+#  google_docs     :text
+#  salesforce_id   :string
 #
 
 class Account < ActiveRecord::Base

@@ -31,8 +31,12 @@ potentials.each do |b|
     errors_potentials[x['salesforce_id']] = x.errors
   else
     b["addresses"].each do |addr|
-      address = Address.create(:street1 => addr["street1"], :city => addr["city"], :state => addr["state"], :zipcode => addr["zipcode"], :country => addr["country"], :address_type => addr["address_type"].capitalize)
-      x.addresses << address
+      address = Address.new(:street1 => addr["street1"], :city => addr["city"], :state => addr["state"], :zipcode => addr["zipcode"], :country => addr["country"], :address_type => addr["address_type"].capitalize)
+      if address.save
+        x.addresses << address
+      else
+        errors_potentials[b['salesforce_id']] = b.errors
+      end
     end
   end
   b["contacts"].each do |c|
@@ -41,8 +45,12 @@ potentials.each do |b|
       errors_potentials[j['first_name']] = j.errors
     else
       if !c["addresses"].empty?
-        y = Address.create(:street1 => c["addresses"].first["street1"], :city => c["addresses"].first["city"], :state => c["addresses"].first["state"], :zipcode => c["addresses"].first["zipcode"], :country => c["addresses"].first["country"], :address_type => c["addresses"].first["address_type"].capitalize)
-        j.addresses << y
+        y = Address.new(:street1 => c["addresses"].first["street1"], :city => c["addresses"].first["city"], :state => c["addresses"].first["state"], :zipcode => c["addresses"].first["zipcode"], :country => c["addresses"].first["country"], :address_type => c["addresses"].first["address_type"].capitalize)
+        if y.save
+          j.addresses << y
+        else
+          errors_potentials[c['last_name']] = c.errors
+        end
       end
     end
   end
