@@ -29,6 +29,9 @@ cust.json
 customers.json
 customers.txt
 "errors = [].txt"
+customers.data
+customers_updated.txt
+potential.txt
 
 tmp
 Design

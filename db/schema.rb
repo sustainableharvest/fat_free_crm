@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150210160009) do
+ActiveRecord::Schema.define(:version => 20150218004252) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(:version => 20150210160009) do
     t.string   "first_name",       :limit => 64,  :default => "",       :null => false
     t.string   "last_name",        :limit => 64,  :default => "",       :null => false
     t.string   "access",           :limit => 8,   :default => "Public"
-    t.string   "title",            :limit => 64
+    t.string   "title",            :limit => 196
     t.string   "department",       :limit => 64
     t.string   "source",           :limit => 32
     t.string   "email",            :limit => 254
