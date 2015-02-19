@@ -68,7 +68,7 @@
 :smtp:
 
   :address                    : smtp.gmail.com # e.g. smtp.gmail.com
-  :from                       : scott@sustainableharvest.com # e.g. no-reply@your-domain.com
+  :from                       : no-reply@sustainableharvest.com # e.g. no-reply@your-domain.com
   :enable_starttls_auto       : true
   :port                       : 587
   :authentication             : 'plain'
