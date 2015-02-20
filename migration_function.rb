@@ -56,8 +56,6 @@ potentials.each do |b|
   end
 end
 
-
-
 Account.all.each { |n| n.destroy } && Contact.all.each { |n| n.destroy } && Address.all.each { |n| n.destroy }
 
 def zipcode_short(zip)
