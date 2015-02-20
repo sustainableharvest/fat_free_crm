@@ -282,6 +282,19 @@ $sidebar_width: 210px;
     top-left-radius: 7px;
     bottom-left-radius: 7px; }; }
 
+.category_strip {
+  background: gainsboro;
+  color: black;
+  font-size: 11px;
+  margin: 0px 4px 0px 4px;
+  padding: 1px 4px 1px 4px;
+  width: 75px;
+  -moz-border-radius: {
+    radius: 7px; };
+  -webkit-border: {
+    radius: 7px; };
+}
+
 // Indentation classes:
 //   - indent: for use with strip (regular indentation).
 //   - indentslim: for use with avatar and no strip (Contacts).
