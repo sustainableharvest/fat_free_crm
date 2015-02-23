@@ -30,7 +30,7 @@
       / - else
       /   = t(:added_ago, :value => timeago(account.created_at)).html_safe << " | "
       - unless account.website.blank?
-        = link_to account.website, "#{account.website}"
+        = link_to account.website + " - ", "#{account.website}"
       = t('pluralize.contact', account.contacts.count) << " | "
       = t('pluralize.opportunity', account.opportunities.count)
 
