@@ -18,9 +18,10 @@ opportunity_stage_color:
 
 account_category:
   - :international
-  - :local
-  - :regional
   - :national
+  - :regional
+  - :local
+  - :rwanda_local
   - :other
 
 account_category_color:
@@ -32,6 +33,7 @@ account_category_color:
 account_type:
   - :importer
   - :roaster
+  - :retailer
   - :other
 
 account_status:
