@@ -21,7 +21,6 @@ account_category:
   - :national
   - :regional
   - :local
-  - :rwanda_local
   - :other
 
 account_category_color:
@@ -29,6 +28,11 @@ account_category_color:
   :local          : Bisque
   :regional       : PaleGoldenRod
   :national       : Orchid
+  :customer         : Turquoise
+  :target           : PaleGoldenRod
+  :qualified_lead   : Salmon
+  :prospect         : Gold
+  :dormant          : Silver
 
 account_type:
   - :importer
