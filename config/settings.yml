@@ -28,6 +28,7 @@ account_category_color:
   :local          : Silver
   :regional       : PaleGoldenRod
   :national       : Orchid
+  :other          : Orange
 
 account_type:
   - :importer
