@@ -1,7 +1,7 @@
 - amount = account.opportunities.pipeline.map(&:weighted_amount).sum
 %li.highlight[account]
   - if account.status
-    .strip{:class => account.status} #{t(account.status)}
+    .strip{:class => account.status} #{account.status.truncate(13).titleize}
   - else
     .strip{:style => "color: gray;"} #{t :other}
 
