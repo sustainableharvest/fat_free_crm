@@ -26,7 +26,7 @@ if defined?(FatFreeCRM::Application)
     # Generate digests for assets URLs
     config.assets.digest = true
 
-    config.action_mailer.delivery_method = :file
+    config.action_mailer.delivery_method = :smtp
 
     # Defaults to Rails.root.join("public/assets")
     # config.assets.manifest = YOUR_PATH
