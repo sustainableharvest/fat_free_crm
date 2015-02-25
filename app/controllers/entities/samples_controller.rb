@@ -11,10 +11,7 @@ class SamplesController < EntitiesController
   end
 
   def new
-    # binding.pry
-    if params[:related]
-      opp = params[:related].split('_').last.to_i
-    end
+    opp = params[:related].split('_').last.to_i
     # binding.pry
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
     @pricing = Setting.unroll(:sample_pricing)
@@ -26,11 +23,8 @@ class SamplesController < EntitiesController
 
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
-      redirect_to opportunity_path(@sample.opportunity)
-    else
-      binding.pry
-      redirect_to :action => "new", :controller => "samples", :sample => params[:sample]
     end
+    redirect_to opportunity_path(@sample.opportunity)
   end
 
   def edit
