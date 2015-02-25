@@ -28,7 +28,15 @@ class SamplesController < EntitiesController
   end
 
   def edit
+    @pricing = Setting.unroll(:sample_pricing)
+    respond_with(@sample)
+  end
 
+  def update
+    # binding.pry
+    # @sample.access = params[:sample][:access] if params[:sample][:access]
+    # respond_with(@sample)
+    @sample
   end
 
   def destroy

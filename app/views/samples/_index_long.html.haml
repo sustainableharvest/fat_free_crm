@@ -5,8 +5,8 @@
     .strip.white #{t :other}
 
   %ul.tools
-    / - if can?(:update, sample)
-    /   %li= link_to_edit(sample)
+    - if can?(:update, sample)
+      %li= link_to_edit(sample)
 
     - if can?(:destroy, sample)
       %li= link_to (t :delete), sample_path(sample, :from => "opportunity"), method: :delete
