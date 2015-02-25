@@ -42,6 +42,13 @@ account_status:
   - :prospect
   - :dormant
 
+account_status_color:
+  :customer         : Skyblue
+  :target           : PaleGoldenRod
+  :qualified_lead   : Orchid
+  :prospect         : Orange
+  :dormant          : Silver
+
 account_source:
   - :campaign
   - :cold_call
