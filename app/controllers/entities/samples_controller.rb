@@ -36,7 +36,14 @@ class SamplesController < EntitiesController
     # binding.pry
     # @sample.access = params[:sample][:access] if params[:sample][:access]
     # respond_with(@sample)
-    @sample
+    if @sample.update_attributes(params[:sample])
+      respond_with(@sample) do |format|
+        format.html { redirect_to opportunity_path(@sample.opportunity) }
+        format.js {  }
+      end
+    else
+      redirect_to opportunity_path(@sample.opportunity)
+    end
   end
 
   def destroy
