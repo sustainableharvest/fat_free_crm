@@ -2,7 +2,11 @@
 .title_tools#menu
   / FIX THIS SHIT!!!!!!!!  PARAMS[:CANCEL] WON'T CHANGE
   / = link_to_inline(:edit_sample, edit_sample_path(@sample), :text => t(:edit)) + " | "
+  / ^^^ SERIOUSLY FIX THAT ^^^
+
+  / Shitty fix for now.
   = link_to("Return to Opportunity to Edit |", opportunity_path(@sample.opportunity))
+
   = link_to_function(t(:delete) + '?', confirm_delete(@sample))
 .title#edit_opportunity_title
   = h(sample.name)

@@ -37,13 +37,12 @@ class SamplesController < EntitiesController
   end
 
   def update
-    # binding.pry
-    if @sample.update_attributes(params[:sample])
-      if request.referer.include?("sample")
-        redirect_to sample_path(@sample)
-      else
-        redirect_to opportunity_path(@sample.opportunity)
-      end
+    @sample.update_attributes(params[:sample]) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
+      
+    if request.referer.include?("sample")
+      redirect_to sample_path(@sample)
+    else
+      redirect_to opportunity_path(@sample.opportunity)
     end
   end
 

@@ -1,9 +1,11 @@
 class Sample < ActiveRecord::Base
   belongs_to :opportunity
   belongs_to :user
-  has_many    :tasks, :as => :asset, :dependent => :destroy
+  has_many   :tasks, :as => :asset, :dependent => :destroy
 
   serialize :subscribed_users, Set
+
+  before_save :follow_up_default
 
   uses_user_permissions
   acts_as_commentable
@@ -33,14 +35,9 @@ class Sample < ActiveRecord::Base
   # Validations for Shipment and Follow Up
   validates :shipment_date, :presence => true, :if => :sample_shipped?
 
-
   def sample_shipped?
     self.state != "sample_requested"
   end
-
-  # def shipment_and_follow_up_dates
-  #   if (self.shipment_date)
-  # end
 
   def spot?
     self.pricing_type == "spot"
@@ -57,6 +54,19 @@ class Sample < ActiveRecord::Base
 
   def name
     self.spot? ? self.rits_purchase_contract_id : self.producer
+  end
+
+  def follow_up_default
+    today = Date.today
+    default = today + 14
+    case self.state
+    when 'sample_requested'
+      self.follow_up_date = default if self.follow_up_date.blank?
+    when "sample_shipped", "pending_approval"
+      self.follow_up_date = self.shipment_date + 14 if self.follow_up_date.blank?
+    when "rejected", "approved"
+      self.follow_up_date = nil
+    end
   end
 
 end
