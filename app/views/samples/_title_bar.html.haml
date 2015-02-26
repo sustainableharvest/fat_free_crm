@@ -5,5 +5,5 @@
   = link_to("Return to Opportunity to Edit |", opportunity_path(@sample.opportunity))
   = link_to_function(t(:delete) + '?', confirm_delete(@sample))
 .title#edit_opportunity_title
-  = h("Sample " + sample.id.to_s)
+  = h(sample.name)
   = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")

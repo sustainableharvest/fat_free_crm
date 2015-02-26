@@ -37,7 +37,7 @@ class SamplesController < EntitiesController
   end
 
   def update
-    binding.pry
+    # binding.pry
     if @sample.update_attributes(params[:sample])
       if request.referer.include?("sample")
         redirect_to sample_path(@sample)
