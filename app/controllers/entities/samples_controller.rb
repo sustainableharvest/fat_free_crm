@@ -52,6 +52,8 @@ class SamplesController < EntitiesController
     opportunity = @sample.opportunity
     @sample.destroy
 
+    flash[:notice] = @sample.name + " has been deleted."
+
     redirect_to :back
   end
 

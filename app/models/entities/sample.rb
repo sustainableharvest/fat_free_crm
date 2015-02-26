@@ -55,4 +55,8 @@ class Sample < ActiveRecord::Base
     short = short.gsub("_approval", "").titleize.truncate(13)
   end
 
+  def name
+    self.spot? ? self.rits_purchase_contract_id : self.producer
+  end
+
 end

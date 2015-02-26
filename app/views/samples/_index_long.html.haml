@@ -13,7 +13,7 @@
 
   .indent
     %tt
-      = link_to "Sample " + sample.id.to_s, sample_path(sample)
+      = link_to sample.name, sample_path(sample)
       &ndash;
       - user_name = sample.user.try(:full_name)
       - if user_name
