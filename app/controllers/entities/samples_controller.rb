@@ -7,7 +7,7 @@ class SamplesController < EntitiesController
   end
 
   def show
-    
+    @pricing = Setting.unroll(:sample_pricing)
   end
 
   def new
@@ -23,8 +23,12 @@ class SamplesController < EntitiesController
 
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
+      redirect_to opportunity_path(@sample.opportunity)
+    else
+      flash[:error] = errors_format(@sample.errors.messages)
+      # binding.pry
+      redirect_to opportunity_path(@sample.opportunity)
     end
-    redirect_to opportunity_path(@sample.opportunity)
   end
 
   def edit
@@ -33,16 +37,13 @@ class SamplesController < EntitiesController
   end
 
   def update
-    # binding.pry
-    # @sample.access = params[:sample][:access] if params[:sample][:access]
-    # respond_with(@sample)
+    binding.pry
     if @sample.update_attributes(params[:sample])
-      respond_with(@sample) do |format|
-        format.html { redirect_to opportunity_path(@sample.opportunity) }
-        format.js {  }
+      if request.referer.include?("sample")
+        redirect_to sample_path(@sample)
+      else
+        redirect_to opportunity_path(@sample.opportunity)
       end
-    else
-      redirect_to opportunity_path(@sample.opportunity)
     end
   end
 
@@ -52,6 +53,16 @@ class SamplesController < EntitiesController
     @sample.destroy
 
     redirect_to :back
+  end
+
+  def errors_format(errors)
+    result = ""
+    errors.each do |error, messages|
+      messages.each do |message|
+        result += error.to_s.capitalize + " " + message.to_s + ".\n"
+      end  
+    end
+    result  
   end
 
   private

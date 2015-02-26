@@ -1,4 +1,14 @@
 #confirm{ hidden }
+.title_tools#menu
+  / = link_to "Edit", render 'edit', :remote => true
+  / = link_to_inline(:edit_sample, edit_sample_path(@sample), :text => t(:edit)) + " | "
+  = link_to('Edit',
+      edit_sample_path(@sample) + "#{url.include?('?') ? '&' : '?'}cancel=true" + related,
+      :remote => true,
+      :onclick => "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none'));",
+      :class => options[:class]
+    )
+  = link_to_function(t(:delete) + '?', confirm_delete(@sample))
 .title#edit_opportunity_title
   = h("Sample " + sample.id.to_s)
   = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
