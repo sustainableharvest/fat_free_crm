@@ -1,4 +1,5 @@
 class Sample < ActiveRecord::Base
+
   belongs_to :opportunity
   belongs_to :user
   has_many   :tasks, :as => :asset, :dependent => :destroy
@@ -56,6 +57,15 @@ class Sample < ActiveRecord::Base
     self.spot? ? self.rits_purchase_contract_id : self.producer
   end
 
+  def overdue?
+    today = Date.today
+    self.follow_up_date.present? ? self.follow_up_date <= today : false
+  end
+
+  def complete?
+    self.state == "rejected" || self.state == "approved"
+  end
+
   def follow_up_default
     today = Date.today
     default = today + 14
@@ -64,8 +74,8 @@ class Sample < ActiveRecord::Base
       self.follow_up_date = default if self.follow_up_date.blank?
     when "sample_shipped", "pending_approval"
       self.follow_up_date = self.shipment_date + 14 if self.follow_up_date.blank?
-    when "rejected", "approved"
-      self.follow_up_date = nil
+    # when "rejected", "approved"
+    #   self.follow_up_date = nil
     end
   end
 

@@ -515,9 +515,17 @@ $sidebar_width: 210px;
     dt {
       float: right;
       font-size: 11px;
-      font-weight: bold; }
+      font-weight: bold;
+      &.overdue {
+        color: red; }
+      &.complete {
+        text-decoration: line-through;}}
     tt {
-      font-size: 11px; }
+      font-size: 11px;
+      &.overdue {
+        color: red; }
+      &.complete {
+        text-decoration: line-through;} }
     &.last {
       border-bottom: none; } }
   &#recently {

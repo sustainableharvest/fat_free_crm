@@ -523,6 +523,8 @@ en-US:
   sample_summary: Sample at a Glance
   delivery_month: Delivery Month
   save_sample: Save Sample
+  shipment_date: Shipment Date
+  follow_up_date: Follow Up Date
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
