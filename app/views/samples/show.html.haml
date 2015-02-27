@@ -2,7 +2,7 @@
 = render 'samples/title_bar', :sample => @sample
 
 = render "comments/new", :commentable => @sample
-/ = render :partial => "shared/timeline", :collection => @timeline
+= render :partial => "shared/timeline", :collection => @timeline
 
 = render "tasks/tasks", :object => @sample
 

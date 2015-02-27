@@ -7,6 +7,7 @@ class SamplesController < EntitiesController
   end
 
   def show
+    @timeline = timeline(@sample)
     @pricing = Setting.unroll(:sample_pricing)
   end
 

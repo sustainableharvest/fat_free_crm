@@ -3,6 +3,7 @@ class Sample < ActiveRecord::Base
   belongs_to :opportunity
   belongs_to :user
   has_many   :tasks, :as => :asset, :dependent => :destroy
+  has_many   :emails, :as => :mediator
 
   serialize :subscribed_users, Set
 
