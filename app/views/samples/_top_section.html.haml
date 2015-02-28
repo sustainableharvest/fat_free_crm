@@ -36,15 +36,19 @@
           = f.text_field :follow_up_date, :value => f.object.follow_up_date, :style => "width:110px", :autocomplete => :off, :class => 'date'
       %tr
         %td
+          .label #{t :quoted_price}:
+          = f.text_field :quoted_price
+        %td= spacer
+        %td
+          .label #{t :sh_fee} #{t :currency}:
+          = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
+      %tr
+        %td
           .label_bold #{t :spot_pricing}:
       %tr
         %td
           .label #{t :rits_id}:
           = f.text_field :rits_purchase_contract_id
-        %td= spacer
-        %td
-          .label #{t :quoted_price} #{t :currency}:
-          = f.text_field :quoted_price, :style => "width:110px; text-align:right;"
       %tr
         %td
           .label_bold #{t :forward_pricing}:
@@ -52,14 +56,10 @@
         %td
           .label #{t :producer}:
           = f.text_field :producer
-        %td= spacer
-        %td
-          .label #{t :differential} #{t :currency}:
-          = f.text_field :differential, :style => "width:110px; text-align:right;"
-        %td= spacer
-        %td
-          .label #{t :sh_fee} #{t :currency}:
-          = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
+        -# %td= spacer
+        -# %td
+        -#   .label #{t :differential} #{t :currency}:
+        -#   = f.text_field :differential, :style => "width:110px; text-align:right;"
         %td= spacer
         %td
           .label #{t :delivery_date}:

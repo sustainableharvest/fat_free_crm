@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150227180900) do
+ActiveRecord::Schema.define(:version => 20150228002240) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -367,7 +367,7 @@ ActiveRecord::Schema.define(:version => 20150227180900) do
     t.string   "rits_purchase_contract_id"
     t.string   "pricing_type",              :limit => 12
     t.string   "producer",                  :limit => 64
-    t.decimal  "quoted_price",                            :precision => 8, :scale => 2
+    t.string   "quoted_price"
     t.decimal  "sh_margin",                               :precision => 8, :scale => 2
     t.decimal  "sh_fee",                                  :precision => 8, :scale => 2
     t.decimal  "differential",                            :precision => 8, :scale => 2

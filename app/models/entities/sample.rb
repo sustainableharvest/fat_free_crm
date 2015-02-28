@@ -26,7 +26,7 @@ class Sample < ActiveRecord::Base
   validates :description, length: { maximum: 255 }
 
   # Validations for Spot Pricing
-  validates_numericality_of :quoted_price, :allow_nil => true, :if => :spot?
+  # validates :quoted_price, :allow_nil => true
   validates :rits_purchase_contract_id, :presence => true, :if => :spot?
 
   # Validations for Forward Pricing
