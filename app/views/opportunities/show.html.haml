@@ -6,7 +6,7 @@
 
   = styles_for :task, :contact
   = render 'opportunities/title_bar', :opportunity => @opportunity
-  = render 'opportunities/overview', :opportunity => @opportunity
+  -# = render 'opportunities/overview', :opportunity => @opportunity
 
   = render "comments/new", :commentable => @opportunity
   = render :partial => "shared/timeline", :collection => @timeline
