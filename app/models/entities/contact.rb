@@ -34,6 +34,7 @@
 #  updated_at      :datetime
 #  background_info :string(255)
 #  skype           :string(128)
+#  salesforce_id   :string
 #
 
 class Contact < ActiveRecord::Base

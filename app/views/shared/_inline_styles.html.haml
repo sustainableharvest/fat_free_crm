@@ -4,6 +4,8 @@
   - if models.include?(:account)
     - Setting.account_category_color.each do |key, value|
       li.account .#{key} { background:#{value}; }
+    - Setting.account_status_color.each do |key, value|
+      li.account .#{key} { background:#{value}; }
 
   - if models.include?(:campaign)
     - Setting.campaign_status_color.each do |key, value|

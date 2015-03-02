@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150228002240) do
+
+ActiveRecord::Schema.define(:version => 20150218203055) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -378,7 +379,10 @@ ActiveRecord::Schema.define(:version => 20150228002240) do
     t.datetime "updated_at"
     t.date     "shipment_date"
     t.date     "follow_up_date"
+<<<<<<< HEAD
     t.text     "subscribed_users"
+=======
+>>>>>>> master
   end
 
   create_table "sessions", :force => true do |t|

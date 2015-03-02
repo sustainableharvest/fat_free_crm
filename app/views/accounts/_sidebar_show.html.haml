@@ -43,6 +43,9 @@
   %li
     %dt= @account.status ? t(@account.status) : t(:n_a)
     %tt #{t :status}
+  / %li
+  /   %dt= @account.source ? t(@account.source) : t(:n_a)
+  /   %tt #{t :source}
   %li
     %dt= @account.assigned_to ? truncate(@account.assignee.full_name, :length => 16) : nil
     %tt #{t :assigned_to}:

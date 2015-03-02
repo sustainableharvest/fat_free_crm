@@ -37,19 +37,22 @@ sample_pricing:
 
 account_category:
   - :international
-  - :local
-  - :regional
   - :national
+  - :regional
+  - :local
+  - :other
 
 account_category_color:
   :international  : Skyblue
-  :local          : Bisque
+  :local          : Silver
   :regional       : PaleGoldenRod
   :national       : Orchid
+  :other          : Orange
 
 account_type:
   - :importer
   - :roaster
+  - :retailer
   - :other
 
 account_status:
@@ -58,3 +61,21 @@ account_status:
   - :qualified_lead
   - :prospect
   - :dormant
+
+account_status_color:
+  :customer         : Skyblue
+  :target           : PaleGoldenRod
+  :qualified_lead   : Orchid
+  :prospect         : Orange
+  :dormant          : Silver
+
+account_source:
+  - :campaign
+  - :cold_call
+  - :conference
+  - :online_marketing
+  - :referral
+  - :self_generated
+  - :website
+  - :word_of_mouth
+  - :other

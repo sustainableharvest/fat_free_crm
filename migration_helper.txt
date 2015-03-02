@@ -1,0 +1,35 @@
+errors = {}
+
+def add_address(type, addr)
+  address = Address.new(:street1 => addr["street1"], :city => addr["city"], :state => addr["state"], :zipcode => addr["zipcode"], :country => addr["country"], :address_type => addr["address_type"])
+  if !address.save
+    errors[address["street1"]] = address.errors
+  else
+    type.addresses << address
+  end
+end
+
+a.each do |b|
+  x = Account.new(:user => User.where(:, :name => b["name"], :website => b["website"], :phone => b["phone"], :fax => b["fax"], :email => b["email"], :category => b["category"], :salesforce_id => b["salesforce_id"])
+  if !x.save
+    errors[x['salesforce_id']] = x.errors
+  else
+    b["addresses"].each do |addr|
+      add_address(x, addr)
+    end
+  end
+  b["contacts"].each do |c|
+    j = Contact.new(:user => User.first, :first_name => c["first_name"], :last_name => c["last_name"], :email => c["email"], :phone => c["phone"], :mobile => c["mobile"], :fax => c["fax"], :skype => c["skype"], :account => x, :title => c["title"], :department => c["department"])
+    if !j.save
+      errors[j['first_name']] = j.errors
+    else
+      c["addresses"].each do |addr|
+        add_address(j, addr)
+      end
+    end
+  end
+end
+
+
+
+Account.all.each { |n| n.destroy } && Contact.all.each { |n| n.destroy } && Address.all.each { |n| n.destroy }
