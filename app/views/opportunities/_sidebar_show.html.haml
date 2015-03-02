@@ -19,7 +19,7 @@
     %dt= @opportunity.probability ? @opportunity.probability.to_s + "%" : t(:n_a)
     %tt #{t :probability}:
   %li
-    %dt= @opportunity.amount ? number_to_currency(@opportunity.amount || 0, :precision => 0) : t(:n_a)
+    %dt= @opportunity.amount ? @opportunity.amount.round.to_s + " " + (t :bags) : t(:n_a)
     %tt #{t :amount}:
   -# %li
   -#   %dt= @opportunity.discount ? number_to_currency(@opportunity.discount || 0, :precision => 0) : t(:n_a)
