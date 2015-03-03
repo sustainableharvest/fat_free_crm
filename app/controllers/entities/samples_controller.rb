@@ -7,6 +7,7 @@ class SamplesController < EntitiesController
   end
 
   def show
+    # binding.pry
     @timeline = timeline(@sample)
     @pricing = Setting.unroll(:sample_pricing)
   end
@@ -33,8 +34,8 @@ class SamplesController < EntitiesController
   end
 
   def edit
+    # binding.pry
     @pricing = Setting.unroll(:sample_pricing)
-    respond_with(@sample)
   end
 
   def update

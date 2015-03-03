@@ -2,6 +2,8 @@
 - @entity = instance_variable_get("@#{entity_name}")
 - id = dom_id(@entity)
 
+- binding.pry
+
 - if params[:cancel].true? # <--------------------- Hide [Edit]
 
   - if called_from_landing_page?

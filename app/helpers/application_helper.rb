@@ -88,6 +88,8 @@ module ApplicationHelper
     text = (arrow_for(id) + text) unless options[:plain]
     related = (options[:related] ? "&related=#{options[:related]}" : '')
 
+    # binding.pry
+
     link_to(text,
       url + "#{url.include?('?') ? '&' : '?'}cancel=false" + related,
       :remote => true,
