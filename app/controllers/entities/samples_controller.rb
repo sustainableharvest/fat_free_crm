@@ -21,7 +21,8 @@ class SamplesController < EntitiesController
   def create
     # binding.pry
     @comment_body = params[:comment_body]
-
+    # @purchase_contracts = 
+    
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
