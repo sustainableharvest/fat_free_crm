@@ -1,0 +1,18 @@
+-# - binding.pry
+= simple_form_for(@sample, :html => one_submit_only) do |f|
+  = link_to_close new_sample_path
+  = f.hidden_field :user_id
+  = f.hidden_field :opportunity_id
+
+  = f.error_messages :object_name => t('sample')
+
+  = render "samples/top_section",            :f => f, :edit => true
+  = render "fields/edit_custom_field_group", :f => f, :edit => true
+  = render "shared/add_comment",             :f => f, :edit => true
+  = render "fields/groups",                  :f => f, :edit => true
+  / = render "entities/permissions",      :f => f, :entity => @sample
+
+  .buttonbar
+    = f.submit t(:create_sample)
+    #{t :or}
+    = link_to_cancel new_sample_path
