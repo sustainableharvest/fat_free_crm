@@ -13,7 +13,9 @@ class SamplesController < EntitiesController
 
   def new
     opp = params[:related].split('_').last.to_i
-    # binding.pry
+    url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
+    @purchase_contracts =  JSON.parse(open(url).read)
+    binding.pry
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
     @pricing = Setting.unroll(:sample_pricing)
   end
@@ -21,8 +23,7 @@ class SamplesController < EntitiesController
   def create
     # binding.pry
     @comment_body = params[:comment_body]
-    # @purchase_contracts = 
-    
+
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
@@ -34,6 +35,9 @@ class SamplesController < EntitiesController
   end
 
   def edit
+    url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
+    @purchase_contracts =  JSON.parse(open(url).read)
+    binding.pry
     @pricing = Setting.unroll(:sample_pricing)
     respond_with(@sample)
   end
