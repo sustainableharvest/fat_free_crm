@@ -35,9 +35,9 @@ class SamplesController < EntitiesController
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       @sample.fob_price = info[:fob]
       @sample.producer  = info[:producer]
-      @sample.description = info[:country] + ", " + info[:ssp].to_s
+      @sample.description = info[:country] + ", Suggested Sales Price: " + info[:ssp].to_s
     end
-    
+
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)

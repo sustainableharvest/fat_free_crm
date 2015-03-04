@@ -11,34 +11,39 @@
     %li
       %dt= @sample.rits_purchase_contract_id ? t(@sample.rits_purchase_contract_id) : t(:n_a)
       %tt #{t :rits_id}:
-    %li
-      %dt= @sample.quoted_price ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)
-      %tt #{t :quoted_price}:
 
   - else
     %li
       %dt= @sample.pricing_type ? "Forward " + t(@sample.pricing_type) : t(:other)
       %tt #{t :pricing_type}:
     %li
-      %dt= @sample.producer ? t(@sample.producer) : t(:n_a)
-      %tt #{t :producer}:
-    %li
       %dt= @sample.differential ? number_to_currency(@sample.differential, :precision => 2) : t(:n_a)
       %tt #{t :differential}:
-    %li
-      %dt= @sample.sh_fee ? number_to_currency(@sample.sh_fee, :precision => 2) : t(:n_a)
-      %tt #{t :sh_fee}:
     %li
       %dt= @sample.delivery_month ? t(@sample.delivery_month.strftime("%B %Y")) : t(:n_a)
       %tt #{t :delivery_month}:
 
   %li
+    %dt= @sample.producer ? t(@sample.producer) : t(:n_a)
+    %tt #{t :producer}:
+  %li
+    %dt= @sample.quoted_price.present? ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)
+    %tt #{t :quoted_price}:
+  %li
+    %dt= @sample.sh_fee ? number_to_currency(@sample.sh_fee, :precision => 2) : t(:n_a)
+    %tt #{t :sh_fee}:
+  %li
     %dt= @sample.shipment_date ? t(@sample.shipment_date.strftime("%_m/%e/%Y")) : t(:n_a)
     %tt #{t :shipment_date}:
+
   - @sample.complete? ? overdue = "complete" : (overdue = @sample.overdue? ? "overdue" : "not")
   %li
     %dt{:class => overdue}= @sample.follow_up_date ? t(@sample.follow_up_date.strftime("%_m/%e/%Y")) : t(:n_a)
     %tt{:class => overdue} #{t :follow_up_date}:
+
+  %li
+    %dt= @sample.description
+    %tt #{t :description}
 
   = render "fields/sidebar_show", :asset => @sample
 
