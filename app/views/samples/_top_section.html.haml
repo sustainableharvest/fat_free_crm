@@ -48,7 +48,7 @@
       %tr
         %td
           .label #{t :rits_id}:
-          = f.select :rits_purchase_contract_id, @pc_names, :include_blank => true
+          = select :sample, :rits_purchase_contract_id , @pc_names, {:include_blank => true}, { :style => "width:160px", :class => 'select2'}
       %tr
         %td
           .label_bold #{t :forward_pricing}:

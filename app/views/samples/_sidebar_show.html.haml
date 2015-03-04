@@ -9,8 +9,11 @@
       %dt= @sample.pricing_type ? t(@sample.pricing_type) : t(:other)
       %tt #{t :pricing_type}:
     %li
-      %dt= @sample.rits_purchase_contract_id ? t(@sample.rits_purchase_contract_id) : t(:n_a)
+      %dt= @sample.rits_purchase_contract_id ? link_to(t(@sample.rits_purchase_contract_id), "http://rits.sustainableharvest.com/purchase_contracts/" + @sample.rits_id.to_s, :target => "_blank") : t(:n_a)
       %tt #{t :rits_id}:
+    %li
+      %dt= @sample.ssp ? number_to_currency(@sample.ssp, :precision => 2) : t(:n_a)
+      %tt #{t :ssp}:
 
   - else
     %li
@@ -42,8 +45,8 @@
     %tt{:class => overdue} #{t :follow_up_date}:
 
   %li
-    %dt= @sample.description
-    %tt #{t :description}
+    %dt= @sample.description.present? ? truncate(@sample.description, :length => 16) : t(:n_a)
+    %tt #{t :description}:
 
   = render "fields/sidebar_show", :asset => @sample
 
