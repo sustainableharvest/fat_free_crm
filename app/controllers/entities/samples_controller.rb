@@ -1,5 +1,5 @@
 class SamplesController < EntitiesController
-
+  include SamplesHelper
   before_filter :load_settings
 
   def index
@@ -12,27 +12,32 @@ class SamplesController < EntitiesController
   end
 
   def new
-    opp = params[:related].split('_').last.to_i
-    url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
-    @purchase_contracts =  JSON.parse(open(url).read)
+    opp = params[:related].split('_').last.to_i if params[:related]
+    # @purchase_contracts = rits_purchase_contracts
     # Outline of converting it to better hash
-    # pc_hash = {}quit
-    # results.each {|pc| pc_hash[pc["contract_number"]] = pc["country"], pc["ssp"]}
-    pc_names = []
-    @purchase_contracts.each {|pc| pc_names << pc["contract_number"]}
-    @pc_names = pc_names
-    binding.pry
+    # pc_hash = {}
+    # @purchase_contracts.each {|pc| pc_hash[pc["contract_number"]] = {:country => pc["country"], :ssp => pc["ssp"], :fob => pc["fob"], :rits_id => pc["id"], :producer => pc["producer"]}}
+    # pc_names = []
+    # @purchase_contracts.each {|pc| pc_names << pc["contract_number"]}
+    @pc_names = rits_pc_names
+    # binding.pry
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
     @pricing = Setting.unroll(:sample_pricing)
   end
 
   def create
-    binding.pry
+    # binding.pry
     @comment_body = params[:comment_body]
-    url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
-    @purchase_contracts =  JSON.parse(open(url).read)
-    if @sample.rits_purchase_contract_id
-      @sample.fob_price = @purchase_contracts.where()
+    # url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
+    # @purchase_contracts =  JSON.parse(open(url).read)
+
+    if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
+      info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
+      @sample.fob_price = info[:fob]
+      @sample.producer  = info[:producer]
+      @sample.description = info[:country] + ", " + info[:ssp].to_s
+    end
+    
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
@@ -44,9 +49,8 @@ class SamplesController < EntitiesController
   end
 
   def edit
-    url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
-    @purchase_contracts =  JSON.parse(open(url).read)
-    binding.pry
+    @pc_names = rits_pc_names
+    # binding.pry
     @pricing = Setting.unroll(:sample_pricing)
     respond_with(@sample)
   end
