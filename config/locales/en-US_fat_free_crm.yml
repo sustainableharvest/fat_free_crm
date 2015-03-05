@@ -528,6 +528,7 @@ en-US:
   shipment_date: Shipment Date
   follow_up_date: Follow Up Date
   ssp: Suggested Sales Price
+  fob: Fob Price
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

@@ -35,7 +35,7 @@
 - @entity = instance_variable_get("@#{entity_name}")
 - id = dom_id(@entity)
 
-- binding.pry
+-# - binding.pry
 
 - if params[:cancel].true?
   $('##{id}').replaceWith('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');

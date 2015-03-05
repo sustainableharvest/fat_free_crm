@@ -14,6 +14,9 @@
     %li
       %dt= @sample.ssp ? number_to_currency(@sample.ssp, :precision => 2) : t(:n_a)
       %tt #{t :ssp}:
+    %li
+      %dt= @sample.fob_price ? number_to_currency(@sample.fob_price, :precision => 2) : t(:n_a)
+      %tt #{t :fob}:
 
   - else
     %li
@@ -27,7 +30,7 @@
       %tt #{t :delivery_month}:
 
   %li
-    %dt= @sample.producer ? t(@sample.producer) : t(:n_a)
+    %dt= @sample.producer.present? ? t(@sample.producer) : t(:n_a)
     %tt #{t :producer}:
   %li
     %dt= @sample.quoted_price.present? ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)

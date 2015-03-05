@@ -49,8 +49,17 @@ class SamplesController < EntitiesController
   end
 
   def update
+    if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
+      info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
+      params[:sample][:fob_price] = info[:fob]
+      params[:sample][:producer]  = info[:producer]
+      params[:sample][:rits_id] = info[:rits_id]
+      params[:sample][:country] = info[:country]
+      params[:sample][:ssp] = info[:ssp]
+    end
+    binding.pry
     @sample.update_attributes(params[:sample]) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
-      
+
     if request.referer.include?("sample")
       redirect_to sample_path(@sample)
     else
