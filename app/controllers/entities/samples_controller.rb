@@ -31,6 +31,8 @@ class SamplesController < EntitiesController
       @sample.ssp = info[:ssp]
     end
 
+    # @sample.delivery_month = params[:date]
+
     if @sample.save
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
@@ -57,7 +59,7 @@ class SamplesController < EntitiesController
       params[:sample][:country] = info[:country]
       params[:sample][:ssp] = info[:ssp]
     end
-    binding.pry
+    # binding.pry
     @sample.update_attributes(params[:sample]) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
 
     if request.referer.include?("sample")

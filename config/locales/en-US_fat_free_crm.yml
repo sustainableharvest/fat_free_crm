@@ -529,6 +529,7 @@ en-US:
   follow_up_date: Follow Up Date
   ssp: Suggested Sales Price
   fob: Fob Price
+  description_input: Description (255 character max)
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
