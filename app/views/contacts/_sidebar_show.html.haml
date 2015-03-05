@@ -33,8 +33,12 @@
     %tt #{t :lead}:
   %li
     %dt
-      - if @contact.lead.try(:campaign)
-        = link_to(truncate(@contact.lead.campaign.name, :length => 16), @contact.lead.campaign, :title => @contact.lead.campaign.name)
+      - if @contact.campaigns
+        - @contact.campaigns.each_with_index do |campaign, index|
+          - unless index == @contact.campaigns.size - 1
+            = link_to(truncate(campaign.name, :length => 16), campaign, :title => campaign.name) + ","
+          - else
+            = link_to(truncate(campaign.name, :length => 16), campaign, :title => campaign.name)
       - else
         #{t :n_a}
     %tt #{t :campaign}:
