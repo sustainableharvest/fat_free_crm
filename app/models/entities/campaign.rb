@@ -74,7 +74,7 @@ class Campaign < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def attach!(attachment)
     unless self.send("#{attachment.class.name.downcase}_ids").include?(attachment.id)
-      if attachment.is_a?(Task)
+      if attachment.is_a?(Task) || attachment.is_a?(Contact)
         self.send(attachment.class.name.tableize) << attachment
       else # Leads, Opportunities
         attachment.update_attribute(:campaign, self)
