@@ -120,6 +120,7 @@ class Contact < ActiveRecord::Base
     save_account(params)
     result = self.save
     self.opportunities << Opportunity.find(params[:opportunity]) unless params[:opportunity].blank?
+    self.campaigns << Campaign.find(params[:campaign]) unless params[:campaign].blank?
     result
   end
 
