@@ -46,6 +46,8 @@ class Contact < ActiveRecord::Base
   has_one     :account, :through => :account_contact
   has_many    :contact_opportunities, :dependent => :destroy
   has_many    :opportunities, :through => :contact_opportunities, :uniq => true, :order => "opportunities.id DESC"
+  has_many    :contact_campaigns, :dependent => :destroy
+  has_many    :campaigns, :through => :contact_campaigns, :uniq => true, :order => "campaigns.id DESC"
   has_many    :tasks, :as => :asset, :dependent => :destroy
   has_one     :business_address, :dependent => :destroy, :as => :addressable, :class_name => "Address", :conditions => "address_type = 'Business'"
   has_many    :addresses, :dependent => :destroy, :as => :addressable, :class_name => "Address" # advanced search uses this
@@ -53,7 +55,7 @@ class Contact < ActiveRecord::Base
 
   delegate :campaign, :to => :lead, :allow_nil => true
 
-  has_ransackable_associations %w(account opportunities tags activities emails addresses comments tasks)
+  has_ransackable_associations %w(account opportunities tags activities emails addresses comments tasks campaigns)
   ransack_can_autocomplete
 
   serialize :subscribed_users, Set
