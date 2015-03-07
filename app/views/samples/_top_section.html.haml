@@ -1,3 +1,7 @@
+-# - content_for :javascripts do
+-#   = javascript_include_tag "app/views/samples/top_section.js.haml"
+
+-# - binding.pry
 = hook(:sample_top_section, self, :f => f) do
   .section
     %table
@@ -8,24 +12,17 @@
         %td= spacer
         %td
           .label_bold #{t :pricing_type}:
-          .radio_box_long
-            - @pricing.each_with_index do |item, index|
-              - if index == 0
-                = f.radio_button :pricing_type, item[1], :checked => "checked"
-                = f.label item[0]
-                %br
-                = "Forward Pricing:"
-                %br
-              - else
-                = f.radio_button :pricing_type, item[1]
-                = f.label item[0]
-                %br
-            / %br
-            / = f.radio_button :pricing_type, "Open"
-            / = f.label "Open"
-            / %br
-            / = f.radio_button :pricing_type, "Outright"
-            / = f.label "Outright"
+          .radio_box_long.type_pricing
+            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing_spot"
+            = f.label "Spot"
+            %br
+            = "Forward Pricing:"
+            %br
+            = f.radio_button :pricing_type, "Open", :class => "pricing_open"
+            = f.label "Open"
+            %br
+            = f.radio_button :pricing_type, "Outright", :class => "pricing_outright"
+            = f.label "Outright"
         %td= spacer
         %td
           .label #{t :sample_shipment_date}:
@@ -42,18 +39,17 @@
         %td
           .label #{t :quoted_price}:
           = f.text_field :quoted_price
-
-      %tr
+      %tr.field_pricing_spot(style="display:none")
         %td
           .label_bold #{t :spot_pricing}:
-      %tr
+      %tr.field_pricing_spot(style="display:none")
         %td
           .label #{t :rits_id}:
           = select :sample, :rits_purchase_contract_id , @pc_names, {:include_blank => true}, { :style => "width:160px", :class => 'select2'}
-      %tr
+      %tr.field_pricing_forward
         %td
           .label_bold #{t :forward_pricing}:
-      %tr
+      %tr.field_pricing_forward
         %td
           .label #{t :producer}:
           = f.text_field :producer
@@ -66,8 +62,15 @@
           .label #{t :delivery_date}:
           = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date' 
           -# = select_month(Date.today)
-    %table
-      %tr
-        %td
-          .label #{t :description_input}:
-          = f.text_area :description, :style => "width:500px; height:120px"
+    -# %table
+    -#   %tr
+    -#     %td
+    -#       .label #{t :description_input}:
+    -#       = f.text_area :description, :style => "width:500px; height:120px"
+
+:javascript
+  $(document).ready(function() {
+    $(".type_pricing").change(function (){
+      $(".field_pricing_spot").toggle();
+    })
+  });

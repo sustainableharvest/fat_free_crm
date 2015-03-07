@@ -15,13 +15,11 @@ class SamplesController < EntitiesController
     opp = params[:related].split('_').last.to_i if params[:related]
     @pc_names = rits_pc_names
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
-    @pricing = Setting.unroll(:sample_pricing)
+    # @pricing = Setting.unroll(:sample_pricing)
   end
 
   def create
-    # binding.pry
     @comment_body = params[:comment_body]
-    # binding.pry
     if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       @sample.fob_price = info[:fob]
