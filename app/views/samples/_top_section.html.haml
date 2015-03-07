@@ -13,15 +13,15 @@
         %td
           .label_bold #{t :pricing_type}:
           .radio_box_long.type_pricing
-            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing_spot"
+            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing", :value => "Spot"
             = f.label "Spot"
             %br
             = "Forward Pricing:"
             %br
-            = f.radio_button :pricing_type, "Open", :class => "pricing_open"
+            = f.radio_button :pricing_type, "Open", :class => "pricing", :value => "Forward"
             = f.label "Open"
             %br
-            = f.radio_button :pricing_type, "Outright", :class => "pricing_outright"
+            = f.radio_button :pricing_type, "Outright", :class => "pricing", :value => "Forward"
             = f.label "Outright"
         %td= spacer
         %td
@@ -39,17 +39,17 @@
         %td
           .label #{t :quoted_price}:
           = f.text_field :quoted_price
-      %tr.field_pricing_spot(style="display:none")
+      %tr.field_pricing_spot
         %td
           .label_bold #{t :spot_pricing}:
-      %tr.field_pricing_spot(style="display:none")
+      %tr.field_pricing_spot
         %td
           .label #{t :rits_id}:
           = select :sample, :rits_purchase_contract_id , @pc_names, {:include_blank => true}, { :style => "width:160px", :class => 'select2'}
-      %tr.field_pricing_forward
+      %tr.field_pricing_forward(style="display:none")
         %td
           .label_bold #{t :forward_pricing}:
-      %tr.field_pricing_forward
+      %tr.field_pricing_forward(style="display:none")
         %td
           .label #{t :producer}:
           = f.text_field :producer
@@ -70,7 +70,8 @@
 
 :javascript
   $(document).ready(function() {
-    $(".type_pricing").change(function (){
-      $(".field_pricing_spot").toggle();
+    $("input:radio[class=pricing]").change(function (){
+        $(".field_pricing_forward").toggle();
+      }
     })
   });
