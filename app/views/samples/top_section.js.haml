@@ -1,16 +1,12 @@
 $(document).ready(function() {
-  - binding.pry
-  var toggle_quotedPrice = function(visible) {
-      if (visible){
-        $("#quotedPrice").show();
-      } else {
-        $("#quotedPrice").hide();
+    $("#type_pricing").change(function (){
+      if ($("input[name=pricing]:checked", "#type_pricing").val() == "Spot") {
+        $(".field_pricing_spot").show();
+        $(".field_pricing_forward").hide();
       }
-  }
-
-  $("#pricing_type input").change(function(){
-    toggle_quotedPrice($(this).val()=="Open")
-  })
-
-
-})();
+      else {
+        $(".field_pricing_spot").hide();
+        $(".field_pricing_forward").show();
+      }
+    })
+  });
