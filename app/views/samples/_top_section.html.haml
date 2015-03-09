@@ -12,16 +12,16 @@
         %td= spacer
         %td
           .label_bold #{t :pricing_type}:
-          .radio_box_long.type_pricing
-            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing", :value => "Spot"
+          .radio_box_long#type_pricing
+            = f.radio_button :pricing_type, "Spot", :checked => "checked", :name => "pricing", :value => "Spot", :id => "spot"
             = f.label "Spot"
             %br
             = "Forward Pricing:"
             %br
-            = f.radio_button :pricing_type, "Open", :class => "pricing", :value => "Forward"
+            = f.radio_button :pricing_type, "Open", :name => "pricing", :value => "Forward", :id => "open"
             = f.label "Open"
             %br
-            = f.radio_button :pricing_type, "Outright", :class => "pricing", :value => "Forward"
+            = f.radio_button :pricing_type, "Outright", :name => "pricing", :value => "Forward", :id => "outright"
             = f.label "Outright"
         %td= spacer
         %td
@@ -62,16 +62,22 @@
           .label #{t :delivery_date}:
           = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date' 
           -# = select_month(Date.today)
-    -# %table
-    -#   %tr
-    -#     %td
-    -#       .label #{t :description_input}:
-    -#       = f.text_area :description, :style => "width:500px; height:120px"
+    %table
+      %tr
+        %td
+          .label #{t :description_input}:
+          = f.text_area :description, :style => "width:500px; height:120px"
 
 :javascript
   $(document).ready(function() {
-    $("input:radio[class=pricing]").change(function (){
-        $(".field_pricing_forward").toggle();
+    $("#type_pricing").change(function (){
+      if ($("input[name=pricing]:checked", "#type_pricing").val() == "Spot") {
+        $(".field_pricing_spot").show();
+        $(".field_pricing_forward").hide();
+      }
+      else {
+        $(".field_pricing_spot").hide();
+        $(".field_pricing_forward").show();
       }
     })
   });
