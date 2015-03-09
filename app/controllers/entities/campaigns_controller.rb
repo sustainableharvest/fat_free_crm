@@ -167,6 +167,7 @@ private
 
   #----------------------------------------------------------------------------
   def respond_to_destroy(method)
+
     if method == :ajax
       get_data_for_sidebar
       @campaigns = get_campaigns

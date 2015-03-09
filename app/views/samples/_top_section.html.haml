@@ -13,15 +13,18 @@
         %td
           .label_bold #{t :pricing_type}:
           .radio_box_long#type_pricing
-            = f.radio_button :pricing_type, "Spot", :checked => "checked", :name => "pricing", :value => "Spot", :id => "spot"
+            -# <input checked="checked" id="sample_pricing_type_spot" name="pricing" type="radio" value="Spot"> , :name => "pricing", :value => "Spot"
+            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing"
             = f.label "Spot"
             %br
             = "Forward Pricing:"
             %br
-            = f.radio_button :pricing_type, "Open", :name => "pricing", :value => "Forward", :id => "open"
+            -# <input id="sample_pricing_type_open" name="pricing" type="radio" value="Open"> , :name => "pricing", :value => "Open"
+            = f.radio_button :pricing_type, "Open", :class => "pricing"
             = f.label "Open"
             %br
-            = f.radio_button :pricing_type, "Outright", :name => "pricing", :value => "Forward", :id => "outright"
+            -# <input id="sample_pricing_type_outright" name="pricing" type="radio" value="Outright"> , :name => "pricing", :value => "Outright"
+            = f.radio_button :pricing_type, "Outright", :class => "pricing"
             = f.label "Outright"
         %td= spacer
         %td
@@ -71,7 +74,7 @@
 :javascript
   $(document).ready(function() {
     $("#type_pricing").change(function (){
-      if ($("input[name=pricing]:checked", "#type_pricing").val() == "Spot") {
+      if ($("input[class=pricing]:checked", "#type_pricing").val() == "Spot") {
         $(".field_pricing_spot").show();
         $(".field_pricing_forward").hide();
       }

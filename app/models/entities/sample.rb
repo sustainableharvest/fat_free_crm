@@ -43,11 +43,11 @@ class Sample < ActiveRecord::Base
   end
 
   def spot?
-    self.pricing_type == "spot"
+    self.pricing_type == "Spot"
   end
 
   def not_spot?
-    self.pricing_type != "spot"
+    self.pricing_type != "Spot"
   end
 
   def short_state

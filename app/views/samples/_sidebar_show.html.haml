@@ -4,7 +4,7 @@
     %dt= @sample.state ? t(@sample.state) : t(:other)
     %tt #{t :state}:
 
-  - if @sample.pricing_type == "spot"
+  - if @sample.pricing_type == "Spot"
     %li
       %dt= @sample.pricing_type ? t(@sample.pricing_type) : t(:other)
       %tt #{t :pricing_type}:

@@ -35,8 +35,7 @@ class SamplesController < EntitiesController
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
     else
-      flash[:error] = errors_format(@sample.errors.messages)
-      # binding.pry
+      flash[:warning] = errors_format(@sample.errors.messages)
       redirect_to opportunity_path(@sample.opportunity)
     end
   end
