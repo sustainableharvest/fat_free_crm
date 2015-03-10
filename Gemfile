@@ -87,5 +87,3 @@ group :assets do
   gem 'execjs'
   gem 'therubyracer', platform: :ruby unless ENV["CI"]
 end
-
-gem 'turbo-sprockets-rails3'
