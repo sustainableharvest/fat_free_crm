@@ -36,7 +36,7 @@ class Campaign < ActiveRecord::Base
   has_many    :leads, -> { order "id DESC" }, dependent: :destroy
   has_many    :opportunities, -> { order "id DESC" }, dependent: :destroy
   has_many    :contact_campaigns, :dependent => :destroy
-  has_many    :contacts, :through => :contact_campaigns, :uniq => true, :order => "contacts.id DESC"
+  has_many    :contacts, -> { order "contacts.id DESC" }, :through => :contact_campaigns
   has_many    :emails, :as => :mediator
 
   serialize :subscribed_users, Set

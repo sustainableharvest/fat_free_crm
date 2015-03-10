@@ -83,13 +83,9 @@ class Opportunity < ActiveRecord::Base
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
 
-<<<<<<< HEAD
   # before_save :default_follow_up
 
   after_create  :increment_opportunities_count
-=======
-  after_create :increment_opportunities_count
->>>>>>> upstream/master
   after_destroy :decrement_opportunities_count
 
   # Default values provided through class methods.

@@ -194,10 +194,11 @@ class Task < ActiveRecord::Base
   #--------------------------------------------------------------------------------
   def self.find_all_by_user(view)
     return {} unless ALLOWED_VIEWS.include?(view)
-    users_arr = User.all.sort_by! { |user| user.name }
+    users_arr = User.order(username: :desc)
     users = Hash[users_arr.collect { |v| [v]}]
     users.each_pair do |user, value|
-      tasks = Task.where(:user_id => user.id, :completed_at => nil).sort_by! { |task| [task.due_at ? 0 : 1, task.due_at] }
+      # tasks = Task.where(:user_id => user.id, :completed_at => nil).sort_by! { |task| [task.due_at ? 0 : 1, task.due_at] }
+      tasks = Task.where(:user_id => user.id, :completed_at => nil).order(due_at: :desc)
       users[user] = tasks
     end
   end
