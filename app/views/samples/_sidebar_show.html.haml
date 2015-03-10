@@ -3,6 +3,9 @@
   %li
     %dt= @sample.state ? t(@sample.state) : t(:other)
     %tt #{t :state}:
+  %li
+    %dt= @sample.opportunity ? link_to(t(@sample.opportunity.name), opportunity_path(@sample.opportunity)) : t(:other)
+    %tt #{t :opportunity}:
 
   - if @sample.pricing_type == "Spot"
     %li
