@@ -60,9 +60,10 @@ class Version < PaperTrail::Version
     end
 
     def visible_to(user)
-      binding.pry
-      all.to_a.delete_if do |version|
-        if item = version.item || version.reify
+      all.where.not(item_type: "Sample", related_type: "Sample").to_a.delete_if do |version|
+        if item = version.item
+          # Removed from above line due to issues with Rails 4 ActiveRecord
+          # || version.reify
           if item.respond_to?(:access) # NOTE: Tasks don't have :access as of yet.
             # Delete from scope if it shouldn't be visible
             next item.user_id != user.id &&
