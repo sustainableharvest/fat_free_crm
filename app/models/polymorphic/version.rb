@@ -6,7 +6,7 @@
 require 'paper_trail'
 
 class Version < PaperTrail::Version
-  ASSETS = %w(all tasks campaigns leads accounts contacts opportunities comments emails)
+  ASSETS = %w(all tasks campaigns leads accounts contacts opportunities comments emails samples)
   EVENTS = %w(all_events create view update destroy)
   DURATION = %w(one_hour one_day two_days one_week two_weeks one_month)
 
@@ -60,6 +60,7 @@ class Version < PaperTrail::Version
     end
 
     def visible_to(user)
+      binding.pry
       all.to_a.delete_if do |version|
         if item = version.item || version.reify
           if item.respond_to?(:access) # NOTE: Tasks don't have :access as of yet.
