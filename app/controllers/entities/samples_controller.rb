@@ -72,8 +72,9 @@ class SamplesController < EntitiesController
     @sample.destroy
 
     flash[:notice] = @sample.name + " has been deleted."
+    # binding.pry
 
-    redirect_to :back
+    redirect_to opportunity_path(opportunity)
   end
 
   def errors_format(errors)
