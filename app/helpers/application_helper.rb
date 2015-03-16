@@ -52,7 +52,7 @@ module ApplicationHelper
     create_url = controller.send(:"new_#{asset}_path")
 
     html = tag(:br)
-    html << content_tag(:div, link_to(t(select_id), "#", :id => select_id), :class => "subtitle_tools")
+    html << content_tag(:div, link_to(t(select_id), "#", :id => select_id), :class => "subtitle_tools") unless select_id == "select_sample"
     html << content_tag(:div, "&nbsp;|&nbsp;".html_safe, :class => "subtitle_tools")
     html << content_tag(:div, link_to_inline(create_id, create_url, :related => dom_id(related), :text => t(create_id)), :class => "subtitle_tools")
     html << content_tag(:div, t(assets), :class => :subtitle, :id => "create_#{asset}_title")
