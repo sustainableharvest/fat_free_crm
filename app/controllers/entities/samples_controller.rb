@@ -12,6 +12,7 @@ class SamplesController < EntitiesController
   end
 
   def new
+    binding.pry
     opp = params[:related].split('_').last.to_i if params[:related]
     @pc_names = rits_pc_names
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
