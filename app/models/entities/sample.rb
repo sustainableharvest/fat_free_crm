@@ -7,6 +7,8 @@ class Sample < ActiveRecord::Base
 
   serialize :subscribed_users, Set
 
+  scope :text_search, ->(query) { search('name' => query).result }
+
   before_save :follow_up_default
 
   uses_user_permissions

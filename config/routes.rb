@@ -128,7 +128,11 @@ Rails.application.routes.draw do
 
   resources :samples, :id => /\d+/ do
     collection do
-      
+      get   :redraw
+      post  :filter
+      get   :options
+      match :auto_complete
+      get   :advanced_search
     end
     member do
       put  :attach
