@@ -1,7 +1,13 @@
+-# -binding.pry
 .filters#filter
   .caption= t :sample_states
   - @state.each do |value, key|
-    .check_box
+    .check_box{:style => "border-bottom: 1px silver dotted;"}
       %div{:style => "float:right;"}
-        = "test"
+        = @sample_state_total[key]
       = label_tag(key, value)
+
+  .check_box
+    %div{:style => "float:right;"}
+      %b= @sample_state_total[:all]
+    %b #{t :total_samples}

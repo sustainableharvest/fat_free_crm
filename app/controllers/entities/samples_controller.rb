@@ -1,6 +1,7 @@
 class SamplesController < EntitiesController
   include SamplesHelper
   before_filter :load_settings
+  before_filter :get_data_for_sidebar, :only => :index
 
   def index
     @samples = get_samples(:page => params[:page], :per_page => params[:per_page])
@@ -93,6 +94,13 @@ class SamplesController < EntitiesController
     alias :get_samples :get_list_of_records
 
   #----------------------------------------------------------------------------
+  def get_data_for_sidebar(related = false)
+    @sample_state_total = { :all => Sample.my.count, :other => 0 }
+    @state.each do |value, key|
+      @sample_state_total[key] = Sample.my.where(:state => key.to_s).count
+    end
+  end
+
   def load_settings
     @state = Setting.unroll(:sample_state)
   end
