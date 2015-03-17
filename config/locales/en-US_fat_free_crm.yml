@@ -530,6 +530,7 @@ en-US:
   ssp: Suggested Sales Price
   fob: Fob Price
   description_input: Description (255 character max)
+  sample_states: Sample States
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

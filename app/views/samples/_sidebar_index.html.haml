@@ -1,0 +1,7 @@
+.filters#filter
+  .caption= t :sample_states
+  - @state.each do |value, key|
+    .check_box
+      %div{:style => "float:right;"}
+        = "test"
+      = label_tag(key, value)
