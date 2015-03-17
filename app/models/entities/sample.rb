@@ -72,12 +72,12 @@ class Sample < ActiveRecord::Base
     today = Date.today
     default = today + 14
     case self.state
-    when 'sample_requested'
+      when 'sample_requested'
       self.follow_up_date = default if self.follow_up_date.blank?
-    when "sample_shipped", "pending_approval"
+      when "sample_shipped", "pending_approval"
       self.follow_up_date = self.shipment_date + 14 if self.follow_up_date.blank?
-    # when "rejected", "approved"
-    #   self.follow_up_date = nil
+      # when "rejected", "approved"
+      #   self.follow_up_date = nil
     end
   end
 

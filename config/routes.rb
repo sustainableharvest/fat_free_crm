@@ -131,7 +131,10 @@ Rails.application.routes.draw do
       
     end
     member do
-
+      put  :attach
+      post :discard
+      post :subscribe
+      post :unsubscribe
     end
   end
 
