@@ -79,6 +79,13 @@ class SamplesController < EntitiesController
     redirect_to opportunity_path(opportunity)
   end
 
+  def filter
+    @samples = get_samples
+    respond_with(@samples) do |format|
+      format.js { render :index}
+    end
+  end
+
   def errors_format(errors)
     result = ""
     errors.each do |error, messages|

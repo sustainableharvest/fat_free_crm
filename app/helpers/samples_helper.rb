@@ -1,5 +1,9 @@
 module SamplesHelper
 
+  def opportunity_state_checkbox(state, count)
+    entity_filter_checkbox(:state, state, count)
+  end
+
   def rits_purchase_contracts
     url = "https://rits.sustainableharvest.com/api/v1/spot_contracts.json"
     JSON.parse(open(url).read)
