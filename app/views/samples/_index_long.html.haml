@@ -15,8 +15,10 @@
     %tt
       = link_to sample.name, sample_path(sample)
       &ndash;
-      = link_to "(" + sample.opportunity.name + ")", opportunity_path(sample.opportunity), { :style=>'color:red;' }
-      &ndash;
+      - if request.referer.nil?
+        = link_to "(" + sample.opportunity.name + ")", opportunity_path(sample.opportunity), { :style=>'color:red;' }
+        &ndash;
+        = link_to sample.opportunity.account.name + " - ", account_path(sample.opportunity.account) if sample.opportunity.account
       - user_name = sample.user.try(:full_name)
       - if user_name
         = t(:added_by, :time_ago => timeago(sample.created_at), :user => h(user_name)).html_safe

@@ -92,6 +92,15 @@ class SamplesController < EntitiesController
     end
   end
 
+  def redraw
+    @samples = get_samples(:page => 1, :per_page => params[:per_page])
+    set_options
+
+    respond_with(@samples) do |format|
+      format.js { render :index }
+    end
+  end
+
   def errors_format(errors)
     result = ""
     errors.each do |error, messages|
