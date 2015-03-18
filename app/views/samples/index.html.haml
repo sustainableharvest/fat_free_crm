@@ -2,10 +2,14 @@
 
 -# = render 'search'
 
+.remote#options{ hidden }
+
 .list#samples
   - if @samples.any?
     = render @samples
   - else
     = render "shared/empty"
+
+#paginate= render "shared/paginate_with_per_page"
 
 = hook(:sample_index_after, self)

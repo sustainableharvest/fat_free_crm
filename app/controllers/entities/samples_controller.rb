@@ -5,6 +5,11 @@ class SamplesController < EntitiesController
 
   def index
     @samples = get_samples(:page => params[:page], :per_page => params[:per_page])
+
+    respond_with @samples do |format|
+      format.xls { render :layout => 'header'}
+      format.csv { render :csv => @samples}
+    end
   end
 
   def show
@@ -13,7 +18,6 @@ class SamplesController < EntitiesController
   end
 
   def new
-    binding.pry
     opp = params[:related].split('_').last.to_i if params[:related]
     @pc_names = rits_pc_names
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
@@ -80,7 +84,9 @@ class SamplesController < EntitiesController
   end
 
   def filter
-    @samples = get_samples
+    session[:samples_filter] = params[:state]
+    @samples = get_samples(:page => 1, :per_page => params[:per_page])
+
     respond_with(@samples) do |format|
       format.js { render :index}
     end
