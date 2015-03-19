@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20150305050033) do
 
   # These are extensions that must be enabled in order to support this database
@@ -374,17 +373,6 @@ ActiveRecord::Schema.define(version: 20150305050033) do
   create_table "samples", force: :cascade do |t|
     t.string   "state",                     limit: 32
     t.integer  "opportunity_id"
-<<<<<<< HEAD
-    t.string   "type",                      :limit => 32
-    t.string   "description"
-    t.string   "rits_purchase_contract_id"
-    t.string   "pricing_type",              :limit => 12
-    t.string   "producer",                  :limit => 64
-    t.string   "quoted_price"
-    t.decimal  "sh_margin",                               :precision => 8, :scale => 2
-    t.decimal  "sh_fee",                                  :precision => 8, :scale => 2
-    t.decimal  "differential",                            :precision => 8, :scale => 2
-=======
     t.string   "type",                      limit: 32
     t.string   "description",               limit: 255
     t.string   "rits_purchase_contract_id", limit: 255
@@ -394,7 +382,6 @@ ActiveRecord::Schema.define(version: 20150305050033) do
     t.decimal  "sh_margin",                             precision: 8, scale: 2
     t.decimal  "sh_fee",                                precision: 8, scale: 2
     t.decimal  "differential",                          precision: 8, scale: 2
->>>>>>> master
     t.date     "delivery_month"
     t.decimal  "fob_price",                             precision: 8, scale: 2
     t.integer  "user_id"
@@ -405,11 +392,7 @@ ActiveRecord::Schema.define(version: 20150305050033) do
     t.text     "subscribed_users"
     t.integer  "rits_id"
     t.integer  "ssp"
-<<<<<<< HEAD
-    t.string   "country"
-=======
     t.string   "country",                   limit: 255
->>>>>>> master
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -131,7 +131,7 @@ Rails.application.routes.draw do
       get   :redraw
       post  :filter
       get   :options
-      match :auto_complete
+      match :auto_complete, via: [:get, :post]
       get   :advanced_search
     end
     member do
