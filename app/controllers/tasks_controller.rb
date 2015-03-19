@@ -75,6 +75,8 @@ class TasksController < ApplicationController
     @task = Task.new(task_params) # NOTE: we don't display validation messages for tasks.
     @all_tasks_by_user = Task.find_all_by_user(@view)
 
+    binding.pry
+
     respond_with(@task) do |_format|
       if @task.save
         update_sidebar if called_from_index_page?

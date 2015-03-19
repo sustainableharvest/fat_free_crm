@@ -15,6 +15,7 @@ class SamplesController < EntitiesController
   def show
     @timeline = timeline(@sample)
     @pricing = Setting.unroll(:sample_pricing)
+    respond_with(@sample)
   end
 
   def new
@@ -48,22 +49,19 @@ class SamplesController < EntitiesController
 
   def edit
     @pc_names = rits_pc_names
-    # binding.pry
     @pricing = Setting.unroll(:sample_pricing)
+    if params[:previous].to_s =~ /(\d+)\z/
+      @previous = Sample.my.find_by_id(Regexp.last_match[1]) || Regexp.last_match[1].to_i
+    end
     respond_with(@sample)
   end
 
   def update
     if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
-      params[:sample][:fob_price] = info[:fob]
-      params[:sample][:producer]  = info[:producer]
-      params[:sample][:rits_id] = info[:rits_id]
-      params[:sample][:country] = info[:country]
-      params[:sample][:ssp] = info[:ssp]
+      params[:sample].merge!(info)
     end
-    # binding.pry
-    @sample.update_attributes(params[:sample]) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
+    @sample.update_attributes(resource_params) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
 
     if request.referer.include?("sample")
       redirect_to sample_path(@sample)
@@ -73,14 +71,15 @@ class SamplesController < EntitiesController
   end
 
   def destroy
-    # binding.pry
     opportunity = @sample.opportunity
     @sample.destroy
 
     flash[:notice] = @sample.name + " has been deleted."
-    # binding.pry
-
-    redirect_to opportunity_path(opportunity)
+    if request.referer.include?("samples")
+      redirect_to samples_path
+    else
+      redirect_to opportunity_path(opportunity)
+    end
   end
 
   def filter
@@ -93,7 +92,7 @@ class SamplesController < EntitiesController
   end
 
   def redraw
-    @samples = get_samples(:page => 1, :per_page => params[:per_page])
+    @samples = get_samples(page: 1, per_page: params[:per_page])
     set_options
 
     respond_with(@samples) do |format|

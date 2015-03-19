@@ -534,6 +534,7 @@ en-US:
   sample_states: Sample States
   total_samples: Total Samples
   follow_up_overdue: Follow-Up Overdue
+  could_not_find_samples: Could not find any samples. Create new ones in an 
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

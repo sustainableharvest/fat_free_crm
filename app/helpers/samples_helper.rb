@@ -17,7 +17,7 @@ module SamplesHelper
 
   def rits_pc_hash
     pc_hash = {}
-    rits_purchase_contracts.each {|pc| pc_hash[pc["contract_number"]] = {:country => pc["country"], :ssp => pc["ssp"], :fob => pc["fob"], :rits_id => pc["id"], :producer => pc["producer"]}}
+    rits_purchase_contracts.each {|pc| pc_hash[pc["contract_number"]] = {:country => pc["country"], :ssp => pc["ssp"], :fob_price => pc["fob"], :rits_id => pc["id"], :producer => pc["producer"]}}
     pc_hash
   end
 
