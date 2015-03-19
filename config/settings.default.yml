@@ -236,6 +236,11 @@
   :url:
     :controller: opportunities
 - :active: false
+  :text: :tab_samples
+  :icon: :fa-coffee
+  :url:
+    :controller: samples
+- :active: false
   :text: :tab_team
   :icon: :fa-globe
   :url:
