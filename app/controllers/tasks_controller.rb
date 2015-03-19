@@ -4,9 +4,9 @@
 # See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
 #------------------------------------------------------------------------------
 class TasksController < ApplicationController
-  before_filter :require_user
-  before_filter :set_current_tab, :only => [ :index, :show ]
-  before_filter :update_sidebar, :only => :index
+  before_action :require_user
+  before_action :set_current_tab, only: [:index, :show]
+  before_action :update_sidebar, only: :index
 
   # GET /tasks
   #----------------------------------------------------------------------------
@@ -18,9 +18,9 @@ class TasksController < ApplicationController
     @total_number_of_tasks = Task.count_all_tasks(@view)
 
     respond_with @tasks do |format|
-      format.xls { render :layout => 'header' }
-      format.csv { render :csv => @tasks.map(&:second).flatten }
-      format.xml { render :xml => @tasks, :except => [:subscribed_users] }
+      format.xls { render layout: 'header' }
+      format.csv { render csv: @tasks.map(&:second).flatten }
+      format.xml { render xml: @tasks, except: [:subscribed_users] }
     end
   end
 
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
   def new
     @view = view
     @task = Task.new
-    @bucket = Setting.unroll(:task_bucket)[1..-1] << [ t(:due_specific_date, :default => 'On Specific Date...'), :specific_time ]
+    @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
 
     if params[:related]
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
       if related = model.classify.constantize.my.find_by_id(id)
         instance_variable_set("@asset", related)
       else
-        respond_to_related_not_found(model) and return
+        respond_to_related_not_found(model) && return
       end
     end
 
@@ -56,12 +56,12 @@ class TasksController < ApplicationController
   def edit
     @view = view
     @task = Task.tracked_by(current_user).find(params[:id])
-    @bucket = Setting.unroll(:task_bucket)[1..-1] << [ t(:due_specific_date, :default => 'On Specific Date...'), :specific_time ]
+    @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
     @asset = @task.asset if @task.asset_id?
 
     if params[:previous].to_s =~ /(\d+)\z/
-      @previous = Task.tracked_by(current_user).find_by_id($1) || $1.to_i
+      @previous = Task.tracked_by(current_user).find_by_id(Regexp.last_match[1]) || Regexp.last_match[1].to_i
     end
 
     respond_with(@task)
@@ -71,10 +71,11 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def create
     @view = view
-    @task = Task.new(params[:task]) # NOTE: we don't display validation messages for tasks.
+
+    @task = Task.new(task_params) # NOTE: we don't display validation messages for tasks.
     @all_tasks_by_user = Task.find_all_by_user(@view)
 
-    respond_with(@task) do |format|
+    respond_with(@task) do |_format|
       if @task.save
         update_sidebar if called_from_index_page?
       end
@@ -94,8 +95,8 @@ class TasksController < ApplicationController
       @task_before_update.bucket = @task.computed_bucket
     end
 
-    respond_with(@task) do |format|
-      if @task.update_attributes(params[:task])
+    respond_with(@task) do |_format|
+      if @task.update_attributes(task_params)
         @task.bucket = @task.computed_bucket
         if called_from_index_page?
           if Task.bucket_empty?(@task_before_update.bucket, current_user, @view)
@@ -127,7 +128,7 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def complete
     @task = Task.tracked_by(current_user).find(params[:id])
-    @task.update_attributes(:completed_at => Time.now, :completed_by => current_user.id) if @task
+    @task.update_attributes(completed_at: Time.now, completed_by: current_user.id) if @task
 
     # Make sure bucket's div gets hidden if it's the last completed task in the bucket.
     if Task.bucket_empty?(params[:bucket], current_user)
@@ -142,7 +143,7 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def uncomplete
     @task = Task.tracked_by(current_user).find(params[:id])
-    @task.update_attributes(:completed_at => nil, :completed_by => nil) if @task
+    @task.update_attributes(completed_at: nil, completed_by: nil) if @task
 
     # Make sure bucket's div gets hidden if we're deleting last task in the bucket.
     if Task.bucket_empty?(params[:bucket], current_user, @view)
@@ -171,7 +172,13 @@ class TasksController < ApplicationController
     end
   end
 
-private
+  protected
+
+  def task_params
+    params[:task].permit!
+  end
+
+  private
 
   # Yields array of current filters and updates the session using new values.
   #----------------------------------------------------------------------------
@@ -215,5 +222,4 @@ private
     views = Task::ALLOWED_VIEWS
     views.include?(view) ? view : views.first
   end
-
 end

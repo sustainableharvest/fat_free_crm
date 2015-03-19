@@ -19,8 +19,10 @@
 
     = render "opportunities/opportunities", :object => @campaign
 
+    = render "contacts/contacts", :object => @campaign
+
     = render "versions/versions", :object => @campaign
 
-    = load_select_popups_for(@campaign, :tasks, :leads, :opportunities)
+    = load_select_popups_for(@campaign, :tasks, :leads, :opportunities, :contacts)
 
   #export= render "shared/export", :action => :show
