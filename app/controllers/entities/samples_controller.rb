@@ -29,13 +29,10 @@ class SamplesController < EntitiesController
     @comment_body = params[:comment_body]
     if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
-      @sample.fob_price = info[:fob]
-      @sample.producer  = info[:producer]
-      @sample.rits_id = info[:rits_id]
-      @sample.country = info[:country]
-      @sample.ssp = info[:ssp]
+      params[:sample].merge!(info)
     end
-
+    
+    @sample = Sample.new(params[:sample])
     # @sample.delivery_month = params[:date]
 
     if @sample.save
