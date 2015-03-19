@@ -1,5 +1,7 @@
 - if (params['controller'] == 'samples') and (template = template_for_current_view).present?
   = render(template, :sample => sample)
 - else
-  -# default view
-  = render 'samples/index_long', :sample => sample, :short_state => sample.short_state
+  - if params["action"] == "index"
+    = render 'samples/index_long', :sample => sample, :short_state => sample.short_state
+  - else
+    = render 'samples/index_short', :sample => sample, :short_state => sample.short_state

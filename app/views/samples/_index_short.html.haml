@@ -1,0 +1,26 @@
+%li.highlight[sample]{:style => alert}
+  - if sample.state
+    .strip{:class => sample.state}= t(short_state)
+  - else
+    .strip.white #{t :other}
+
+  %ul.tools
+    - if can?(:update, sample)
+      %li= link_to_edit(sample)
+
+    - if can?(:destroy, sample)
+      %li= link_to (t :delete), sample_path(sample, :from => "opportunity"), method: :delete
+
+  .indent
+    %tt
+      - if sample.follow_up_date <= Date.today
+        = link_to sample.name, sample_path(sample), {:style => "font-weight: bold; background-color: pink; color: red; border-radius: 3px;"}
+      - else
+        = link_to sample.name, sample_path(sample), {:style => "font-weight: bold;"}
+      &ndash;
+      - user_name = sample.user.try(:full_name)
+      - if user_name
+        = t(:added_by, :time_ago => timeago(sample.created_at), :user => h(user_name)).html_safe
+      - else
+        = t(:added_ago, :value => timeago(sample.created_at)).html_safe
+  = hook(:sample_bottom, self, :sample => sample)
