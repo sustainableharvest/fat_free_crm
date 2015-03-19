@@ -24,8 +24,8 @@ sample_state:
   - :approved
 
 sample_state_color:
-  :sample_requested  : Silver
-  :sample_shipped    : Orchid
+  :sample_requested  : Khaki
+  :sample_shipped    : Cyan
   :pending_approval  : Salmon
   :rejected          : PaleGoldenRod
   :approved          : Gold
