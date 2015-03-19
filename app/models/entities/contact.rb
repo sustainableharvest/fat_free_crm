@@ -45,6 +45,8 @@ class Contact < ActiveRecord::Base
   belongs_to :reporting_user, class_name: "User", foreign_key: :reports_to
   has_one :account_contact, dependent: :destroy
   has_one :account, through: :account_contact
+  has_many :contact_campaigns
+  has_many :campaigns, :through => :contact_campaigns
   has_many :contact_opportunities, dependent: :destroy
   has_many :opportunities, -> { order("opportunities.id DESC").distinct }, through: :contact_opportunities
   has_many :tasks, as: :asset, dependent: :destroy # , :order => 'created_at DESC'
