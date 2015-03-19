@@ -532,6 +532,7 @@ en-US:
   description_input: Description (255 character max)
   sample_states: Sample States
   total_samples: Total Samples
+  follow_up_overdue: Follow-Up Overdue
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------
