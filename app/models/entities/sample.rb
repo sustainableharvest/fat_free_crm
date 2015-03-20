@@ -44,6 +44,16 @@ class Sample < ActiveRecord::Base
   # Validations for Shipment and Follow Up
   validates :shipment_date, :presence => true, :if => :sample_shipped?
 
+  # Discard given attachment from the account.
+  #----------------------------------------------------------------------------
+  def discard!(attachment)
+    if attachment.is_a?(Task)
+      attachment.update_attribute(:asset, nil)
+    else # Contacts, Opportunities
+      send(attachment.class.name.tableize).delete(attachment)
+    end
+  end  
+
   def sample_shipped?
     self.state != "sample_requested"
   end
