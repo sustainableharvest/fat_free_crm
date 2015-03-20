@@ -31,11 +31,14 @@ class SamplesController < EntitiesController
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       params[:sample].merge!(info)
     end
-    
+
     @sample = Sample.new(params[:sample])
     # @sample.delivery_month = params[:date]
 
     if @sample.save
+      if @sample.follow_up_date.present?
+        follow_up_task(@sample)
+      end
       @sample.add_comment_by_user(@comment_body, current_user)
       redirect_to opportunity_path(@sample.opportunity)
     else
@@ -54,11 +57,19 @@ class SamplesController < EntitiesController
   end
 
   def update
+    old_sample_date = @sample.follow_up_date
     if rits_pc_hash.fetch(@sample.rits_purchase_contract_id, "Error") != "Error"
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       params[:sample].merge!(info)
     end
-    @sample.update_attributes(resource_params) ? flash[:notice] = @sample.name + " updated." : flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
+    if @sample.update_attributes(resource_params)
+      flash[:notice] = @sample.name + " updated."
+      if @sample.follow_up_date != old_sample_date
+        follow_up_task(@sample)
+      end
+    else
+      flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
+    end
 
     if request.referer.include?("sample")
       redirect_to sample_path(@sample)
@@ -121,6 +132,10 @@ class SamplesController < EntitiesController
 
   def load_settings
     @state = Setting.unroll(:sample_state)
+  end
+
+  def follow_up_task(sample)
+    Task.create(:user => current_user, :asset_id => sample.id, :asset_type => "Sample", :name => "Follow-Up Due", :bucket => "specific_time", :calendar => sample.follow_up_date.to_s, :assignee => current_user, :category => "follow_up")
   end
 
 end
