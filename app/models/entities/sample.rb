@@ -2,6 +2,7 @@ class Sample < ActiveRecord::Base
 
   belongs_to :opportunity
   belongs_to :user
+  belongs_to :assignee, class_name: "User", foreign_key: :assigned_to
   has_many   :tasks, :as => :asset, :dependent => :destroy
   has_many   :emails, :as => :mediator
 

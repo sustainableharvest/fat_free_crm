@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305050033) do
+ActiveRecord::Schema.define(version: 20150320183447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -393,7 +393,11 @@ ActiveRecord::Schema.define(version: 20150305050033) do
     t.integer  "rits_id"
     t.integer  "ssp"
     t.string   "country",                   limit: 255
+    t.integer  "assigned_to"
+    t.string   "access",                    limit: 8
   end
+
+  add_index "samples", ["assigned_to"], name: "index_samples_on_assigned_to", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
