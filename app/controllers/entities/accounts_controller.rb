@@ -57,6 +57,7 @@ class AccountsController < EntitiesController
 
     respond_with(@account) do |_format|
       if @account.save
+        @account.campaigns << Campaign.find(params[:campaign]) unless params[:campaign].blank?
         @account.add_comment_by_user(@comment_body, current_user)
         # None: account can only be created from the Accounts index page, so we
         # don't have to check whether we're on the index page.

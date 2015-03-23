@@ -4,7 +4,7 @@
 
   -# default view
 
-  = styles_for :task, :lead, :opportunity
+  = styles_for :task, :lead, :opportunity, :account, :contact
 
   = render 'campaigns/title_bar', :campaign => @campaign
 
@@ -21,8 +21,10 @@
 
     = render "contacts/contacts", :object => @campaign
 
+    = render "accounts/accounts", :object => @campaign
+
     = render "versions/versions", :object => @campaign
 
-    = load_select_popups_for(@campaign, :tasks, :leads, :opportunities, :contacts)
+    = load_select_popups_for(@campaign, :tasks, :leads, :opportunities, :contacts, :accounts)
 
   #export= render "shared/export", :action => :show

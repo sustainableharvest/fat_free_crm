@@ -60,7 +60,7 @@ class Campaign < ActiveRecord::Base
   exportable
   sortable by: ["name ASC", "target_leads DESC", "target_revenue DESC", "leads_count DESC", "revenue DESC", "starts_on DESC", "ends_on DESC", "created_at DESC", "updated_at DESC"], default: "created_at DESC"
 
-  has_ransackable_associations %w(accounts contacts leads opportunities tags activities emails comments tasks)
+  has_ransackable_associations %w(contacts leads opportunities tags activities emails comments tasks)
   ransack_can_autocomplete
 
   validates_presence_of :name, message: :missing_campaign_name
@@ -79,7 +79,7 @@ class Campaign < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def attach!(attachment)
     unless self.send("#{attachment.class.name.downcase}_ids").include?(attachment.id)
-      if attachment.is_a?(Task) || attachment.is_a?(Contact)
+      if attachment.is_a?(Task) || attachment.is_a?(Contact) || attachment.is_a?(Account)
         self.send(attachment.class.name.tableize) << attachment
       else # Leads, Opportunities
         attachment.update_attribute(:campaign, self)

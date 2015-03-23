@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
   has_many   :account_contacts, dependent: :destroy
   has_many   :account_opportunities, dependent: :destroy
   has_many   :accounts_campaigns, dependent: :destroy
-  has_many   :campaigns, -> { order("accounts.id DESC").distinct }, through: :accounts_campaigns
+  has_many   :campaigns, -> { order("campaigns.id DESC").distinct }, through: :accounts_campaigns
   has_many   :contacts, -> { distinct }, through: :account_contacts
   has_many   :opportunities, -> { order("opportunities.id DESC").distinct }, through: :account_opportunities
   has_many   :tasks, as: :asset, dependent: :destroy # , :order => 'created_at DESC'
@@ -75,7 +75,7 @@ class Account < ActiveRecord::Base
   exportable
   sortable by: ["name ASC", "rating DESC", "created_at DESC", "updated_at DESC"], default: "created_at DESC"
 
-  has_ransackable_associations %w(campaigns contacts opportunities tags activities emails addresses comments tasks)
+  has_ransackable_associations %w(contacts opportunities tags activities emails addresses comments tasks)
   ransack_can_autocomplete
 
   validates_presence_of :name, message: :missing_account_name

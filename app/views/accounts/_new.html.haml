@@ -1,6 +1,7 @@
 = simple_form_for(@account, :html => one_submit_only, :remote => true) do |f|
   = link_to_close new_account_path
   = f.hidden_field :user_id
+  = hidden_field_tag "campaign", "#{@campaign.id if @campaign}"
 
   = f.error_messages :object_name => t('account')
 
