@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320183447) do
+ActiveRecord::Schema.define(version: 20150323181500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 20150320183447) do
 
   add_index "accounts", ["assigned_to"], name: "index_accounts_on_assigned_to", using: :btree
   add_index "accounts", ["user_id", "name", "deleted_at"], name: "index_accounts_on_user_id_and_name_and_deleted_at", unique: true, using: :btree
+
+  create_table "accounts_campaigns", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "campaign_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"

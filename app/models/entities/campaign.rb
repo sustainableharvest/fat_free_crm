@@ -32,6 +32,8 @@
 class Campaign < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :assignee, :class_name => "User", :foreign_key => :assigned_to
+  has_many    :accounts, -> { order "accounts.id DESC"}, through: :accounts_campaigns
+  has_many    :accounts_campaigns, dependent: :destroy
   has_many    :tasks, :as => :asset, :dependent => :destroy
   has_many    :leads, -> { order "id DESC" }, dependent: :destroy
   has_many    :opportunities, -> { order "id DESC" }, dependent: :destroy
@@ -58,7 +60,7 @@ class Campaign < ActiveRecord::Base
   exportable
   sortable by: ["name ASC", "target_leads DESC", "target_revenue DESC", "leads_count DESC", "revenue DESC", "starts_on DESC", "ends_on DESC", "created_at DESC", "updated_at DESC"], default: "created_at DESC"
 
-  has_ransackable_associations %w(leads opportunities tags activities emails comments tasks)
+  has_ransackable_associations %w(accounts contacts leads opportunities tags activities emails comments tasks)
   ransack_can_autocomplete
 
   validates_presence_of :name, message: :missing_campaign_name
