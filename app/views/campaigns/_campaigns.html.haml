@@ -1,0 +1,9 @@
+
+-# = section(object, :campaigns)
+%br
+.subtitle= :Campaigns
+.list#campaigns
+  - campaigns = object.campaigns.order('updated_at desc').paginate(:page => 1, :per_page => 20)
+  = render :partial => "campaigns/campaign", :collection => campaigns
+
+= paginate( collection: campaigns, id: 'campaigns_pagination', params: { action: 'campaigns' } )

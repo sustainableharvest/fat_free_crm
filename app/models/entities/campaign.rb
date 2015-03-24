@@ -94,6 +94,8 @@ class Campaign < ActiveRecord::Base
   def discard!(attachment)
     if attachment.is_a?(Task)
       attachment.update_attribute(:asset, nil)
+    elsif attachment.is_a?(Account)
+      attachment.campaigns.delete(self)
     else # Leads, Opportunities
       attachment.send("decrement_#{attachment.class.name.tableize}_count")
       attachment.update_attribute(:campaign, nil)
