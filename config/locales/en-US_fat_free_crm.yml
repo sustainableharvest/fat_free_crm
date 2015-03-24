@@ -646,6 +646,7 @@ en-US:
   subject_opportunity: opportunity
   subject_task: task
   subject_user: user
+  subject_sample: sample
   tag_list: Tags
   create_past_participle: Record Creations
   view_past_participle: Views
