@@ -1,6 +1,14 @@
+= image_tag("loading.gif", :size => :thumb, :class => "spinner", :style => "display: none;")
 = section(object, :samples)
 .list#samples
   - samples = object.samples.order('updated_at desc').paginate(:page => 1, :per_page => 20)
   = render :partial => "samples/sample", :collection => samples
 
 = paginate( collection: samples, id: 'samples_pagination', params: {action: 'samples' } )
+
+:javascript
+  $(document).ready(function() {
+    $("#section").load(function (){
+      $(".spinner").toggle();
+    })
+  });

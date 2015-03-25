@@ -87,12 +87,21 @@ module ApplicationHelper
     text = (arrow_for(id) + text) unless options[:plain]
     related = (options[:related] ? "&related=#{options[:related]}" : '')
 
-    link_to(text,
+    if id.to_s.include? "sample"
+      link_to(text,
             url + "#{url.include?('?') ? '&' : '?'}cancel=false" + related,
             remote: true,
-            onclick: "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none'));",
+            onclick: "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none')); $('.spinner').toggle()",
             class: options[:class]
     )
+    else
+      link_to(text,
+              url + "#{url.include?('?') ? '&' : '?'}cancel=false" + related,
+              remote: true,
+              onclick: "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none'));",
+              class: options[:class]
+      )
+    end
   end
 
   #----------------------------------------------------------------------------
