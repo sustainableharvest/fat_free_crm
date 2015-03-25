@@ -6,9 +6,9 @@
   = f.error_messages :object_name => t('sample')
 
   = render "samples/top_section", :f => f
-  -# = render "fields/edit_custom_field_group", :f => f
-  -# = render "shared/add_comment",        :f => f
-  -# = render "fields/groups",             :f => f
+  = render "fields/edit_custom_field_group", :f => f
+  = render "shared/add_comment",        :f => f
+  = render "fields/groups",             :f => f
   / = render "entities/permissions",      :f => f, :entity => @sample
 
   .buttonbar

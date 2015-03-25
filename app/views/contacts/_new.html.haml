@@ -12,7 +12,7 @@
   = render "contacts/extra",       :f => f
   = render "contacts/web",         :f => f
   = render "fields/groups",        :f => f
-  = render "entities/permissions", :f => f, :entity => @contact
+  -# = render "entities/permissions", :f => f, :entity => @contact
   = hook(:entity_form, self, {f: f, entity: @contact})
 
   .buttonbar
