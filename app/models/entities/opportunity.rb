@@ -84,7 +84,7 @@ class Opportunity < ActiveRecord::Base
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
 
-  # before_save :default_follow_up
+  before_save :default_assigned_to
 
   after_create  :increment_opportunities_count
   after_destroy :decrement_opportunities_count
@@ -178,6 +178,17 @@ class Opportunity < ActiveRecord::Base
       Opportunity.my.where(:stage => scope.to_s ).each { |opp| result += opp.amount if opp.amount }
     end
     result
+  end
+
+  # ------------------------------------------------------------------------------------------------
+  def default_assigned_to
+    if assigned_to.blank?
+      if account.id.blank?
+        self.assigned_to = user_id
+      else
+        account.assigned_to.blank? ? self.assigned_to = account.user_id : self.assigned_to = account.assigned_to
+      end
+    end
   end
 
   private
