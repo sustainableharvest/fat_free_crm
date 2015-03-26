@@ -12,6 +12,7 @@
       %tr
         = col(t(:fax), contact.fax)
         = col(t(:do_not_call), contact.do_not_call == false ? "no" : "yes")
+        = col(t(:do_not_email), contact.do_not_email == false ? "no" : "yes")
       %tr
         %th=t(:address) + ":"
         %td
