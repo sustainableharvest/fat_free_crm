@@ -69,7 +69,6 @@
 
 :javascript
   $(document).ready(function() {
-    $(".spinner").toggle();
     $("#type_pricing").change(function (){
       if ($("input[class=pricing]:checked", "#type_pricing").val() == "Spot") {
         $(".field_pricing_spot").show();
