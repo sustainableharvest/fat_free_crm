@@ -27,6 +27,9 @@ $color_footer: grey;
     color: $color_logo;
     font: normal 15px "Lucida Grande", Arial, Helvetica, sans-serif;
     text-decoration: none; }
+  .logos {
+    background-color: $color_header_background;
+    height: 64px; }
   #welcome {
     float: right;
     font-size: 11px;
