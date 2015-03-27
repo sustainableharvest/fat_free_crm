@@ -6,7 +6,7 @@
 
   %ul.tools
     - if can?(:update, sample)
-      %li= link_to_edit(sample)
+      %li.edit= link_to_edit(sample)
 
     - if can?(:destroy, sample)
       %li= link_to (t :delete), sample_path(sample, :from => "opportunity"), method: :delete
@@ -24,3 +24,10 @@
       - else
         = t(:added_ago, :value => timeago(sample.created_at)).html_safe
   = hook(:sample_bottom, self, :sample => sample)
+
+:javascript
+$(document).ready(function() {
+  $(".edit").click(function(){
+    $("#loading").show();
+  })
+});
