@@ -78,7 +78,10 @@ $sidebar_width: 210px;
     position: relative;
     top: -3px; }
   label {
-    font-size: 11px; } }
+    font-size: 11px; }
+  &.bottom_border {
+    border-bottom: 1px silver dotted; } 
+}
 
 // Main area (page and form).
 //------------------------------------------------------------------------------

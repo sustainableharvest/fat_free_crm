@@ -12,14 +12,14 @@
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)
 
-  .check_box{:style => "border-bottom: 1px silver dotted;"}
+  .check_box.bottom_border
     %div{:style => "float:right;"}
       = (@opportunity_amount_total[:other].floor || 0).to_s + " | "
       = @opportunity_stage_total[:other]
     = opportunity_stage_checkbox("other", @opportunity_stage_total[:other])
     = label_tag(:other, t(:other))
 
-  .check_box{:style => "border-bottom: 1px silver dotted;"}
+  .check_box.bottom_border
     %div{:style => "float:right;"}
       / Includes closed opps
       / %b= number_to_currency(@opportunity_amount_total[:all] || 0, :precision => 0) + " | "
