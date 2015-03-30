@@ -505,8 +505,16 @@ $sidebar_width: 210px;
       size: 12px;
       weight: bold; };
     margin: 4px 0px 5px 0px;
-    padding: 2px 0px 2px 0px; }
+    padding: 2px 0px 2px 0px;
+    #legend {
+      float: right;
+      font: {
+        weight: normal;
+        size: 9px;
+        style: italic;} 
+    } 
   }
+}
 
 .filters {
   h4 {

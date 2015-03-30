@@ -1,18 +1,20 @@
 .filters#filters
-  .caption= t :opportunity_stages
+  .caption
+    = (t :opportunity_stages) 
+    #legend= (t :bags_small)
   - @stage.each do |value, key|
     .check_box
       - unless key == :closed_won || key == :closed_lost
         %div{:style => "float:right;"}
           / Doesn't show amount of closed opps in sidebar
-          = number_to_currency(@opportunity_amount_total[key] || 0, :precision => 0) + " | "
+          = (@opportunity_amount_total[key] || 0).to_s + " | "
           = @opportunity_stage_total[key]
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)
 
   .check_box{:style => "border-bottom: 1px silver dotted;"}
     %div{:style => "float:right;"}
-      = number_to_currency(@opportunity_amount_total[:other] || 0, :precision => 0) + " | "
+      = (@opportunity_amount_total[:other].floor || 0).to_s + " | "
       = @opportunity_stage_total[:other]
     = opportunity_stage_checkbox("other", @opportunity_stage_total[:other])
     = label_tag(:other, t(:other))
@@ -22,8 +24,8 @@
       / Includes closed opps
       / %b= number_to_currency(@opportunity_amount_total[:all] || 0, :precision => 0) + " | "
       / Excludes closed opps
-      %b= number_to_currency(@opportunity_amount_total[:all] - (@opportunity_amount_total[:closed_won] + @opportunity_amount_total[:closed_lost]) || 0, :precision => 0) + " | "
-      %b= @opportunity_stage_total[:all] - @opportunity_stage_total[:closed_lost] - @opportunity_stage_total[:closed_won]
+      %b= ((@opportunity_amount_total[:all] - (@opportunity_amount_total[:closed_won] + @opportunity_amount_total[:closed_lost])).floor || 0).to_s + " | "
+      %b= (@opportunity_stage_total[:all] - @opportunity_stage_total[:closed_lost] - @opportunity_stage_total[:closed_won]).floor
     %b #{t :open_opportunities}
   = hook(:index_opportunity_sidebar_bottom, self)
 
@@ -31,7 +33,7 @@
     .check_box
       - if key == :closed_won || key == :closed_lost
         %div{:style => "float:right;"}
-          = number_to_currency(@opportunity_amount_total[key] || 0, :precision => 0) + " | "
+          = (@opportunity_amount_total[key].floor || 0).to_s + " | "
           = @opportunity_stage_total[key]
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)

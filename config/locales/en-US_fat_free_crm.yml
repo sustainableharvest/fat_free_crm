@@ -562,6 +562,7 @@ en-US:
   opportunity: Opportunity
   opportunity_small: opportunity
   opportunity_stages: Opportunity Stages
+  bags_small:  (bags | opps)
   opportunity_summary: Opportunity At a Glance
   opportunity_summary_text: ! '%{amount} with %{discount} discount and %{probability}
     probability'
