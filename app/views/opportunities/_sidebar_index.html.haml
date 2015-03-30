@@ -7,7 +7,7 @@
       - unless key == :closed_won || key == :closed_lost
         %div{:style => "float:right;"}
           / Doesn't show amount of closed opps in sidebar
-          = (@opportunity_amount_total[key] || 0).to_s + " | "
+          = (@opportunity_amount_total[key].floor || 0).to_s + " | "
           = @opportunity_stage_total[key]
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)
