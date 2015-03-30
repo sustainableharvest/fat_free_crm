@@ -31,19 +31,19 @@
   -#   %dt= @opportunity.amount ? number_to_currency(@opportunity.weighted_amount || 0, :precision => 0) : t(:n_a)
   -#   %tt #{t :weighted_amount}:
   %li
-    %dt= @opportunity.assigned_to ? link_to(truncate(@opportunity.assignee.full_name, :length => 16), @opportunity.assignee, :title => @opportunity.assignee) : t(:n_a)
+    %dt= @opportunity.assigned_to ? link_to(truncate(@opportunity.assignee.full_name, :length => 25), @opportunity.assignee, :title => @opportunity.assignee) : t(:n_a)
     %tt #{t :assigned_to}:
   %li
     %dt
       - if @opportunity.account
-        = link_to(truncate(@opportunity.account.name, :length => 16), @opportunity.account, :title => @opportunity.account.name)
+        = link_to(truncate(@opportunity.account.name, :length => 25), @opportunity.account, :title => @opportunity.account.name)
       - else
         #{t :n_a}
     %tt #{t :account}:
   %li.last
     %dt
       - if @opportunity.campaign
-        = link_to(truncate(@opportunity.campaign.name, :length => 16), @opportunity.campaign, :title => @opportunity.campaign.name)
+        = link_to(truncate(@opportunity.campaign.name, :length => 25), @opportunity.campaign, :title => @opportunity.campaign.name)
       - else
         #{t :n_a}
     %tt #{t :campaign}:
