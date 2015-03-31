@@ -4,11 +4,11 @@
     %dt= @sample.state ? t(@sample.state) : t(:other)
     %tt #{t :state}:
   %li
-    %dt= @sample.opportunity ? link_to(t(@sample.opportunity.name), opportunity_path(@sample.opportunity)) : t(:other)
+    %dt= @sample.opportunity ? link_to(truncate(t(@sample.opportunity.name), :length => 20), opportunity_path(@sample.opportunity)) : t(:other)
     %tt #{t :opportunity}:
   - if @sample.opportunity.account
     %li
-      %dt= @sample.opportunity.account.name.present? ? link_to(t(@sample.opportunity.account.name), account_path(@sample.opportunity.account)) : t(:n_a)
+      %dt= @sample.opportunity.account.name.present? ? link_to(truncate(t(@sample.opportunity.account.name), :length => 20), account_path(@sample.opportunity.account)) : t(:n_a)
       %tt #{t :account}:
 
   - if @sample.pricing_type == "Spot"
@@ -37,7 +37,7 @@
       %tt #{t :delivery_month}:
 
   %li
-    %dt= @sample.producer.present? ? t(@sample.producer) : t(:n_a)
+    %dt= @sample.producer.present? ? truncate(t(@sample.producer), :length => 20) : t(:n_a)
     %tt #{t :producer}:
   %li
     %dt= @sample.quoted_price.present? ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)
@@ -55,7 +55,7 @@
     %tt{:class => overdue} #{t :follow_up_date}:
 
   %li
-    %dt= @sample.description.present? ? truncate(@sample.description, :length => 16) : t(:n_a)
+    %dt= @sample.description.present? ? truncate(@sample.description, :length => 255) : t(:n_a)
     %tt #{t :description}:
 
   = render "fields/sidebar_show", :asset => @sample

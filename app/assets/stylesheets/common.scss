@@ -548,6 +548,7 @@ $sidebar_width: 210px;
         text-decoration: line-through;}}
     tt {
       font-size: 11px;
+      float: top;
       &.overdue {
         color: red; }
       &.complete {

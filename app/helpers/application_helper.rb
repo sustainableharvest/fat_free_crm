@@ -91,7 +91,7 @@ module ApplicationHelper
       link_to(text,
             url + "#{url.include?('?') ? '&' : '?'}cancel=false" + related,
             remote: true,
-            onclick: "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none')); $('.spinner').toggle()",
+            onclick: "this.href = this.href.replace(/cancel=(true|false)/,'cancel='+ ($('##{id}').css('display') != 'none')); $('#loading').toggle()",
             class: options[:class]
     )
     else
@@ -114,11 +114,20 @@ module ApplicationHelper
     object = record.is_a?(Array) ? record.last : record
 
     name = (params[:klass_name] || object.class.name).underscore.downcase
-    link_to(t(:edit),
+
+    if name == "sample"
+      link_to(t(:edit),
+            options[:url] || polymorphic_url(record, action: :edit),
+            remote:  true,
+            onclick: "this.href = this.href.split('?')[0] + '?previous='+crm.find_form('edit_#{h name}'); $('#loading').toggle()".html_safe
+      )
+    else
+      link_to(t(:edit),
             options[:url] || polymorphic_url(record, action: :edit),
             remote:  true,
             onclick: "this.href = this.href.split('?')[0] + '?previous='+crm.find_form('edit_#{h name}');".html_safe
-    )
+      )
+    end
   end
 
   #----------------------------------------------------------------------------
