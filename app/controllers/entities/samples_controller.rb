@@ -35,16 +35,26 @@ class SamplesController < EntitiesController
     @sample = Sample.new(params[:sample])
     # @sample.delivery_month = params[:date]
 
-    if @sample.save
-      if @sample.follow_up_date.present?
-        follow_up_task(@sample)
+    respond_with(@sample) do |_format|
+      binding.pry
+      if @sample.save
+        if @sample.follow_up_date.present?
+          follow_up_task(@sample)
+        end
+        @sample.add_comment_by_user(@comment_body, current_user)
       end
-      @sample.add_comment_by_user(@comment_body, current_user)
-      redirect_to opportunity_path(@sample.opportunity)
-    else
-      flash[:warning] = errors_format(@sample.errors.messages)
-      redirect_to opportunity_path(@sample.opportunity)
     end
+
+    # if @sample.save
+    #   if @sample.follow_up_date.present?
+    #     follow_up_task(@sample)
+    #   end
+    #   @sample.add_comment_by_user(@comment_body, current_user)
+    #   redirect_to opportunity_path(@sample.opportunity)
+    # else
+    #   flash[:warning] = errors_format(@sample.errors.messages)
+    #   redirect_to opportunity_path(@sample.opportunity)
+    # end
   end
 
   def edit
