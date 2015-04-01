@@ -6,6 +6,7 @@ ruby '2.1.0'
 # gem 'mysql2'
 # gem 'sqlite3'
 gem 'pg'
+gem 'newrelic_rpm'
 
 # Removes a gem dependency
 def remove(name)
