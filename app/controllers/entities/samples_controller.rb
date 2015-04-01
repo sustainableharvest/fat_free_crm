@@ -42,7 +42,10 @@ class SamplesController < EntitiesController
           follow_up_task(@sample)
         end
         @sample.add_comment_by_user(@comment_body, current_user)
+      else
+        @pc_names = rits_pc_names
       end
+
     end
 
     # if @sample.save
