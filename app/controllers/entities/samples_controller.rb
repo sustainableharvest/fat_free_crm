@@ -23,7 +23,7 @@ class SamplesController < EntitiesController
     @pc_names = rits_pc_names
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
 
-    respond_with(@sample)
+    respond_with(@sample) 
   end
 
   def create

@@ -2,6 +2,8 @@
 - @entity =  instance_variable_get("@#{entity_name}")
 - create_id = "create_#{entity_name}"
 
+$('#loading').toggle();
+
 - if @entity.valid?
   $('##{create_id}_arrow').html(crm.COLLAPSED);
   $('##{create_id}_title').html('#{ j t(entity_name.pluralize) }');
