@@ -10,6 +10,8 @@
   - else
     $('##{id}').replaceWith('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
     $('##{id}').effect("highlight", { duration:1500 });
+  $('#flash').html('#{j t(:sample_updated)} - #{j @sample.name}'.);
+  crm.flash('notice', false)
 - else
   $('##{id}').html('#{ j render(:partial => "edit") }');
   $('##{id}').effect("shake", { duration:250, distance: 6 });
