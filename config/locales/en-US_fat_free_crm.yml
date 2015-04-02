@@ -537,6 +537,7 @@ en-US:
   total_samples: Total Samples
   follow_up_overdue: Follow-Up Overdue
   could_not_find_samples: Could not find any samples. Create new ones in an 
+  sample_created: Created Sample 
 
   # Views -> Opportunities.
   #----------------------------------------------------------------------------

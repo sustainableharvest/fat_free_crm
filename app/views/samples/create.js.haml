@@ -10,6 +10,8 @@ $('#loading').toggle();
   $('##{create_id}').slideUp(250);
   $('##{entity_name.pluralize}').prepend('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
   $('##{dom_id(@entity)}').effect("highlight", { duration:1500 });
+  $('#flash').html('#{j t(:sample_created)} #{j t(@sample.name)}.');
+  crm.flash('notice', false)
   -# = refresh_sidebar(:index, :filters)
   -# $('#paginate').html('#{ j render(:partial => "shared/paginate_with_per_page") }');
   crm.flick('empty', 'remove');
