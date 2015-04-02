@@ -10,7 +10,6 @@
   - else
     $('##{id}').replaceWith('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
     $('##{id}').effect("highlight", { duration:1500 });
-    = refresh_sidebar(:index, :filters)
 - else
   $('##{id}').html('#{ j render(:partial => "edit") }');
   $('##{id}').effect("shake", { duration:250, distance: 6 });
