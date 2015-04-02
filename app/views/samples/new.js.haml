@@ -1,9 +1,12 @@
+- entity_name = controller.controller_name.singularize # account
+- create_id = "create_#{entity_name}"
+
 $("#loading").toggle();
 crm.flick('empty', 'toggle');
-crm.flip_form('create_sample');
+crm.flip_form('#{create_id}');
 
 - unless params[:cancel].true?
-  $('#create_sample').html('#{ j render(:partial => "new") }');
-  crm.set_title('create_sample', '#{j t(:create_sample) }');
+  $('##{create_id}').html('#{ j render(:partial => "new") }');
+  crm.set_title('#{create_id}', '#{j t(:create_sample) }');
 - else
-  crm.set_title('create_sample', '#{ @view == "assigned" ? t(:assigned_tasks) : t(:samples) }');
+  crm.set_title('#{create_id}', '#{ j t(entity_name.pluralize) }');

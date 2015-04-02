@@ -36,7 +36,6 @@ class SamplesController < EntitiesController
     # @sample.delivery_month = params[:date]
 
     respond_with(@sample) do |_format|
-      binding.pry
       if @sample.save
         if @sample.follow_up_date.present?
           follow_up_task(@sample)
