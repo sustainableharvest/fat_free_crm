@@ -78,20 +78,31 @@ class SamplesController < EntitiesController
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       params[:sample].merge!(info)
     end
-    if @sample.update_attributes(resource_params)
-      flash[:notice] = @sample.name + " updated."
-      if @sample.follow_up_date != old_sample_date
-        follow_up_task(@sample)
+    # if @sample.update_attributes(resource_params)
+    #   flash[:notice] = @sample.name + " updated."
+    #   if @sample.follow_up_date != old_sample_date
+    #     follow_up_task(@sample)
+    #   end
+    # else
+    #   flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
+    # end
+
+    respond_with(@sample) do |_format|
+      if @sample.update_attributes(resource_params)
+        if @sample.follow_up_date != old_sample_date
+          follow_up_task(@sample)
+        end
+        get_data_for_sidebar if called_from_index_page?
+      else
+        @pc_names = rits_pc_names
       end
-    else
-      flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
     end
 
-    if request.referer.include?("sample")
-      redirect_to sample_path(@sample)
-    else
-      redirect_to opportunity_path(@sample.opportunity)
-    end
+    # if request.referer.include?("sample")
+    #   redirect_to sample_path(@sample)
+    # else
+    #   redirect_to opportunity_path(@sample.opportunity)
+    # end
   end
 
   def destroy
