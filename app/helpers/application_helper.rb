@@ -164,6 +164,16 @@ module ApplicationHelper
     )
   end
 
+  #----------------------------------------------------------------------------  
+  def link_to_sample_close(url)
+    binding.pry
+    link_to("x", url + "#{url.include?('?') ? '&' : '?'}cancel=true&related=#{params[:related]}",
+            remote: true,
+            class: "close",
+            title: t(:close_form)
+    )
+  end
+
   #----------------------------------------------------------------------------
   def link_to_close(url)
     link_to("x", url + "#{url.include?('?') ? '&' : '?'}cancel=true",

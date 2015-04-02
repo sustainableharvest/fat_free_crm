@@ -22,6 +22,8 @@ class SamplesController < EntitiesController
     opp = params[:related].split('_').last.to_i if params[:related]
     @pc_names = rits_pc_names
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
+
+    respond_with(@sample)
     # @pricing = Setting.unroll(:sample_pricing)
   end
 

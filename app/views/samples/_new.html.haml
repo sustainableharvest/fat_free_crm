@@ -1,7 +1,9 @@
 = simple_form_for(@sample, :html => one_submit_only, :remote => true) do |f|
-  = link_to_close new_sample_path
+  = link_to_sample_close new_sample_path
   = f.hidden_field :user_id
   = f.hidden_field :opportunity_id
+  = hidden_field_tag "opportunity", "#{@sample.opportunity.id if @sample.opportunity}"
+  - binding.pry
 
   = f.error_messages :object_name => t('sample')
 
