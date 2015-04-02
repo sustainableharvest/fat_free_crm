@@ -67,7 +67,9 @@ class SamplesController < EntitiesController
     if params[:previous].to_s =~ /(\d+)\z/
       @previous = Sample.my.find_by_id(Regexp.last_match[1]) || Regexp.last_match[1].to_i
     end
-    respond_with(@sample)
+    respond_to do |format|
+      format.js {render :edit}
+    end
   end
 
   def update

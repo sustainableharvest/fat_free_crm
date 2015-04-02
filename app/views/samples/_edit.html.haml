@@ -1,6 +1,6 @@
 .remote
-  = simple_form_for(@sample, :html => one_submit_only) do |f|
-    = link_to_close new_sample_path
+  = simple_form_for(@sample, :html => one_submit_only, :remote => true) do |f|
+    = link_to_sample_close edit_sample_path
     = f.hidden_field :user_id
     = f.hidden_field :opportunity_id
 
