@@ -24,7 +24,6 @@ class SamplesController < EntitiesController
     @sample.attributes = {:user => current_user, :opportunity => Opportunity.find(opp)}
 
     respond_with(@sample)
-    # @pricing = Setting.unroll(:sample_pricing)
   end
 
   def create
@@ -35,7 +34,6 @@ class SamplesController < EntitiesController
     end
 
     @sample = Sample.new(params[:sample])
-    # @sample.delivery_month = params[:date]
 
     respond_with(@sample) do |_format|
       if @sample.save
@@ -46,19 +44,7 @@ class SamplesController < EntitiesController
       else
         @pc_names = rits_pc_names
       end
-
     end
-
-    # if @sample.save
-    #   if @sample.follow_up_date.present?
-    #     follow_up_task(@sample)
-    #   end
-    #   @sample.add_comment_by_user(@comment_body, current_user)
-    #   redirect_to opportunity_path(@sample.opportunity)
-    # else
-    #   flash[:warning] = errors_format(@sample.errors.messages)
-    #   redirect_to opportunity_path(@sample.opportunity)
-    # end
   end
 
   def edit
@@ -78,14 +64,6 @@ class SamplesController < EntitiesController
       info = rits_pc_hash.fetch(@sample.rits_purchase_contract_id)
       params[:sample].merge!(info)
     end
-    # if @sample.update_attributes(resource_params)
-    #   flash[:notice] = @sample.name + " updated."
-    #   if @sample.follow_up_date != old_sample_date
-    #     follow_up_task(@sample)
-    #   end
-    # else
-    #   flash[:error] = "Update Failed. " + errors_format(@sample.errors.messages)
-    # end
 
     respond_with(@sample) do |_format|
       if @sample.update_attributes(resource_params)
@@ -97,12 +75,6 @@ class SamplesController < EntitiesController
         @pc_names = rits_pc_names
       end
     end
-
-    # if request.referer.include?("sample")
-    #   redirect_to sample_path(@sample)
-    # else
-    #   redirect_to opportunity_path(@sample.opportunity)
-    # end
   end
 
   def destroy
