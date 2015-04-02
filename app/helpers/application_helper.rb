@@ -169,7 +169,8 @@ module ApplicationHelper
     link_to("x", url + "#{url.include?('?') ? '&' : '?'}cancel=true&related=#{params[:related]}",
             remote: true,
             class: "close",
-            title: t(:close_form)
+            title: t(:close_form),
+            onclick: "$('#loading').toggle();"
     )
   end
 

@@ -2,17 +2,16 @@
 - @entity = instance_variable_get("@#{entity_name}")
 - id = dom_id(@entity)
 
+$('#loading').toggle();
+
 - if params[:cancel].true? # <--------------------- Hide [Edit]
   - if called_from_landing_page?
-    $('#loading').toggle();
     crm.flip_form('edit_#{entity_name}');
     crm.set_title('edit_#{entity_name}', '#{h @entity.name}');
   - else                                            # Called from index page...
     $('##{id}').replaceWith('#{ j render(:partial => entity_name, :collection => [ @entity ]) }');
 
 - else # <----------------------------------------  Show [Edit] form.
-
-  $('#loading').toggle();
   - if params[:cancel].blank?                       # Called from index page...
     - if @previous                                  # Hide open [Edit] form if any.
       - if @previous.is_a?(@entity.class)
