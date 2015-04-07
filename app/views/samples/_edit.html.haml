@@ -13,6 +13,6 @@
     / = render "entities/permissions",      :f => f, :entity => @sample
 
     .buttonbar
-      = f.submit t(:save_sample)
+      = f.submit t(:save_sample), :onclick => "$('#loading').toggle();"
       #{t :or}
       = link_to_sample_cancel edit_sample_path
