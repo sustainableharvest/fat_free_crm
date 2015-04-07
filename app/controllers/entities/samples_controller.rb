@@ -85,13 +85,6 @@ class SamplesController < EntitiesController
       format.html { respond_to_destroy(:html) }
       format.js   { respond_to_destroy(:ajax) }
     end
-
-    # flash[:notice] = @sample.name + " has been deleted."
-    # if request.referer.include?("samples")
-    #   redirect_to samples_path
-    # else
-    #   redirect_to opportunity_path(opportunity)
-    # end
   end
 
   def filter
