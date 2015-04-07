@@ -81,12 +81,17 @@ class SamplesController < EntitiesController
     opportunity = @sample.opportunity
     @sample.destroy
 
-    flash[:notice] = @sample.name + " has been deleted."
-    if request.referer.include?("samples")
-      redirect_to samples_path
-    else
-      redirect_to opportunity_path(opportunity)
+    respond_with(@sample) do |format|
+      format.html { respond_to_destroy(:html) }
+      format.js   { respond_to_destroy(:ajax) }
     end
+
+    # flash[:notice] = @sample.name + " has been deleted."
+    # if request.referer.include?("samples")
+    #   redirect_to samples_path
+    # else
+    #   redirect_to opportunity_path(opportunity)
+    # end
   end
 
   def filter
@@ -126,6 +131,21 @@ class SamplesController < EntitiesController
     @sample_state_total = { :all => Sample.my.count, :other => 0 }
     @state.each do |value, key|
       @sample_state_total[key] = Sample.my.where(:state => key.to_s).count
+    end
+  end
+
+  def respond_to_destroy(method)
+    
+    if method == :ajax
+      get_data_for_sidebar
+      @samples = get_samples
+    else
+      flash[:notice] = t(:msg_asset_deleted, @sample.name)
+      if request.referer.include? "opportunities"
+        redirect_to opportunity_path(@sample.opportunity)
+      else
+        redirect_to samples_path
+      end
     end
   end
 
