@@ -5,7 +5,6 @@
 $('#loading').toggle();
 
 - if @entity.errors.empty?
-  - binding.pry
   - if called_from_landing_page?
     crm.flip_form('edit_#{entity_name}');
     crm.set_title('edit_#{entity_name}', '#{h @entity.id}');
