@@ -35,7 +35,7 @@ class PasswordsController < ApplicationController
     if empty_password?
       flash[:notice] = t(:msg_enter_new_password)
       render :edit
-    elsif @user.update_attributes(params.permit[:user])
+    elsif @user.update_attributes(params.require(:user).permit!)
       flash[:notice] = t(:msg_password_updated)
       redirect_to profile_url
     else
