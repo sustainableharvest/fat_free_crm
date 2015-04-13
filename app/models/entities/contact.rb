@@ -164,13 +164,6 @@ class Contact < ActiveRecord::Base
   # Import Methods
   #----------------------------------------------------------------------------
   def self.import(file, user)
-    # binding.pry
-    # , header_converters: lambda { |h| h.snake_case }
-    # CSV.foreach(file.path, headers: true) do |row|
-      # hash = row.to_hash.compact
-      # binding.pry
-      # Contact.create! hash unless hash["first_name"].blank? || hash["last_name"].blank?
-    # end
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
     header.each_with_index { |h, i| header[i] = h.snake_case }
@@ -181,9 +174,6 @@ class Contact < ActiveRecord::Base
       contact.user = user
       if row["country"]
         contact.import_address(row["country"])
-        # address = row.slice("country")
-        # address["address_type"] = "Business"
-        # contact.addresses << Address.create(address)
       end
       contact.save!
     end
