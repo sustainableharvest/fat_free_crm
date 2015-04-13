@@ -180,9 +180,10 @@ class Contact < ActiveRecord::Base
       contact.attributes = row.except("country")
       contact.user = user
       if row["country"]
-        address = row.slice("country")
-        address["address_type"] = "Business"
-        contact.addresses << Address.create(address)
+        contact.import_address(row["country"])
+        # address = row.slice("country")
+        # address["address_type"] = "Business"
+        # contact.addresses << Address.create(address)
       end
       contact.save!
     end
@@ -195,6 +196,11 @@ class Contact < ActiveRecord::Base
       when ".xlsx" then Roo::Excelx.new(file.path)
       else raise "Unknown file type: #{file.original_filename}"
     end
+  end
+
+  def import_address(country)
+    address = Address.create({:country => country, :address_type => "Business"})
+    self.addresses << address
   end
 
 
