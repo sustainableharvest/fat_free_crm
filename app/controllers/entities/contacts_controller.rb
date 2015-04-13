@@ -141,6 +141,15 @@ class ContactsController < EntitiesController
     end
   end
 
+  def import
+    if params[:file].present?
+      Contact.import(params[:file], current_user)
+      redirect_to contacts_path, notice: "Contacts imported"
+    else
+      redirect_to contacts_path, notice: "Select a file to import"
+    end
+  end
+
   private
 
   #----------------------------------------------------------------------------

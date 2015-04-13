@@ -16,3 +16,7 @@
 
 #paginate= render "shared/paginate_with_per_page"
 #export= render "shared/export"
+
+= form_tag(import_contacts_path, multipart: true) do
+  = file_field_tag :file, value: current_user
+  = submit_tag "Import"

@@ -157,6 +157,47 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def current_user_call
+    current_user
+  end
+
+  # Import Methods
+  #----------------------------------------------------------------------------
+  def self.import(file, user)
+    # binding.pry
+    # , header_converters: lambda { |h| h.snake_case }
+    # CSV.foreach(file.path, headers: true) do |row|
+      # hash = row.to_hash.compact
+      # binding.pry
+      # Contact.create! hash unless hash["first_name"].blank? || hash["last_name"].blank?
+    # end
+    spreadsheet = open_spreadsheet(file)
+    header = spreadsheet.row(1)
+    header.each_with_index { |h, i| header[i] = h.snake_case }
+    (2..spreadsheet.last_row).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      contact = find_by_id(row["id"]) || new
+      contact.attributes = row.except("country")
+      contact.user = user
+      if row["country"]
+        address = row.slice("country")
+        address["address_type"] = "Business"
+        contact.addresses << Address.create(address)
+      end
+      contact.save!
+    end
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+      when ".csv" then Roo::CSV.new(file.path)
+      when ".xls" then Roo::Excel.new(file.path)
+      when ".xlsx" then Roo::Excelx.new(file.path)
+      else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+
   # Class methods.
   #----------------------------------------------------------------------------
   def self.create_for(model, account, opportunity, params)
