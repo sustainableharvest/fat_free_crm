@@ -420,8 +420,15 @@ $sidebar_width: 210px;
   margin: 12px 0px 0px 0px; }
 
 #import {
-  font-size: 9px;
-  margin: 12px 0px 0px 0px; }
+  color: darkslateblue;
+  font-size: 12px;
+  width: $sidebar_width;
+  border: 1px silver solid;
+  border-radius: 8px;
+  padding: 5px; }
+
+#center {
+  text-align: center; }
 
 #paginate {
   float: right;

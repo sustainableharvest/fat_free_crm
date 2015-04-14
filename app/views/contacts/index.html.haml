@@ -20,5 +20,6 @@
 #import
   = t :import_contacts
   = form_tag(import_contacts_path, multipart: true) do
-    = file_field_tag :file, {:style => "color: darkslateblue;"}
+    = file_field_tag :file
+    %br
     = submit_tag "Import"
