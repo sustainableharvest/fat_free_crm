@@ -10,7 +10,7 @@
   = render "shared/add_comment", :f => f
   = render "accounts/contact_info", :f => f
   = render "fields/groups",  :f => f
-  -# = render "entities/permissions",  :f => f, :entity => @account
+  = render "entities/permissions",  :f => f, :entity => @account
   = hook(:entity_form, self, {f: f, entity: @account})
 
   .buttonbar
