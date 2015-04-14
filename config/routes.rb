@@ -142,6 +142,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :tags
+
   resources :tasks, id: /\d+/ do
     collection do
       post :filter
