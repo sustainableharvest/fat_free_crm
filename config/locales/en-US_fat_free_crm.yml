@@ -319,6 +319,7 @@ en-US:
   born_on: Born on
   reports_to: Reports to
   access: Access
+  bags: bags
 
   # Views -> Authenticate.
   #----------------------------------------------------------------------------
