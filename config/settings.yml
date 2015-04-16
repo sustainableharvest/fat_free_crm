@@ -77,3 +77,27 @@ account_source:
   - :website
   - :word_of_mouth
   - :other
+
+:email_comment_replies:
+  :server                     : "imap.gmail.com"        # IMAP server name.
+  :port                       : "993"        # IMAP server port number.
+  :ssl                        : true        # True for secure IMAP connection, false othewise.
+  :address                    : <%= ENV['CATS_DROPBOX'] %>       # Comment reply email address.
+  :user                       : <%= ENV['CATS_DROPBOX'] %>        # User to login to the IMAP server.
+  :password                   : <%= ENV['CATS_DROPBOX_PASSWORD'] %>       # Password to login to the IMAP server.
+  :scan_folder                : "Inbox"        # Folder to scan for comment replies.
+
+email_dropbox:
+  :server                     : "imap.gmail.com"        # IMAP server name.
+  :port                       : "993"        # IMAP server port number.
+  :ssl                        : true      # True for secure IMAP connection, false othewise.
+  :address                    : <%= ENV['CATS_DROPBOX'] %>        # Dropbox email address.
+  :user                       : <%= ENV['CATS_DROPBOX'] %>      # User to login to the IMAP server.
+  :password                   : <%= ENV['CATS_DROPBOX_PASSWORD'] %>        # Password to login to the IMAP server.
+  :scan_folder                : "Inbox"        # Folder to scan for dropbox messages.
+  :attach_to_account          : ""        # Attach emails to contact's account, if any.
+                                          # (The rule above also applies to opportunities.)
+#  :address_aliases:                      # Optional: List any aliases that you also want to
+#    - example_alias@example.com          #           ignore when scanning recipients
+#  :move_to_folder            : ""        # Optional: folder to move processed messages to.
+#  :move_invalid_to_folder    : ""        # Optional: folder to move invalid messages to.
