@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :set_current_tab, only: [:index, :show]  
 
   def index
-    @tags = Tag.order(name: :desc)
+    @tags = Tag.order(:name)
   end
 
   def show
