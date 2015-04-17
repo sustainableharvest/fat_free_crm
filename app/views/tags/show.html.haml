@@ -1,5 +1,20 @@
 = styles_for :task, :contact, :opportunity, :campaign, :sample
 = render 'tags/title_bar', :tag => @tag
 
-- @taggings.each do |tagging|
-  = link_to tagging.name, tagging
+-# - binding.pry
+- if @taggings["Account"].present?
+  .list#accounts
+    %h3 #{t :accounts}
+    = render :partial => "accounts/account", :collection => @taggings["Account"]
+- if @taggings["Contact"].present?
+  .list#contacts
+    %h3 #{t :contacts}
+    = render :partial => "contacts/contact", :collection => @taggings["Contact"]
+- if @taggings["Opportunity"].present?
+  .list#opportunities
+    %h3 #{t :opportunities}
+    = render :partial => "opportunities/opportunity", :collection => @taggings["Opportunity"]
+- if @taggings["Campaign"].present?
+  .list#campaigns
+    %h3 #{t :campaigns}
+    = render :partial => "campaigns/campaign", :collection => @taggings["Campaign"]

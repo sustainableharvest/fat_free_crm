@@ -11,7 +11,7 @@
     - if can?(:update, account)
       %li= link_to_edit(account)
 
-    - if shown_on_landing_page?
+    - if shown_on_landing_page? && not_tag
       %li= link_to_discard(account)
 
     - if can?(:destroy, account)

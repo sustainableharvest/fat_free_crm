@@ -393,6 +393,10 @@ module ApplicationHelper
        (!request.xhr? && request.fullpath =~ %r{/\w+/\d+}))
   end
 
+  def not_tag
+    !request.referer.include? "tags"
+  end
+
   # Helper to display links to supported data export formats.
   #----------------------------------------------------------------------------
   def links_to_export(action = :index)

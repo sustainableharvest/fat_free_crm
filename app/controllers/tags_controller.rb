@@ -9,12 +9,13 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     @taggings = get_taggings(@tag)
+    # binding.pry
   end
 
   def get_taggings(tag)
-    tags = []
+    tags = {}
     tag.taggings.each do |tagging|
-      tags << tagging.taggable_type.constantize.find(tagging.taggable_id)
+      (tags[tagging.taggable_type.constantize.to_s] ||= []) << tagging.taggable_type.constantize.find(tagging.taggable_id)
     end
     tags
   end

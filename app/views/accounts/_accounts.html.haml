@@ -1,4 +1,3 @@
-
 = section(object, :accounts)
 .list#accounts
   - accounts = object.accounts.order('updated_at desc').paginate(:page => 1, :per_page => 20)
