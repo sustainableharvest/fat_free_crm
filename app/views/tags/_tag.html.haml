@@ -1,0 +1,9 @@
+- tag_field_groups = FieldGroup.where(tag_id: tag.id)
+- model_tagging_counts = tag.model_tagging_counts
+
+%li.hightlight[tag]
+  %span.black= link_to(tag.name, tag_path(tag))
+  %tt
+    - if model_tagging_counts.any?
+      = t(:tagged) + ":"
+      = model_tagging_counts.map {|k, c| t(pluralize(c, k.downcase)) }.join(", ")

@@ -1,0 +1,13 @@
+= styles_for :tag
+
+= render 'entities/title_bar'
+
+.remote#options{ hidden }
+
+.list#tags
+  - if @tags.any?
+    = render :partial => "tags/tag", :collection => @tags
+  - else
+    = render "shared/empty"
+
+= hook(:tag_index_after, self)

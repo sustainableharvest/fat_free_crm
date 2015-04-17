@@ -8,7 +8,7 @@
     - if can?(:update, opportunity)
       %li= link_to_edit(opportunity)
 
-    - if shown_on_landing_page?
+    - if shown_on_landing_page? && not_tag
       %li= link_to_discard(opportunity)
 
     - if can?(:destroy, opportunity)
@@ -28,9 +28,10 @@
 
     %dt
       %b= opportunity.amount.to_i.to_s + " " + (t :bags) + " | "
-      - won_or_lost = %w(won lost).include?(opportunity.stage)
+      -# %b= number_to_currency(opportunity.weighted_amount, :precision => 0) + " | "
+      - won_or_lost = %w(closed_won closed_lost).include?(opportunity.stage)
       - unless won_or_lost
-        / = number_to_currency(opportunity.amount || 0, :precision => 0)
+        = (opportunity.amount.to_i.to_s || 0.to_s) + " bags"
         / - if opportunity.discount
         /   = t(:discount_number, number_to_currency(opportunity.discount, :precision => 0))
         / - else

@@ -8,7 +8,7 @@
     - if can?(:update, opportunity)
       %li= link_to_edit(opportunity)
 
-    - if shown_on_landing_page?
+    - if shown_on_landing_page? && not_tag
       %li= link_to_discard(opportunity)
 
     - if can?(:destroy, opportunity)
