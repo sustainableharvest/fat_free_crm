@@ -4,7 +4,7 @@
 .title_tools
   #buttons
     = view_buttons
-  - unless model_name == "sample"
+  - unless model_name == "sample" || model_name == "tag"
     .create_asset
       = link_to_inline("create_#{model_name}".to_sym, send("new_#{model_name}_path"), :text => t("create_#{model_name}".to_sym))
 
