@@ -1,5 +1,7 @@
 - if (params['controller'] == 'opportunities') and (template = template_for_current_view).present?
   = render(template, :opportunity => opportunity)
 - else
-  -# default view
-  = render 'opportunities/index_long', :opportunity => opportunity
+  - if !not_tag
+    = render 'opportunities/index_brief', :opportunity => opportunity
+  - else # default view
+    = render 'opportunities/index_long', :opportunity => opportunity

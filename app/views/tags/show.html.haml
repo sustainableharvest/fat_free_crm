@@ -1,7 +1,6 @@
 = styles_for :task, :contact, :opportunity, :campaign, :sample, :account
 = render 'tags/title_bar', :tag => @tag
 
--# - binding.pry
 - if @taggings["Account"].present?
   .list
     %h3 #{t :accounts}

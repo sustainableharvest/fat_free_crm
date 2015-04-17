@@ -32,7 +32,6 @@ class PasswordsController < ApplicationController
 
   #----------------------------------------------------------------------------
   def update
-    binding.pry
     if empty_password?
       flash[:notice] = t(:msg_enter_new_password)
       render :edit
