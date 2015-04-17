@@ -1,2 +1,5 @@
 = styles_for :task, :contact, :opportunity, :campaign, :sample
 = render 'tags/title_bar', :tag => @tag
+
+- @taggings.each do |tagging|
+  = link_to tagging.name, tagging
