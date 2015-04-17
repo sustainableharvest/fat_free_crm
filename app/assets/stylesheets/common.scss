@@ -472,6 +472,8 @@ $sidebar_width: 210px;
 //------------------------------------------------------------------------------
 .list {
   padding: 8px 0px 7px 0px;
+  h3 {
+        border-bottom: 1px grey solid; }
   li {
     border-bottom: 1px silver dotted;
     color: #3f3f3f;
