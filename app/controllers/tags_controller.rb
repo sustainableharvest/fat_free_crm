@@ -3,13 +3,12 @@ class TagsController < ApplicationController
   before_action :set_current_tab, only: [:index, :show]  
 
   def index
-    @tags = Tag.all
+    @tags = Tag.order(name: :desc)
   end
 
   def show
     @tag = Tag.find(params[:id])
     @taggings = get_taggings(@tag)
-    # binding.pry
   end
 
   def get_taggings(tag)
