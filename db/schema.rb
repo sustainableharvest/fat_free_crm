@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326212013) do
+ActiveRecord::Schema.define(version: 20150422204448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,12 +222,12 @@ ActiveRecord::Schema.define(version: 20150326212013) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "emails", force: :cascade do |t|
-    t.string   "imap_message_id", limit: 255,                      null: false
+    t.string   "imap_message_id", limit: 255,                       null: false
     t.integer  "user_id"
     t.integer  "mediator_id"
     t.string   "mediator_type",   limit: 255
-    t.string   "sent_from",       limit: 255,                      null: false
-    t.string   "sent_to",         limit: 255,                      null: false
+    t.string   "sent_from",       limit: 255,                       null: false
+    t.string   "sent_to",         limit: 255,                       null: false
     t.string   "cc",              limit: 255
     t.string   "bcc",             limit: 255
     t.string   "subject",         limit: 255
@@ -236,9 +236,9 @@ ActiveRecord::Schema.define(version: 20150326212013) do
     t.datetime "sent_at"
     t.datetime "received_at"
     t.datetime "deleted_at"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.string   "state",           limit: 16,  default: "Expanded", null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "state",           limit: 16,  default: "Collapsed", null: false
   end
 
   add_index "emails", ["mediator_id", "mediator_type"], name: "index_emails_on_mediator_id_and_mediator_type", using: :btree
