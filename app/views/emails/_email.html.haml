@@ -1,4 +1,4 @@
-- truncated = truncate(email.body_without_textile.to_s.gsub("\n", " "), :length => 125 - email.subject.to_s.size)
+- truncated = truncate(email.body_without_textile.to_s.gsub("\n", " "), :length => 600 - email.subject.to_s.size)
 - formatted = email.body
 - mediator  = email.mediator
 
