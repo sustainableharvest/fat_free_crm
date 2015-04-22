@@ -394,7 +394,7 @@ module ApplicationHelper
   end
 
   def not_tag
-    !request.referer.include? "tags"
+    request.referer.present? ? (!request.referer.include? "tags") : false
   end
 
   # Helper to display links to supported data export formats.
