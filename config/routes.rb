@@ -63,6 +63,8 @@ Rails.application.routes.draw do
       post :unsubscribe
       get :leads
       get :opportunities
+      get :contacts
+      get :accounts
     end
   end
 
@@ -82,6 +84,7 @@ Rails.application.routes.draw do
       post :subscribe
       post :unsubscribe
       get :opportunities
+      get :campaigns
     end
   end
 
@@ -123,6 +126,7 @@ Rails.application.routes.draw do
       post :subscribe
       post :unsubscribe
       get :contacts
+      get :opportunities
     end
   end
 
