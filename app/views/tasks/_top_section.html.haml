@@ -24,6 +24,12 @@
       %td
         .label.req #{t :category}:
         = f.select :category, @category, { :selected => @task.category.blank? ? nil : @task.category.to_sym, :include_blank => t(:select_blank) }, { :style => "width:160px" }
+      %td= spacer
+      %td
+        .label #{t :account}:
+        = hidden_field_tag :task
+        -# = f.select(:asset_id, @accounts, { :include_blank => t(:select_blank) } , class: 'select2')
+        = account_select_from_all
 
     - if Setting.background_info && Setting.background_info.include?(:task)
       %tr

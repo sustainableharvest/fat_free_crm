@@ -38,6 +38,7 @@ class TasksController < ApplicationController
     @task = Task.new
     @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
+    @accounts = Account.all
 
     if params[:related]
       model, id = params[:related].split(/_(\d+)/)
@@ -72,6 +73,11 @@ class TasksController < ApplicationController
   def create
     @view = view
 
+    # if params["account"]
+    #   task_params["asset"] = "Account" 
+    #   task_params["asset_id"] = params["account"]["id"].to_i
+    # end
+    binding.pry
     @task = Task.new(task_params) # NOTE: we don't display validation messages for tasks.
     @all_tasks_by_user = Task.find_all_by_user(@view)
 
