@@ -83,6 +83,7 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [:probability, :amount, :discount], allow_nil: true
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
+  validates :origin, presence: true, inclusion: { in: proc { Setting.unroll(:opportunity_origin).map { |s| s.last.to_s } } }
 
   before_save :default_assigned_to
 

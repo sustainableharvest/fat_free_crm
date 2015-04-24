@@ -216,6 +216,7 @@ class OpportunitiesController < EntitiesController
   #----------------------------------------------------------------------------
   def load_settings
     @stage = Setting.unroll(:opportunity_stage)
+    @origin = Setting.unroll(:opportunity_origin)
   end
 
   #----------------------------------------------------------------------------

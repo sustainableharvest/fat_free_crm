@@ -23,6 +23,18 @@
         %td
           .label #{t :amount} (#{t :bags}):
           = f.text_field :amount, :style => "width:110px; text-align:right;"
+        %td= spacer
+        %td
+          .label #{t :sales_price_per_lb}:
+          = f.text_field :sales_price_per_lb, :style => "width:110px; text-align:right;"
+    %table
+      %tr
+        %td
+          .label #{t :origin}
+          = f.select :origin, @origin, { :selected => @opportunity.origin ? @opportunity.origin.to_sym : nil }, { :style => "width:160px" }
+        %td
+          .label #{t :delivery_month}
+          = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date'
         / %td= spacer
         / %td
         /   .label #{t :discount} #{t :currency}:

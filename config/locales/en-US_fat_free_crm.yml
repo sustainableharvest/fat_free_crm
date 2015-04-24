@@ -576,6 +576,24 @@ en-US:
   total_opportunities: Total Opportunities
   open_opportunities: Open Opps
   weighted_amount: Weighted amount
+  sales_price_per_lb: Sales Price / lb
+  peru: Peru
+  mexico: Mexico
+  nicaragua: Nicaragua
+  colombia: Colombia
+  honduras: Honduras
+  ethiopia: Ethiopia
+  brazil: Brazil
+  costa_rica: Costa Rica
+  rwanda: Rwanda
+  guatemala: Guatemala
+  el_salvador: El Salvador
+  malawi: Malawi
+  ecuador: Ecuador
+  tanzania: Tanzania
+  india: India
+  origin: Origin
+
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
