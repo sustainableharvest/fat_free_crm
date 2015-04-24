@@ -13,28 +13,31 @@
     %table{ :border => 0, :width => 500, :cellpadding => 0, :cellspacing => 0 }
       %tr
         %td
-          .label #{t :close_date}:
+          .label.req.top #{t :close_date}:
           = f.text_field :closes_on, :value => f.object.closes_on, :style => "width:110px;", :autocomplete => :off, :class => 'date'
         %td= spacer
         %td
-          .label #{t :probability} (%):
+          .label.req.top #{t :probability} (%):
           = f.text_field :probability, :style => "width:110px; text-align:right;"
         %td= spacer
         %td
-          .label #{t :amount} (#{t :bags}):
+          .label.req.top #{t :amount} (#{t :bags}):
           = f.text_field :amount, :style => "width:110px; text-align:right;"
         %td= spacer
         %td
-          .label #{t :sales_price_per_lb}:
+          .label.req.top #{t :sales_price_per_lb}:
           = f.text_field :sales_price_per_lb, :style => "width:110px; text-align:right;"
     %table
       %tr
         %td
-          .label #{t :origin}
+          .label.req.top #{t :origin}:
           = f.select :origin, @origin, { :selected => @opportunity.origin ? @opportunity.origin.to_sym : nil }, { :style => "width:160px" }
         %td
-          .label #{t :delivery_month}
+          .label.req.top #{t :delivery_month}:
           = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date'
+        %td
+          .label.req.top #{t :terms} (0 - 120):
+          = f.text_field :payment_terms, :style => "width:110px; text-align:right;"
         / %td= spacer
         / %td
         /   .label #{t :discount} #{t :currency}:

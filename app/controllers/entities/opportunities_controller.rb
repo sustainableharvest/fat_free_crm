@@ -7,6 +7,7 @@ class OpportunitiesController < EntitiesController
   before_action :load_settings
   before_action :get_data_for_sidebar, only: :index
   before_action :set_params, only: [:index, :redraw, :filter]
+  before_action :set_hidden_vars, only: [:create, :update]
 
   # GET /opportunities
   #----------------------------------------------------------------------------
@@ -224,5 +225,32 @@ class OpportunitiesController < EntitiesController
     current_user.pref[:opportunities_per_page] = params[:per_page] if params[:per_page]
     current_user.pref[:opportunities_sort_by]  = Opportunity.sort_by_map[params[:sort_by]] if params[:sort_by]
     session[:opportunities_filter] = params[:stage] if params[:stage]
+  end
+
+  #----------------------------------------------------------------------------
+  def set_hidden_vars
+    case @opportunity.origin
+    when "columbia"
+      @opportunity.bag_weight = 154
+    when "rwanda", "ethiopia", "malawi", "tanzania"
+      @opportunity.bag_weight = 132
+    when "india"
+      @opportunity.bag_weight = 110
+    else
+      @opportunity.bag_weight = 152
+    end
+
+    case @opportunity.stage
+    when "initial_interest"
+      @opportunity.hidden_probability = 20
+    when "sampling"
+      @opportunity.hidden_probability = 30
+    when "reviewing_offer"
+      @opportunity.hidden_probability = 50
+    when "negotiation"
+      @opportunity.hidden_probability = 70
+    else
+      @opportunity.hidden_probability = 100
+    end
   end
 end
