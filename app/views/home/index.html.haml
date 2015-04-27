@@ -2,6 +2,15 @@
 = styles_for :task, :opportunity, :account
 
 .title
+  %span#title #{t :site_updates}
+%ul.list#updates
+  %li
+    %strong - Fixed issue where tags were merging when editing an Account, Contact, Campaign, or Opportunity
+  %li
+    = "#{t :send_issues_to}"
+    = mail_to "scott@sustainableharvest.com"
+
+.title
   %span#title #{t :my_tasks}
 %ul.list#tasks
   - unless @my_tasks.empty?
