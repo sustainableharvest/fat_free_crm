@@ -38,7 +38,12 @@ class TasksController < ApplicationController
     @task = Task.new
     @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
-    @accounts = Account.all
+    @accounts = Account.all.collect {|p| [p.name, p.id]}
+    @contacts = Contact.all.collect {|p| [p.full_name, p.id]}
+    @campaigns = Campaign.all.collect {|p| [p.name, p.id]}
+    @opportunities = Opportunity.all.collect {|p| [p.name, p.id]}
+
+    # binding.pry
 
     if params[:related]
       model, id = params[:related].split(/_(\d+)/)

@@ -640,6 +640,11 @@ en-US:
   total_tasks: Total %{value}
   view_assigned_tasks: view assigned tasks
   view_pending_tasks: view pending tasks
+  Account: Account
+  Campaign: Campaign
+  Contact: Contact
+  Opportunity: Opportunity
+  asset: Asset
 
   # Views -> Team.
   #----------------------------------------------------------------------------
