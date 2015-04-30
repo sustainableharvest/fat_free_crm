@@ -1,3 +1,5 @@
+require_last_names:  false
+
 opportunity_default_stage: :initial_interest
 
 opportunity_stage:
