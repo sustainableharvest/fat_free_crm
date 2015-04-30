@@ -1,3 +1,5 @@
+require_last_names:  false
+
 opportunity_default_stage: :initial_interest
 
 opportunity_stage:
@@ -15,6 +17,23 @@ opportunity_stage_color:
   :negotiation      : Gold
   :closed_won       : Orchid
   :closed_lost      : Turquoise
+
+opportunity_origin:
+  - :peru
+  - :mexico
+  - :nicaragua
+  - :colombia
+  - :honduras
+  - :ethiopia
+  - :brazil
+  - :costa_rica
+  - :rwanda
+  - :guatemala
+  - :el_salvador
+  - :malawi
+  - :ecuador
+  - :tanzania
+  - :india
 
 sample_state:
   - :sample_requested

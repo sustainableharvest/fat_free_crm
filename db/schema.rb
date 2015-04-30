@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422204448) do
+ActiveRecord::Schema.define(version: 20150424172943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -338,19 +338,26 @@ ActiveRecord::Schema.define(version: 20150422204448) do
     t.integer  "user_id"
     t.integer  "campaign_id"
     t.integer  "assigned_to"
-    t.string   "name",             limit: 64,                           default: "",       null: false
-    t.string   "access",           limit: 8,                            default: "Public"
-    t.string   "source",           limit: 32
-    t.string   "stage",            limit: 32
+    t.string   "name",               limit: 64,                           default: "",       null: false
+    t.string   "access",             limit: 8,                            default: "Public"
+    t.string   "source",             limit: 32
+    t.string   "stage",              limit: 32
     t.integer  "probability"
-    t.decimal  "amount",                       precision: 12, scale: 2
-    t.decimal  "discount",                     precision: 12, scale: 2
+    t.decimal  "amount",                         precision: 12, scale: 2
+    t.decimal  "discount",                       precision: 12, scale: 2
     t.date     "closes_on"
     t.datetime "deleted_at"
-    t.datetime "created_at",                                                               null: false
-    t.datetime "updated_at",                                                               null: false
-    t.string   "background_info",  limit: 255
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
+    t.string   "background_info",    limit: 255
     t.text     "subscribed_users"
+    t.float    "sales_price_per_lb"
+    t.string   "origin"
+    t.integer  "terms"
+    t.date     "delivery_month"
+    t.integer  "bag_weight"
+    t.integer  "payment_terms"
+    t.integer  "hidden_probability"
   end
 
   add_index "opportunities", ["assigned_to"], name: "index_opportunities_on_assigned_to", using: :btree

@@ -83,6 +83,12 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [:probability, :amount, :discount], allow_nil: true
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
+  validates :origin, presence: true, inclusion: { in: proc { Setting.unroll(:opportunity_origin).map { |s| s.last.to_s } } }
+  validates_presence_of :delivery_month
+  validates_presence_of :payment_terms
+  validates :sales_price_per_lb, :presence => true, :numericality => true
+  validates :amount, :presence => true, :numericality => true
+  validates_presence_of :closes_on
 
   before_save :default_assigned_to
 

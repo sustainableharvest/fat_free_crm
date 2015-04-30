@@ -2,6 +2,19 @@
 = styles_for :task, :opportunity, :account
 
 .title
+  %span#title #{t :site_updates}
+%ul.list#updates
+  %li
+    %strong 04/30/2015
+  %li - Last Names are no longer required when creating or editing a Contact
+  %li
+    %strong 04/27/2015
+  %li - Fixed issue where tags were merging when editing an Account, Contact, Campaign, or Opportunity
+  %li
+    %em #{t :send_issues_to}
+    = mail_to "scott@sustainableharvest.com", "scott@sustainableharvest.com" ,:style => "font-style: italic;"
+
+.title
   %span#title #{t :my_tasks}
 %ul.list#tasks
   - unless @my_tasks.empty?
