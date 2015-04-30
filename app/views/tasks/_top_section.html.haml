@@ -25,13 +25,13 @@
         .label.req #{t :category}:
         = f.select :category, @category, { :selected => @task.category.blank? ? nil : @task.category.to_sym, :include_blank => t(:select_blank) }, { :style => "width:160px" }
     %tr
-      %td
+      %td#
         .label #{t :asset}:
-        = f.select :asset_type, Setting.unroll(:asset_types), { :include_blank => t(:select_blank)}, {:style => "width:160px" }
+        = f.select :asset_type, Setting.unroll(:asset_types), { :include_blank => t(:select_blank)}, {:id => "asset_chooser", :style => "width:160px" }
       %td= spacer
       %td
         .label #{t :account}:
-        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px" }
+        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px; display: none;" }
       %td= spacer
       %td
         .label #{t :contact}:
@@ -52,3 +52,14 @@
           = f.text_area :background_info, :style =>"width:500px", :rows => 3
 
     = hook(:task_top_section_bottom, self, :f => f)
+
+
+:javascript
+  $(document).ready(function(){
+    $("#asset_chooser").change(function (){
+      alert("First");
+      if ($(this).val() == "Account") {
+        alert("Second");
+      }
+    })
+  });
