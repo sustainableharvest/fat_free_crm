@@ -5,7 +5,10 @@
     = hidden_field_tag "task[asset_id]", "#{@asset.id if @asset}"
     = hidden_field_tag "task[asset_type]", "#{@asset.class if @asset}"
 
-    = render "tasks/top_section",    :f => f, :edit => true
+    - if request.referer.include?("tasks")
+      = render "tasks/top_section",    :f => f
+    - else
+      = render "tasks/other_top_section", :f => f
     = render "fields/groups", :f => f, :edit => true
 
     .buttonbar
