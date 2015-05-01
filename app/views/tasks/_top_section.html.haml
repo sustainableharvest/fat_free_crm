@@ -31,19 +31,19 @@
       %td= spacer
       %td.task_assign#account_chooser{ :style => asset_exists?(@asset, "Account") }
         .label #{t :account}:
-        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px;" }
+        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :id => "account_select", :style => "width:160px;" }
       %td.task_assign#account_chooser= spacer
       %td.task_assign#contact_chooser{ :style => asset_exists?(@asset, "Contact") }
         .label #{t :contact}:
-        = f.select :asset_id, @contacts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Contact" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
+        = f.select :asset_id, @contacts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Contact" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :id => "contact_select", :style => "width:160px" }
       %td.task_assign= spacer
       %td.task_assign#campaign_chooser{ :style => asset_exists?(@asset, "Campaign") }
         .label #{t :campaign}:
-        = f.select :asset_id, @campaigns,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Campaign" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
+        = f.select :asset_id, @campaigns,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Campaign" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :id => "campaign_select", :style => "width:160px" }
       %td.task_assign= spacer
       %td.task_assign#opportunity_chooser{ :style => asset_exists?(@asset, "Opportunity") }
         .label #{t :opportunity}:
-        = f.select :asset_id, @opportunities,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Opportunity" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
+        = f.select :asset_id, @opportunities,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Opportunity" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :id => "opportunity_select", :style => "width:160px" }
 
     - if Setting.background_info && Setting.background_info.include?(:task)
       %tr
@@ -57,18 +57,26 @@
 :javascript
   $(document).ready(function(){
     $("#asset_chooser").change(function (){
+      $("#account_select").prop("disabled",true);
+      $("#contact_select").prop("disabled",true);
+      $("#campaign_select").prop("disabled",true);
+      $("#opportunity_select").prop("disabled",true);
       $(".task_assign").hide();
       switch ($(this).val()) {
         case "Account":
+          $("#account_select").prop("disabled",false);
           $("#account_chooser").show();
           break;
         case "Contact":
+          $("#contact_select").prop("disabled",false);
           $("#contact_chooser").show();
           break;
         case "Campaign":
+          $("#campaign_select").prop("disabled",false);
           $("#campaign_chooser").show();
           break;
         case "Opportunity":
+          $("#opportunity_select").prop("disabled",false);
           $("#opportunity_chooser").show();
           break;
         default:

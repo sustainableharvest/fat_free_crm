@@ -43,8 +43,6 @@ class TasksController < ApplicationController
     @campaigns = Campaign.all.collect {|p| [p.name, p.id]}
     @opportunities = Opportunity.all.collect {|p| [p.name, p.id]}
 
-    # binding.pry
-
     if params[:related]
       model, id = params[:related].split(/_(\d+)/)
       if related = model.classify.constantize.my.find_by_id(id)
@@ -70,8 +68,6 @@ class TasksController < ApplicationController
     @campaigns = Campaign.all.collect {|p| [p.name, p.id]}
     @opportunities = Opportunity.all.collect {|p| [p.name, p.id]}
 
-    # binding.pry
-
     if params[:previous].to_s =~ /(\d+)\z/
       @previous = Task.tracked_by(current_user).find_by_id(Regexp.last_match[1]) || Regexp.last_match[1].to_i
     end
@@ -88,7 +84,6 @@ class TasksController < ApplicationController
     #   task_params["asset"] = "Account" 
     #   task_params["asset_id"] = params["account"]["id"].to_i
     # end
-    binding.pry
     @task = Task.new(task_params) # NOTE: we don't display validation messages for tasks.
     @all_tasks_by_user = Task.find_all_by_user(@view)
 
