@@ -25,25 +25,25 @@
         .label.req #{t :category}:
         = f.select :category, @category, { :selected => @task.category.blank? ? nil : @task.category.to_sym, :include_blank => t(:select_blank) }, { :style => "width:160px" }
     %tr
-      %td#
+      %td
         .label #{t :asset}:
-        = f.select :asset_type, Setting.unroll(:asset_types), { :include_blank => t(:select_blank)}, {:id => "asset_chooser", :style => "width:160px" }
+        = f.select :asset_type, Setting.unroll(:asset_types), { :include_blank => t(:select_blank)}, { :id => "asset_chooser", :style => "width:160px" }
       %td= spacer
-      %td
+      %td.task_assign#account_chooser{ :style => asset_exists?(@asset, "Account") }
         .label #{t :account}:
-        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px; display: none;" }
-      %td= spacer
-      %td
+        = f.select :asset_id, @accounts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Account" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px;" }
+      %td.task_assign#account_chooser= spacer
+      %td.task_assign#contact_chooser{ :style => asset_exists?(@asset, "Contact") }
         .label #{t :contact}:
-        = f.select :asset_id, @contacts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Contact" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px" }
-      %td= spacer
-      %td
+        = f.select :asset_id, @contacts,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Contact" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
+      %td.task_assign= spacer
+      %td.task_assign#campaign_chooser{ :style => asset_exists?(@asset, "Campaign") }
         .label #{t :campaign}:
-        = f.select :asset_id, @campaigns,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Campaign" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px" }
-      %td= spacer
-      %td
+        = f.select :asset_id, @campaigns,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Campaign" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
+      %td.task_assign= spacer
+      %td.task_assign#opportunity_chooser{ :style => asset_exists?(@asset, "Opportunity") }
         .label #{t :opportunity}:
-        = f.select :asset_id, @opportunities,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Opportunity" ? @task.account.to_sym : nil, :include_blank => t(:select_blank) }, { :style => "width:160px" }
+        = f.select :asset_id, @opportunities,{ :selected => @task.asset.blank? ? nil : @task.asset.class.name == "Opportunity" ? @task.asset.id : nil, :include_blank => t(:select_blank) }, { :class => "select2", :style => "width:160px" }
 
     - if Setting.background_info && Setting.background_info.include?(:task)
       %tr
@@ -57,9 +57,22 @@
 :javascript
   $(document).ready(function(){
     $("#asset_chooser").change(function (){
-      alert("First");
-      if ($(this).val() == "Account") {
-        alert("Second");
+      $(".task_assign").hide();
+      switch ($(this).val()) {
+        case "Account":
+          $("#account_chooser").show();
+          break;
+        case "Contact":
+          $("#contact_chooser").show();
+          break;
+        case "Campaign":
+          $("#campaign_chooser").show();
+          break;
+        case "Opportunity":
+          $("#opportunity_chooser").show();
+          break;
+        default:
+          alert("Something broke. Tell Scott.")
       }
     })
   });

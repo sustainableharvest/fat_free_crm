@@ -136,4 +136,12 @@ module TasksHelper
     text << refresh_sidebar(:index, :filters)
     text
   end
+
+  def asset_exists?(asset, task_type)
+    if asset.present?
+      asset.class.name == task_type ? "display:inline" : ""
+    else
+      ""
+    end
+  end
 end

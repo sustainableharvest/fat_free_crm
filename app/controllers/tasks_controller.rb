@@ -65,6 +65,12 @@ class TasksController < ApplicationController
     @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
     @asset = @task.asset if @task.asset_id?
+    @accounts = Account.all.collect {|p| [p.name, p.id]}
+    @contacts = Contact.all.collect {|p| [p.full_name, p.id]}
+    @campaigns = Campaign.all.collect {|p| [p.name, p.id]}
+    @opportunities = Opportunity.all.collect {|p| [p.name, p.id]}
+
+    # binding.pry
 
     if params[:previous].to_s =~ /(\d+)\z/
       @previous = Task.tracked_by(current_user).find_by_id(Regexp.last_match[1]) || Regexp.last_match[1].to_i

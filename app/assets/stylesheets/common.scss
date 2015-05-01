@@ -182,6 +182,9 @@ $sidebar_width: 210px;
     border-spacing: 0px;
     border-collapse: collapse;
     td {
+      &.task_assign {
+        display: none;
+      }
       vertical-align: top;
       padding: 0px;
       div.input {
