@@ -10,41 +10,18 @@
     %li
       %dt= @sample.opportunity.account.name.present? ? link_to(truncate(t(@sample.opportunity.account.name), :length => 20), account_path(@sample.opportunity.account)) : t(:n_a)
       %tt #{t :account}:
-
-  - if @sample.pricing_type == "Spot"
-    %li
-      %dt= @sample.pricing_type ? t(@sample.pricing_type) : t(:other)
-      %tt #{t :pricing_type}:
-    %li
-      %dt= @sample.rits_purchase_contract_id ? link_to(t(@sample.rits_purchase_contract_id), "http://rits.sustainableharvest.com/purchase_contracts/" + @sample.rits_id.to_s, :target => "_blank") : t(:n_a)
-      %tt #{t :rits_id}:
-    %li
-      %dt= @sample.ssp ? number_to_currency(@sample.ssp, :precision => 2) : t(:n_a)
-      %tt #{t :ssp}:
-    %li
-      %dt= @sample.fob_price ? number_to_currency(@sample.fob_price, :precision => 2) : t(:n_a)
-      %tt #{t :fob}:
-
-  - else
-    %li
-      %dt= @sample.pricing_type ? "Forward " + t(@sample.pricing_type) : t(:other)
-      %tt #{t :pricing_type}:
-    %li
-      %dt= @sample.differential ? number_to_currency(@sample.differential, :precision => 2) : t(:n_a)
-      %tt #{t :differential}:
-    %li
-      %dt= @sample.delivery_month ? t(@sample.delivery_month.strftime("%B %Y")) : t(:n_a)
-      %tt #{t :delivery_month}:
-
+  %li
+    %dt= @sample.rits_purchase_contract_id ? link_to(t(@sample.rits_purchase_contract_id), "http://rits.sustainableharvest.com/purchase_contracts/" + @sample.rits_id.to_s, :target => "_blank") : t(:n_a)
+    %tt #{t :rits_id}:
+  %li
+    %dt= @sample.ssp ? number_to_currency(@sample.ssp, :precision => 2) : t(:n_a)
+    %tt #{t :ssp}:
+  %li
+    %dt= @sample.fob_price ? number_to_currency(@sample.fob_price, :precision => 2) : t(:n_a)
+    %tt #{t :fob}:
   %li
     %dt= @sample.producer.present? ? truncate(t(@sample.producer), :length => 20) : t(:n_a)
     %tt #{t :producer}:
-  %li
-    %dt= @sample.quoted_price.present? ? number_to_currency(@sample.quoted_price, :precision => 2) : t(:n_a)
-    %tt #{t :quoted_price}:
-  %li
-    %dt= @sample.sh_fee ? number_to_currency(@sample.sh_fee, :precision => 2) : t(:n_a)
-    %tt #{t :sh_fee}:
   %li
     %dt= @sample.shipment_date ? t(@sample.shipment_date.strftime("%_m/%e/%Y")) : t(:n_a)
     %tt #{t :shipment_date}:
