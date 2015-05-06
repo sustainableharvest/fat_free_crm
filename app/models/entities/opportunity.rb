@@ -200,8 +200,20 @@ class Opportunity < ActiveRecord::Base
 
   # Opportunity Reporting methods
   # ------------------------------------------------------------------------------------------------
-  def total_revenue
-    amount * bag_weight * sales_price_per_lb
+  def probability_percent
+    probability.to_f / 100
+  end
+
+  def total_lbs
+    amount * bag_weight
+  end
+
+  def total_revenue(weighted = 1)
+    total_lbs * sales_price_per_lb * weighted
+  end
+
+  def total_from_sh_fee(weighted = 1)
+    total_lbs * sh_fee * weighted
   end
 
   private

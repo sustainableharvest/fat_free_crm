@@ -73,7 +73,7 @@ class Sample < ActiveRecord::Base
   end
 
   def name
-    self.spot? ? self.rits_purchase_contract_id : self.producer
+    self.rits_purchase_contract_id.present? ? self.rits_purchase_contract_id : self.producer
   end
 
   def overdue?

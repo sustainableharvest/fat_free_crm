@@ -2,6 +2,6 @@
 .title_tools#menu
   = link_to_inline(:edit_sample, edit_sample_path(sample), :text => t(:edit), :id => "edit_sample") + " | "
   = link_to_function(t(:delete) + '?', confirm_delete(sample))
-.title#edit_opportunity_title
+.title#edit_sample_title
   = h(sample.name)
   = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
