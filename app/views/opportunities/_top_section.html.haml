@@ -17,6 +17,19 @@
           = f.text_field :closes_on, :value => f.object.closes_on, :style => "width:110px;", :autocomplete => :off, :class => 'date'
         %td= spacer
         %td
+          .label.req.top #{t :delivery_month}:
+          = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date'
+        %td= spacer
+        %td
+          .label.req.top #{t :origin}:
+          = f.select :origin, @origin, { :selected => @opportunity.origin ? @opportunity.origin.to_sym : nil }, { :style => "width:110px" }
+        %td= spacer
+        %td
+          .label.req.top #{t :terms} (0 - 120):
+          = f.select :payment_terms, Setting.unroll(:opportunities_payment_terms), { :selected => @opportunity.payment_terms ? @opportunity.payment_terms.to_sym : nil }, :style => "width:110px; text-align:right;"
+    %table
+      %tr
+        %td
           .label.req.top #{t :probability} (%):
           = f.text_field :probability, :style => "width:110px; text-align:right;"
         %td= spacer
@@ -27,17 +40,10 @@
         %td
           .label.req.top #{t :sales_price_per_lb}:
           = f.text_field :sales_price_per_lb, :style => "width:110px; text-align:right;"
-    %table
-      %tr
+        %td= spacer
         %td
-          .label.req.top #{t :origin}:
-          = f.select :origin, @origin, { :selected => @opportunity.origin ? @opportunity.origin.to_sym : nil }, { :style => "width:160px" }
-        %td
-          .label.req.top #{t :delivery_month}:
-          = f.text_field :delivery_month, :value => f.object.delivery_month, :style => "width:110px", :autocomplete => :off, :class => 'date'
-        %td
-          .label.req.top #{t :terms} (0 - 120):
-          = f.text_field :payment_terms, :style => "width:110px; text-align:right;"
+          .label.req.top #{t :sh_fee}:
+          = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
         / %td= spacer
         / %td
         /   .label #{t :discount} #{t :currency}:

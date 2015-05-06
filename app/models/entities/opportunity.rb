@@ -89,6 +89,7 @@ class Opportunity < ActiveRecord::Base
   validates :sales_price_per_lb, :presence => true, :numericality => true
   validates :amount, :presence => true, :numericality => true
   validates_presence_of :closes_on
+  validates :sh_fee, :presence => true, :numericality => true
 
   before_save :default_assigned_to
 
@@ -195,6 +196,12 @@ class Opportunity < ActiveRecord::Base
         account.assigned_to.blank? ? self.assigned_to = account.user_id : self.assigned_to = account.assigned_to
       end
     end
+  end
+
+  # Opportunity Reporting methods
+  # ------------------------------------------------------------------------------------------------
+  def total_revenue
+    amount * bag_weight * sales_price_per_lb
   end
 
   private

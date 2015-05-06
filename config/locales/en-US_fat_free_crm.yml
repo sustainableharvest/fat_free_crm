@@ -522,7 +522,7 @@ en-US:
   rits_id: RITS PC ID #
   producer: Producer
   differential: Differential
-  sh_fee: SH Fee
+  sh_fee: SH Fee (estimate)
   delivery_date: Delivery Date
   spot: Spot
   forward_open: Open
@@ -578,7 +578,7 @@ en-US:
   total_opportunities: Total Opportunities
   open_opportunities: Open Opps
   weighted_amount: Weighted amount
-  sales_price_per_lb: Sales Price / lb
+  sales_price_per_lb: Price/lb (approx)
   peru: Peru
   mexico: Mexico
   nicaragua: Nicaragua
@@ -596,6 +596,11 @@ en-US:
   india: India
   origin: Origin
   terms: Terms
+  net_30: Net 30
+  net_40: Net 40
+  cash: Cash
+  cad: CAD
+  other_terms: Other
 
 
   # Views -> Tasks.

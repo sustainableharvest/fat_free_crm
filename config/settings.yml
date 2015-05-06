@@ -1,3 +1,10 @@
+opportunities_payment_terms:
+  - :net_30
+  - :net_40
+  - :cash
+  - :cad
+  - :other_terms
+
 require_last_names:  false
 
 asset_types:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424172943) do
+ActiveRecord::Schema.define(version: 20150506163906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -356,8 +356,9 @@ ActiveRecord::Schema.define(version: 20150424172943) do
     t.integer  "terms"
     t.date     "delivery_month"
     t.integer  "bag_weight"
-    t.integer  "payment_terms"
+    t.string   "payment_terms"
     t.integer  "hidden_probability"
+    t.decimal  "sh_fee",                         precision: 8,  scale: 2
   end
 
   add_index "opportunities", ["assigned_to"], name: "index_opportunities_on_assigned_to", using: :btree
