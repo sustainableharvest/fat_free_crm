@@ -6,23 +6,23 @@
           .label.req.top #{t :state}:
           = f.select :state, @state, :style => "width:110px"
         %td= spacer
-        %td
-          .label_bold #{t :pricing_type}:
-          .radio_box_long#type_pricing
-            -# <input checked="checked" id="sample_pricing_type_spot" name="pricing" type="radio" value="Spot"> , :name => "pricing", :value => "Spot"
-            = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing"
-            = f.label "Spot"
-            %br
-            = "Forward Pricing:"
-            %br
-            -# <input id="sample_pricing_type_open" name="pricing" type="radio" value="Open"> , :name => "pricing", :value => "Open"
-            = f.radio_button :pricing_type, "Open", :class => "pricing"
-            = f.label "Open"
-            %br
-            -# <input id="sample_pricing_type_outright" name="pricing" type="radio" value="Outright"> , :name => "pricing", :value => "Outright"
-            = f.radio_button :pricing_type, "Outright", :class => "pricing"
-            = f.label "Outright"
-        %td= spacer
+        -# %td
+        -#   .label_bold #{t :pricing_type}:
+        -#   .radio_box_long#type_pricing
+        -#     -# <input checked="checked" id="sample_pricing_type_spot" name="pricing" type="radio" value="Spot"> , :name => "pricing", :value => "Spot"
+        -#     = f.radio_button :pricing_type, "Spot", :checked => "checked", :class => "pricing"
+        -#     = f.label "Spot"
+        -#     %br
+        -#     = "Forward Pricing:"
+        -#     %br
+        -#     -# <input id="sample_pricing_type_open" name="pricing" type="radio" value="Open"> , :name => "pricing", :value => "Open"
+        -#     = f.radio_button :pricing_type, "Open", :class => "pricing"
+        -#     = f.label "Open"
+        -#     %br
+        -#     -# <input id="sample_pricing_type_outright" name="pricing" type="radio" value="Outright"> , :name => "pricing", :value => "Outright"
+        -#     = f.radio_button :pricing_type, "Outright", :class => "pricing"
+        -#     = f.label "Outright"
+        -# %td= spacer
         %td
           .label #{t :sample_shipment_date}:
           = f.text_field :shipment_date, :value => f.object.shipment_date, :style => "width:110px", :autocomplete => :off, :class => 'date'
@@ -30,28 +30,26 @@
         %td
           .label #{t :follow_up}:
           = f.text_field :follow_up_date, :value => f.object.follow_up_date, :style => "width:110px", :autocomplete => :off, :class => 'date'
-      %tr
-        %td
-          .label.req #{t :sh_fee} #{t :currency}:
-          = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
         %td= spacer
-        %td
-          .label #{t :quoted_price}:
-          = f.text_field :quoted_price
-      %tr.field_pricing_spot
-        %td
-          .label_bold #{t :spot_pricing}:
-      %tr.field_pricing_spot
         %td
           .label #{t :rits_id}:
           = select :sample, :rits_purchase_contract_id , @pc_names, {:include_blank => true}, { :style => "width:160px", :class => 'select2'}
-      %tr.field_pricing_forward(style="display:none")
-        %td
-          .label_bold #{t :forward_pricing}:
-      %tr.field_pricing_forward(style="display:none")
-        %td
-          .label #{t :producer}:
-          = f.text_field :producer
+      -# %tr
+      -#   -# %td
+      -#   -#   .label.req #{t :sh_fee} #{t :currency}:
+      -#   -#   = f.text_field :sh_fee, :style => "width:110px; text-align:right;"
+      -#   -# %td= spacer
+      -#   %td
+      -#     .label #{t :quoted_price}:
+      -#     = f.text_field :quoted_price
+      -# %tr.field_pricing_spot
+      -#   %td
+      -#     .label_bold #{t :spot_pricing}:
+      -# %tr.field_pricing_spot
+      -# %tr.field_pricing_forward(style="display:none")
+      -#   %td
+      -#     .label_bold #{t :forward_pricing}:
+      -# %tr.field_pricing_forward(style="display:none")
         -# %td= spacer
         -# %td
         -#   .label #{t :differential} #{t :currency}:
@@ -65,7 +63,10 @@
       %tr
         %td
           .label #{t :description_input}:
-          = f.text_area :description, :style => "width:500px; height:120px"
+          = f.text_field :description
+        %td
+          .label #{t :producer}:
+          = f.text_field :producer
 
 :javascript
   $(document).ready(function() {
