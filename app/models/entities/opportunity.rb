@@ -84,7 +84,7 @@ class Opportunity < ActiveRecord::Base
   validates :amount, :numericality => { :greater_than => 0 }
   validates :probability, numericality: true, inclusion: { in: 0..100, 
                                                            :message => :between_0_100 }
-  validate :users_for_shared_access
+  validate  :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
   validates :origin, presence: true, inclusion: { in: proc { Setting.unroll(:opportunity_origin).map { |s| s.last.to_s } } }
   validates_presence_of :delivery_month
