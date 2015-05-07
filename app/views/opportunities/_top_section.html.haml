@@ -25,7 +25,7 @@
           = f.select :origin, @origin, { :selected => @opportunity.origin ? @opportunity.origin.to_sym : nil }, { :style => "width:110px" }
         %td= spacer
         %td
-          .label.req.top #{t :terms} (0 - 120):
+          .label.req.top #{t :terms}:
           = f.select :payment_terms, Setting.unroll(:opportunities_payment_terms), { :selected => @opportunity.payment_terms ? @opportunity.payment_terms.to_sym : nil }, :style => "width:110px; text-align:right;"
     %table
       %tr

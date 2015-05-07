@@ -16,11 +16,26 @@
         %dt.warn= t('pluralize.day', :count => (days_left * -1))
         %tt #{t :days_late}:
   %li
+    %dt= @opportunity.origin ? @opportunity.origin.titleize : t(:n_a)
+    %tt #{t :origin}:
+  %li
+    %dt= @opportunity.payment_terms ? t(@opportunity.payment_terms) : t(:n_a)
+    %tt #{t :terms}:
+  %li
     %dt= @opportunity.probability ? @opportunity.probability.to_s + "%" : t(:n_a)
     %tt #{t :probability}:
   %li
     %dt= @opportunity.amount ? @opportunity.amount.round.to_s + " " + (t :bags) : t(:n_a)
     %tt #{t :amount}:
+  %li
+    %dt= @opportunity.sales_price_per_lb ? number_to_currency(@opportunity.sales_price_per_lb, precision: 2) : t(:n_a)
+    %tt #{t :sales_price_sidebar}:
+  %li
+    %dt= @opportunity.sh_fee ? number_to_currency(@opportunity.sh_fee, precision: 2) : t(:n_a)
+    %tt #{t :sh_fee}:
+  %li
+    %dt= (@opportunity.total_revenue) ? number_to_currency(@opportunity.total_revenue, precision: 0).to_s + " " + (number_to_currency(@opportunity.total_revenue(@opportunity.probability_percent), precision: 0).to_s) : t(:n_a)
+    %tt #{t :total_revenue}:
   -# %li
   -#   %dt= @opportunity.discount ? number_to_currency(@opportunity.discount || 0, :precision => 0) : t(:n_a)
   -#   - if @opportunity.amount && @opportunity.discount
