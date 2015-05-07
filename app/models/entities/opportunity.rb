@@ -80,7 +80,10 @@ class Opportunity < ActiveRecord::Base
   ransack_can_autocomplete
 
   validates_presence_of :name, message: :missing_opportunity_name
-  validates_numericality_of [:probability, :amount, :discount], allow_nil: true
+  validates_numericality_of :discount, allow_nil: true
+  validates :amount, :numericality => { :greater_than => 0 }
+  validates :probability, numericality: true, inclusion: { in: 0..100, 
+                                                           :message => :between_0_100 }
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
   validates :origin, presence: true, inclusion: { in: proc { Setting.unroll(:opportunity_origin).map { |s| s.last.to_s } } }

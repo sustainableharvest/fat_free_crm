@@ -164,6 +164,8 @@ en-US:
           attributes:
             name:
               missing_opportunity_name: ^Please specify opportunity name.
+            probability:
+              between_0_100: ^Please set probability between 0 and 100.
             access:
               share_opportunity: ^Please specify users to share the opportunity with.
         task:

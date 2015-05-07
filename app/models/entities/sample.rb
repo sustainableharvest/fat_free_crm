@@ -39,7 +39,7 @@ class Sample < ActiveRecord::Base
 
   # Validations for Forward Pricing
   # validates :differential, :numericality => true, :presence => true, :allow_nil => true, :if => :not_spot?
-  validates :producer, :presence => true, :if => :not_spot?
+  validates :producer, :presence => true
   # validates :delivery_month, :presence => true, :if => :not_spot?
 
   # Validations for Shipment and Follow Up
