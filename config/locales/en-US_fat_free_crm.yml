@@ -602,6 +602,8 @@ en-US:
   cash: Cash
   cad: CAD
   other_terms: Other
+  total_revenue: Total Revenue
+  total_revenue_weighted: (weighted)
 
 
   # Views -> Tasks.

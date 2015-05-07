@@ -44,10 +44,10 @@ class Opportunity < ActiveRecord::Base
   }
   scope :created_by,  ->(user) { where('user_id = ?', user.id) }
   scope :assigned_to, ->(user) { where('assigned_to = ?', user.id) }
-  scope :won,         -> { where("opportunities.stage = 'won'") }
-  scope :lost,        -> { where("opportunities.stage = 'lost'") }
-  scope :not_lost,    -> { where("opportunities.stage <> 'lost'") }
-  scope :pipeline,    -> { where("opportunities.stage IS NULL OR (opportunities.stage != 'won' AND opportunities.stage != 'lost')") }
+  scope :won,         -> { where("opportunities.stage = 'closed_won'") }
+  scope :lost,        -> { where("opportunities.stage = 'closed_lost'") }
+  scope :not_lost,    -> { where("opportunities.stage <> 'closed_lost'") }
+  scope :pipeline,    -> { where("opportunities.stage IS NULL OR (opportunities.stage != 'closed_won' AND opportunities.stage != 'closed_lost')") }
   scope :unassigned,  -> { where("opportunities.assigned_to IS NULL") }
 
   # Search by name OR id
@@ -61,7 +61,7 @@ class Opportunity < ActiveRecord::Base
 
   scope :visible_on_dashboard, ->(user) {
     # Show opportunities which either belong to the user and are unassigned, or are assigned to the user and haven't been closed (won/lost)
-    where('(user_id = :user_id AND assigned_to IS NULL) OR assigned_to = :user_id', user_id: user.id).where("opportunities.stage != 'won'").where("opportunities.stage != 'lost'")
+    where('(user_id = :user_id AND assigned_to IS NULL) OR assigned_to = :user_id', user_id: user.id).where("opportunities.stage != 'closed_won'").where("opportunities.stage != 'closed_lost'")
   }
 
   scope :by_closes_on, -> { order(:closes_on) }
@@ -85,7 +85,7 @@ class Opportunity < ActiveRecord::Base
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
   validates :origin, presence: true, inclusion: { in: proc { Setting.unroll(:opportunity_origin).map { |s| s.last.to_s } } }
   validates_presence_of :delivery_month
-  validates_presence_of :payment_terms
+  validates :payment_terms, presence: true, inclusion: { in: proc { Setting.unroll(:opportunities_payment_terms).map { |s| s.last.to_s } } }
   validates :sales_price_per_lb, :presence => true, :numericality => true
   validates :amount, :presence => true, :numericality => true
   validates_presence_of :closes_on
@@ -214,6 +214,19 @@ class Opportunity < ActiveRecord::Base
 
   def total_from_sh_fee(weighted = 1)
     total_lbs * sh_fee * weighted
+  end
+
+  def self.incoming_revenue(weighted = false, target = nil)
+    revenue = 0
+    Opportunity.pipeline.each do |opp|
+      weighted ? rev = opp.total_revenue(opp.probability_percent) : rev = opp.total_revenue
+      if target.present?
+        revenue += rev if opp.closes_on <= target
+      else
+        revenue += rev
+      end
+    end
+    revenue.to_i
   end
 
   private
