@@ -37,7 +37,7 @@
     %dt= @opportunity.amount && @opportunity.bag_weight && @opportunity.sales_price_per_lb ? number_to_currency(@opportunity.total_revenue, precision: 0) : t(:n_a)
     %tt #{t :total_revenue}:
   %li
-    %dt= @opportunity.probability ? "(" + number_to_currency(@opportunity.total_revenue(@opportunity.probability_percent), precision: 0).to_s + ")" : t(:n_a)
+    %dt= @opportunity.probability && @opportunity.amount && @opportunity.bag_weight && @opportunity.sales_price_per_lb ? "(" + number_to_currency(@opportunity.total_revenue(@opportunity.probability_percent), precision: 0).to_s + ")" : t(:n_a)
     %tt #{t :total_revenue_weighted}:
   -# %li
   -#   %dt= @opportunity.discount ? number_to_currency(@opportunity.discount || 0, :precision => 0) : t(:n_a)
