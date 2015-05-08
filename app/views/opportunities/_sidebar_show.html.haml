@@ -34,7 +34,7 @@
     %dt= @opportunity.sh_fee ? number_to_currency(@opportunity.sh_fee, precision: 2) : t(:n_a)
     %tt #{t :sh_fee}:
   %li{ :style => "border-bottom: none;" }
-    %dt= (@opportunity.total_revenue) ? number_to_currency(@opportunity.total_revenue, precision: 0) : t(:n_a)
+    %dt= @opportunity.amount && @opportunity.bag_weight && @opportunity.sales_price_per_lb ? number_to_currency(@opportunity.total_revenue, precision: 0) : t(:n_a)
     %tt #{t :total_revenue}:
   %li
     %dt= @opportunity.probability ? "(" + number_to_currency(@opportunity.total_revenue(@opportunity.probability_percent), precision: 0).to_s + ")" : t(:n_a)
