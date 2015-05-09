@@ -219,12 +219,55 @@ class Opportunity < ActiveRecord::Base
     total_lbs * sh_fee * weighted
   end
 
+  def revenue_breakdown
+    if payment_terms == "net_40" || payment_terms == "net_30"
+      return [ (self.total_revenue / 5).to_i, (self.total_revenue(self.probability_percent) / 5).to_i ]
+    else
+      return [ (self.total_revenue / 4).to_i, (self.total_revenue(self.probability_percent) / 4).to_i ]
+    end
+  end
+
+  # Date::MONTHNAMES[1]
+  def self.revenue_by_month(target_year)
+    report = Hash.new
+    (-1..24).each { |month| report[month] = 0 }
+    opps = Opportunity.delivery_by_month(target_year)
+    opps.each do |month, oppors|
+      oppors.each do |oppor|
+        amount = oppor.revenue_breakdown
+        if oppor.payment_terms == "cad"
+          (-2..1).each do |h|
+            report[(oppor.delivery_month.month + h)] += amount[1]
+          end
+        elsif oppor.payment_terms == "cash"
+          (0..3).each do |h|
+            report[(oppor.delivery_month.month + h)] += amount[1]
+          end
+        else
+          (0..4).each do |h|
+            report[(oppor.delivery_month.month + h)] += amount[1]
+          end
+        end   
+      end
+    end
+    report
+  end
+
+  def self.delivery_by_month(target_year)
+    ops = Hash.new
+    (1..12).each { |month| ops[month] = [] }
+    Opportunity.pipeline.where('extract(year from delivery_month) = ?', target_year).each do |opp|
+      ops[opp.delivery_month.month] << opp
+    end
+    ops
+  end
+
   def self.incoming_revenue(weighted = false, target = nil)
     revenue = 0
     Opportunity.pipeline.each do |opp|
       weighted ? rev = opp.total_revenue(opp.probability_percent) : rev = opp.total_revenue
       if target.present?
-        revenue += rev if opp.closes_on <= target
+        revenue += rev if opp.delivery_month.month == target
       else
         revenue += rev
       end
