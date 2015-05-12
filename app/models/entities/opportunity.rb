@@ -223,9 +223,9 @@ class Opportunity < ActiveRecord::Base
     if payment_terms == "net_40" || payment_terms == "net_30"
       return [ (self.total_revenue / 5).to_i, (self.total_revenue(self.probability_percent) / 5).to_i ]
     elsif payment_terms == "cash"
-      return [ self.total_revenue.to_i, self.total_revenue(self.probability_percent).to_i ]
-    else
       return [ (self.total_revenue / 4).to_i, (self.total_revenue(self.probability_percent) / 4).to_i ]
+    else 
+      return [ self.total_revenue.to_i, self.total_revenue(self.probability_percent).to_i ]  
     end
   end
 
@@ -238,11 +238,11 @@ class Opportunity < ActiveRecord::Base
         if oppor.amount && oppor.bag_weight && oppor.payment_terms && oppor.sales_price_per_lb && oppor.probability && oppor.sh_fee  
           amount = oppor.revenue_breakdown
           if oppor.payment_terms == "cad"
-            range = (-2..1)
+            range = (-2..-2)
           elsif oppor.payment_terms == "cash"
-            range = (0..0)
-          else
             range = (0..4)
+          else
+            range = (0..5)
           end
           range.each do |h|
             if report[month.next_month(h)]
