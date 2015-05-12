@@ -250,7 +250,8 @@ class Opportunity < ActiveRecord::Base
             else
               report.store(month.next_month(h), amount[1])
             end
-          end   
+          end 
+        end  
       end
     end
     report
