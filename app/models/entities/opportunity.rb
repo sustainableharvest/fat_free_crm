@@ -219,13 +219,21 @@ class Opportunity < ActiveRecord::Base
     total_lbs * sh_fee * weighted
   end
 
-  def revenue_breakdown
+  def cash_breakdown
     if payment_terms == "net_40" || payment_terms == "net_30"
       return (self.total_revenue(self.probability_percent) / 5).to_i
     elsif payment_terms == "cash"
       return (self.total_revenue(self.probability_percent) / 4).to_i
     else 
       return self.total_revenue(self.probability_percent).to_i
+    end
+  end
+
+  def sales_breakdown
+    if payment_terms == "cad"
+      return self.total_revenue(self.probability_percent).to_i
+    else
+      return (self.total_revenue(self.probability_percent) / 4).to_i
     end
   end
 
@@ -250,8 +258,8 @@ class Opportunity < ActiveRecord::Base
     opps.each do |month, oppors|
       oppors.each do |oppor|
         if oppor.revenue_checking 
-          type == "cash" ? amount = oppor.revenue_breakdown : amount = oppor.total_revenue(oppor.probability_percent).to_i
-          type == "cash" ? range = oppor.payment_split : range = (0..0)
+          type == "cash" ? amount = oppor.cash_breakdown : amount = oppor.sales_breakdown
+          type == "cash" ? range = oppor.payment_split : oppor.payment_terms == "cad" ? range = (-2..-2) : range = (0..3)
           range.each do |h|
             if report[month.next_month(h)]
               report[month.next_month(h)] += amount
