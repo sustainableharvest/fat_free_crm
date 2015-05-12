@@ -166,6 +166,14 @@ class OpportunitiesController < EntitiesController
     end
   end
 
+  def revenue_report
+    send_data Opportunity.revenue_to_csv,
+              filename: "Opportunities_Revenue_Report.csv",
+              type: "application/csv"
+  end
+
+
+
   private
 
   #----------------------------------------------------------------------------

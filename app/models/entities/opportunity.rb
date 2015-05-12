@@ -263,7 +263,7 @@ class Opportunity < ActiveRecord::Base
     end
     arr = arr.sort {|a,b| a[0] <=> b[0]}
     arr.each {|i| i[0] = i[0].strftime('%B %Y')}
-    CSV.open("Revenue_by_month.csv", "wb") do |csv|
+    CSV.generate do |csv|
       csv << arr.map { |h| h[0] }
       csv << arr.map { |j| j[1] }
     end
