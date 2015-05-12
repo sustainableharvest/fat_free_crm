@@ -606,7 +606,8 @@ en-US:
   other_terms: Other
   total_revenue: Total Revenue
   total_revenue_weighted: (weighted)
-  revenue_report: Revenue Report
+  cash_report: Cash Report
+  sales_report: Sales Report
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------

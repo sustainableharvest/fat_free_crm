@@ -221,34 +221,42 @@ class Opportunity < ActiveRecord::Base
 
   def revenue_breakdown
     if payment_terms == "net_40" || payment_terms == "net_30"
-      return [ (self.total_revenue / 5).to_i, (self.total_revenue(self.probability_percent) / 5).to_i ]
+      return (self.total_revenue(self.probability_percent) / 5).to_i
     elsif payment_terms == "cash"
-      return [ (self.total_revenue / 4).to_i, (self.total_revenue(self.probability_percent) / 4).to_i ]
+      return (self.total_revenue(self.probability_percent) / 4).to_i
     else 
-      return [ self.total_revenue.to_i, self.total_revenue(self.probability_percent).to_i ]  
+      return self.total_revenue(self.probability_percent).to_i
     end
   end
 
-  # Date::MONTHNAMES[1]
-  def self.revenue_by_month
+  def revenue_checking
+    amount && bag_weight && payment_terms && sales_price_per_lb && probability && sh_fee && user.email != "marcus@sustainableharvest.com"
+  end
+
+  def payment_split
+    case self.payment_terms
+    when "cad"
+      return (-2..-2)
+    when "cash"
+      return (0..3)
+    else
+      return (0..4)
+    end
+  end
+
+  def self.revenue_by_month(type)
     report = Hash.new
     opps = Opportunity.delivery_by_month
     opps.each do |month, oppors|
       oppors.each do |oppor|
-        if oppor.amount && oppor.bag_weight && oppor.payment_terms && oppor.sales_price_per_lb && oppor.probability && oppor.sh_fee  
-          amount = oppor.revenue_breakdown
-          if oppor.payment_terms == "cad"
-            range = (-2..-2)
-          elsif oppor.payment_terms == "cash"
-            range = (0..4)
-          else
-            range = (0..5)
-          end
+        if oppor.revenue_checking 
+          type == "cash" ? amount = oppor.revenue_breakdown : amount = oppor.total_revenue(oppor.probability_percent).to_i
+          type == "cash" ? range = oppor.payment_split : range = (0..0)
           range.each do |h|
             if report[month.next_month(h)]
-              report[month.next_month(h)] += amount[1]
+              report[month.next_month(h)] += amount
             else
-              report.store(month.next_month(h), amount[1])
+              report.store(month.next_month(h), amount)
             end
           end 
         end  
@@ -257,8 +265,8 @@ class Opportunity < ActiveRecord::Base
     report
   end
 
-  def self.revenue_to_csv
-    report = Opportunity.revenue_by_month
+  def self.revenue_to_csv(type)
+    report = Opportunity.revenue_by_month(type)
     arr = []
     report.each do |date, revenue|
       arr << [date, revenue]
@@ -286,18 +294,25 @@ class Opportunity < ActiveRecord::Base
     ops
   end
 
-  def self.incoming_revenue(weighted = false, target = nil)
-    revenue = 0
-    Opportunity.pipeline.each do |opp|
-      weighted ? rev = opp.total_revenue(opp.probability_percent) : rev = opp.total_revenue
-      if target.present?
-        revenue += rev if opp.delivery_month.month == target
-      else
-        revenue += rev
-      end
-    end
-    revenue.to_i
-  end
+  # def self.value_by_stage
+  #   report = {}
+  #   Opportunity.pipeline.each do |opp|
+
+  #   end
+  # end
+
+  # def self.incoming_revenue(weighted = false, target = nil)
+  #   revenue = 0
+  #   Opportunity.pipeline.each do |opp|
+  #     weighted ? rev = opp.total_revenue(opp.probability_percent) : rev = opp.total_revenue
+  #     if target.present?
+  #       revenue += rev if opp.delivery_month.month == target
+  #     else
+  #       revenue += rev
+  #     end
+  #   end
+  #   revenue.to_i
+  # end
 
   private
 
