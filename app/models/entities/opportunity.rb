@@ -235,21 +235,22 @@ class Opportunity < ActiveRecord::Base
     opps = Opportunity.delivery_by_month
     opps.each do |month, oppors|
       oppors.each do |oppor|
-        amount = oppor.revenue_breakdown
-        if oppor.payment_terms == "cad"
-          range = (-2..1)
-        elsif oppor.payment_terms == "cash"
-          range = (0..0)
-        else
-          range = (0..4)
-        end
-        range.each do |h|
-          if report[month.next_month(h)]
-            report[month.next_month(h)] += amount[1]
+        if oppor.amount && oppor.bag_weight && oppor.payment_terms && oppor.sales_price_per_lb && oppor.probability && oppor.sh_fee  
+          amount = oppor.revenue_breakdown
+          if oppor.payment_terms == "cad"
+            range = (-2..1)
+          elsif oppor.payment_terms == "cash"
+            range = (0..0)
           else
-            report.store(month.next_month(h), amount[1])
+            range = (0..4)
           end
-        end   
+          range.each do |h|
+            if report[month.next_month(h)]
+              report[month.next_month(h)] += amount[1]
+            else
+              report.store(month.next_month(h), amount[1])
+            end
+          end   
       end
     end
     report
@@ -272,11 +273,13 @@ class Opportunity < ActiveRecord::Base
   def self.delivery_by_month
     ops = Hash.new
     Opportunity.pipeline.each do |opp|
-      month_year = Date.new(opp.delivery_month.year, opp.delivery_month.month, 1)
-      if ops[month_year]
-        ops[month_year] << opp
-      else
-        ops.store(month_year, [opp])
+      if opp.delivery_month
+        month_year = Date.new(opp.delivery_month.year, opp.delivery_month.month, 1)
+        if ops[month_year]
+          ops[month_year] << opp
+        else
+          ops.store(month_year, [opp])
+        end
       end
     end
     ops
