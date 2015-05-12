@@ -222,30 +222,32 @@ class Opportunity < ActiveRecord::Base
   def revenue_breakdown
     if payment_terms == "net_40" || payment_terms == "net_30"
       return [ (self.total_revenue / 5).to_i, (self.total_revenue(self.probability_percent) / 5).to_i ]
+    elsif payment_terms == "cash"
+      return [ self.total_revenue.to_i, self.total_revenue(self.probability_percent).to_i ]
     else
       return [ (self.total_revenue / 4).to_i, (self.total_revenue(self.probability_percent) / 4).to_i ]
     end
   end
 
   # Date::MONTHNAMES[1]
-  def self.revenue_by_month(target_year)
+  def self.revenue_by_month
     report = Hash.new
-    (-1..24).each { |month| report[month] = 0 }
-    opps = Opportunity.delivery_by_month(target_year)
+    opps = Opportunity.delivery_by_month
     opps.each do |month, oppors|
       oppors.each do |oppor|
         amount = oppor.revenue_breakdown
         if oppor.payment_terms == "cad"
-          (-2..1).each do |h|
-            report[(oppor.delivery_month.month + h)] += amount[1]
-          end
+          range = (-2..1)
         elsif oppor.payment_terms == "cash"
-          (0..3).each do |h|
-            report[(oppor.delivery_month.month + h)] += amount[1]
-          end
+          range = (0..0)
         else
-          (0..4).each do |h|
-            report[(oppor.delivery_month.month + h)] += amount[1]
+          range = (0..4)
+        end
+        range.each do |h|
+          if report[month.next_month(h)]
+            report[month.next_month(h)] += amount[1]
+          else
+            report.store(month.next_month(h), amount[1])
           end
         end   
       end
@@ -253,11 +255,29 @@ class Opportunity < ActiveRecord::Base
     report
   end
 
-  def self.delivery_by_month(target_year)
+  def self.revenue_to_csv
+    report = Opportunity.revenue_by_month
+    arr = []
+    report.each do |date, revenue|
+      arr << [date, revenue]
+    end
+    arr = arr.sort {|a,b| a[0] <=> b[0]}
+    arr.each {|i| i[0] = i[0].strftime('%B %Y')}
+    CSV.open("Revenue_by_month.csv", "wb") do |csv|
+      csv << arr.map { |h| h[0] }
+      csv << arr.map { |j| j[1] }
+    end
+  end
+
+  def self.delivery_by_month
     ops = Hash.new
-    (1..12).each { |month| ops[month] = [] }
-    Opportunity.pipeline.where('extract(year from delivery_month) = ?', target_year).each do |opp|
-      ops[opp.delivery_month.month] << opp
+    Opportunity.pipeline.each do |opp|
+      month_year = Date.new(opp.delivery_month.year, opp.delivery_month.month, 1)
+      if ops[month_year]
+        ops[month_year] << opp
+      else
+        ops.store(month_year, [opp])
+      end
     end
     ops
   end
