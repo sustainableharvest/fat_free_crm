@@ -16,7 +16,7 @@
 
 #paginate= render "shared/paginate_with_per_page"
 #export= render "shared/export"
--# .report= link_to t(:sales_report), sales_report_opportunities_path
--# .report= link_to t(:cash_report), cash_report_opportunities_path
+.report= link_to t(:sales_report), sales_report_opportunities_path
+.report= link_to t(:cash_report), cash_report_opportunities_path
 
 = hook(:opportunity_index_after, self)
