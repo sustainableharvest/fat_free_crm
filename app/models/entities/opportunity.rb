@@ -242,13 +242,12 @@ class Opportunity < ActiveRecord::Base
   end
 
   def payment_split
-    case self.payment_terms
-    when "cad"
-      return (-2..-2)
-    when "cash"
-      return (0..3)
-    else
+    if payment_terms == "net_40" || payment_terms == "net_30"
       return (0..4)
+    elsif payment_terms == "cash"
+      return (0..3)
+    else 
+      return (-2..-2)
     end
   end
 
