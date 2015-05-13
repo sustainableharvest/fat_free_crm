@@ -299,7 +299,6 @@ class Opportunity < ActiveRecord::Base
         end
       end
     end
-    binding.pry
     ops
   end
 
