@@ -204,7 +204,7 @@ class Opportunity < ActiveRecord::Base
   # Opportunity Reporting methods
   # ------------------------------------------------------------------------------------------------
   def probability_percent
-    probability.to_f / 100
+    probability.to_f / 100.0
   end
 
   def total_lbs
@@ -231,7 +231,7 @@ class Opportunity < ActiveRecord::Base
 
   def sales_breakdown
     if payment_terms == "cad"
-      return self.total_revenue(self.probability_percent)
+      return self.total_revenue(self.probability_percent) * 1.0
     else
       return self.total_revenue(self.probability_percent) / 4.0
     end
@@ -299,6 +299,7 @@ class Opportunity < ActiveRecord::Base
         end
       end
     end
+    binding.pry
     ops
   end
 
