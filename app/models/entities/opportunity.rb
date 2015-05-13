@@ -211,11 +211,11 @@ class Opportunity < ActiveRecord::Base
     amount * bag_weight
   end
 
-  def total_revenue(weighted = 1)
+  def total_revenue(weighted = 1.0)
     total_lbs * sales_price_per_lb * weighted
   end
 
-  def total_from_sh_fee(weighted = 1)
+  def total_from_sh_fee(weighted = 1.0)
     total_lbs * sh_fee * weighted
   end
 
