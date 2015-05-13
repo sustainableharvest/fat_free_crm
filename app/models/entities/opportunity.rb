@@ -259,7 +259,8 @@ class Opportunity < ActiveRecord::Base
       oppors.each do |oppor|
         if oppor.revenue_checking 
           type == "cash" ? amount = oppor.cash_breakdown : amount = oppor.sales_breakdown
-          type == "cash" ? range = oppor.payment_split : oppor.payment_terms == "cad" ? range = (-2..-2) : range = (0..3)
+          # oppor.payment_terms == "cad" ? range = (-2..-2) : 
+          type == "cash" ? range = oppor.payment_split : range = (0..3)
           range.each do |h|
             if report[month.next_month(h)]
               report[month.next_month(h)] += amount
