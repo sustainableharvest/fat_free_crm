@@ -303,6 +303,16 @@ class Opportunity < ActiveRecord::Base
     ops
   end
 
+  def self.total_pipeline_revenue
+    result = 0.0
+    Opportunity.pipeline.each do |opp|
+      if opp.revenue_checking
+        result += opp.total_revenue(opp.probability_percent)
+      end
+    end
+    result
+  end
+
   # def self.value_by_stage
   #   report = {}
   #   Opportunity.pipeline.each do |opp|
