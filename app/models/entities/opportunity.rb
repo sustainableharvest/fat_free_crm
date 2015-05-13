@@ -262,7 +262,7 @@ class Opportunity < ActiveRecord::Base
           # oppor.payment_terms == "cad" ? range = (-2..-2) : 
           type == "cash" ? range = oppor.payment_split : range = (0..3)
           range.each do |h|
-            if report[month.next_month(h)]
+            if report[month.next_month(h)].present?
               report[month.next_month(h)] += amount
             else
               report.store(month.next_month(h), amount)
