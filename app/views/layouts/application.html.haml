@@ -10,6 +10,7 @@
       #{yield :stylesheet_includes}
     %style= yield :styles
 
+    = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = javascript_include_tag :application
 
     - unless tabless_layout? || %w(en-US en-GB).include?(I18n.locale.to_s)

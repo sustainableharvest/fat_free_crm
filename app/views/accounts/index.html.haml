@@ -1,5 +1,8 @@
 = styles_for :account
 
+= geo_chart Address.where(:addressable_type => "Account").where(:address_type => "Billing").group(:country).count
+= geo_chart Address.where(:addressable_type => "Account").where(:address_type => "Billing").group(:state).count, library: {region: 'US', resolution: 'provinces'}
+
 = render 'entities/title_bar'
 
 .remote#create_account{ hidden }
