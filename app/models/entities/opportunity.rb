@@ -221,9 +221,9 @@ class Opportunity < ActiveRecord::Base
 
   def cash_breakdown
     if payment_terms == "net_40" || payment_terms == "net_30"
-      return (self.total_revenue(self.probability_percent) / 5).to_i
+      return (self.total_revenue(self.probability_percent).to_i) / 5.0
     elsif payment_terms == "cash"
-      return (self.total_revenue(self.probability_percent) / 4).to_i
+      return (self.total_revenue(self.probability_percent).to_i) / 4.0
     else 
       return self.total_revenue(self.probability_percent).to_i
     end
@@ -233,7 +233,7 @@ class Opportunity < ActiveRecord::Base
     if payment_terms == "cad"
       return self.total_revenue(self.probability_percent).to_i
     else
-      return (self.total_revenue(self.probability_percent) / 4).to_i
+      return (self.total_revenue(self.probability_percent).to_i) / 4.0
     end
   end
 
