@@ -319,19 +319,6 @@ class Opportunity < ActiveRecord::Base
   #   end
   # end
 
-  # def self.incoming_revenue(weighted = false, target = nil)
-  #   revenue = 0
-  #   Opportunity.pipeline.each do |opp|
-  #     weighted ? rev = opp.total_revenue(opp.probability_percent) : rev = opp.total_revenue
-  #     if target.present?
-  #       revenue += rev if opp.delivery_month.month == target
-  #     else
-  #       revenue += rev
-  #     end
-  #   end
-  #   revenue.to_i
-  # end
-
   private
 
   # Make sure at least one user has been selected if the contact is being shared.
