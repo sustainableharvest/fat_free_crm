@@ -202,7 +202,24 @@ class Opportunity < ActiveRecord::Base
   end
 
   # Opportunity Reporting methods
-  # Needs some SERIOUS Refactoring
+
+  # Weighted Amount reports
+  # ------------------------------------------------------------------------------------------------
+
+  def self.sum_weighted_amount(opportunities = Opportunity.all)
+    opportunities.map(&:weighted_amount).sum.to_i
+  end
+
+  def self.weighted_amount_by_user
+    result = {}
+    User.all.each do |user|
+      result[user.full_name] = Opportunity.sum_weighted_amount(user.opportunities)
+    end
+    result
+  end
+
+  # Sales and Cash Reports
+  # NEEDS SOME SERIOUS REFACTORING
   # ------------------------------------------------------------------------------------------------
   def probability_percent
     probability.to_f / 100.0
