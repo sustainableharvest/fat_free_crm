@@ -218,6 +218,16 @@ class Opportunity < ActiveRecord::Base
     result
   end
 
+  def self.weighted_amount_by_month(year = Date.today.year)
+    result = {}
+    opps = Opportunity.where('extract(year from closes_on) = ?', year)
+    (1..12).each do |month|
+      month_opps = opps.where('extract(month from closes_on) = ?', month)
+      result[Date::MONTHNAMES[month]] = Opportunity.sum_weighted_amount(month_opps)
+    end
+    result
+  end
+
   # Sales and Cash Reports
   # NEEDS SOME SERIOUS REFACTORING
   # ------------------------------------------------------------------------------------------------

@@ -134,6 +134,10 @@ class OpportunitiesController < EntitiesController
     end
   end
 
+  def reports
+    
+  end
+
   # PUT /opportunities/1/attach
   #----------------------------------------------------------------------------
   # Handled by EntitiesController :attach

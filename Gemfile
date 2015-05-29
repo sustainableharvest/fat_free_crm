@@ -7,6 +7,8 @@ ruby '2.1.0'
 # gem 'sqlite3'
 gem 'pg'
 gem 'newrelic_rpm'
+gem 'chartkick'
+gem 'groupdate'
 
 # Removes a gem dependency
 def remove(name)

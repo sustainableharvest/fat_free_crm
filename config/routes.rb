@@ -121,6 +121,7 @@ Rails.application.routes.draw do
       get :versions
       get :cash_report
       get :sales_report
+      get :reports
     end
     member do
       put :attach
