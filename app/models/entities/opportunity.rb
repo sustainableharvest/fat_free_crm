@@ -202,6 +202,7 @@ class Opportunity < ActiveRecord::Base
   end
 
   # Opportunity Reporting methods
+  # Needs some SERIOUS Refactoring
   # ------------------------------------------------------------------------------------------------
   def probability_percent
     probability.to_f / 100.0
@@ -220,9 +221,9 @@ class Opportunity < ActiveRecord::Base
   end
 
   def cash_breakdown
-    if payment_terms == "net_40" || payment_terms == "net_30"
+    if payment_terms == "net_40" || payment_terms == "net_30" || payment_terms == "net_45"
       return self.total_revenue(self.probability_percent) / 5.0
-    elsif payment_terms == "cash"
+    elsif payment_terms == "cash" || payment_terms == "net_10"
       return self.total_revenue(self.probability_percent) / 4.0
     else 
       return self.total_revenue(self.probability_percent)
@@ -242,9 +243,9 @@ class Opportunity < ActiveRecord::Base
   end
 
   def payment_split
-    if payment_terms == "net_40" || payment_terms == "net_30"
+    if payment_terms == "net_40" || payment_terms == "net_30" || payment_terms == "net_45"
       return (0..4)
-    elsif payment_terms == "cash"
+    elsif payment_terms == "cash" || payment_terms =="net_10"
       return (0..3)
     else 
       return (-2..-2)

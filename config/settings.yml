@@ -1,6 +1,7 @@
 opportunities_payment_terms:
+  - :net_10
   - :net_30
-  - :net_40
+  - :net_45
   - :cash
   - :cad
   - :other_terms
