@@ -1,11 +1,11 @@
-- user = link_to(activity.user.full_name, user_path(activity.user)) if activity.user
+- user = link_to(activity.user.full_name, user_path(activity.user), :target => "_blank") if activity.user
 
 - subject = if (item = activity.related || activity.item)
   - if item.respond_to?(:full_name)
-    - link_to item.full_name, polymorphic_url(item)
+    - link_to item.full_name, polymorphic_url(item), :target => "_blank"
 
   - elsif [Account, Campaign, Contact, Lead, Opportunity, Sample].include?(item.class)
-    - link_to item.name, polymorphic_url(item)
+    - link_to item.name, polymorphic_url(item), :target => "_blank"
 
   - elsif item.respond_to?(:name)
     - content_tag :span, item.name, :style => "color:black;" # Individual tasks have no landing pages where we could link to.
@@ -21,7 +21,7 @@
       - if known_event
         - action = t('action_' + activity.event)
         - type = t('subject_' + activity.item_type.downcase)
-        = link_to avatar_for(activity.user, :size => :thumb), user_path(activity.user)
+        = link_to avatar_for(activity.user, :size => :thumb), user_path(activity.user), :target => "_blank"
         = t("activity_text", :user => h(user), :action => h(action), :type => h(type), :subject => h(subject), :default => "#{h user} #{h action} #{h type} #{h subject}").html_safe # locales optionally can change the word order for activities using 'activity_text'
         - if ((item = activity.item).class == Comment) and Setting.comments_visible_on_dashboard
           = t('action_create_comment', :comment => truncate(h(item.comment), :length => 90)).html_safe
