@@ -2,23 +2,6 @@
 = styles_for :task, :opportunity, :account
 
 .title
-  %span#title #{t :site_updates}
-%ul.list#updates
-  %li
-    %strong 05/12/2015
-  %li - Sales and Cash Flow Reports are now available at the bottom of the Opportunities index screen.
-  %li
-    %strong 05/07/2015
-  %li
-    %strong - Opportunities and Samples have been overhauled. Samples are simpler and Opportunities have several new fields, many of which are required.
-  %li
-    %strong 05/01/2015
-  %li - Creating or Editing a Task now has the option of assigning an Account, Contact, Campaign, or Opportunity in the Task form.
-  %li
-    %em #{t :send_issues_to}
-    = mail_to "scott@sustainableharvest.com", "scott@sustainableharvest.com" ,:style => "font-style: italic;"
-
-.title
   %span#title #{t :my_tasks}
 %ul.list#tasks
   - unless @my_tasks.empty?
