@@ -222,8 +222,24 @@ class Opportunity < ActiveRecord::Base
     result = {}
     opps = Opportunity.where('extract(year from closes_on) = ?', year)
     (1..12).each do |month|
-      month_opps = opps.where('extract(month from closes_on) = ?', month)
+      month_opps = opps.where('extract(month from closes_on) = ?', month) # Array of Opportunities
       result[Date::MONTHNAMES[month]] = Opportunity.sum_weighted_amount(month_opps)
+    end
+    result
+  end
+
+  def self.weighted_amount_by_user_by_month(year = Date.today.year)
+    result = {}
+    (1..12).each do |month|
+      result[Date::MONTHNAMES[month]] = Opportunity.weighted_amount_user_month(year, month)
+    end
+    result
+  end
+
+  def self.weighted_amount_user_month(year = Date.today.year, month = Date.today.month)
+    result = {}
+    User.all.each do |user|
+      result[user.full_name] = Opportunity.sum_weighted_amount(Opportunity.where('extract(year from closes_on) = ?', year).where('extract(month from closes_on) = ?', month).where(:user => User.find(user.id)))
     end
     result
   end
