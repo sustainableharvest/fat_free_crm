@@ -2,6 +2,11 @@
   :plain
     $(function () {
 
+      Highcharts.setOptions({
+        lang: {
+        thousandsSep: ','
+        }
+      });
         $('#chart_div').highcharts({
             chart: {
                 type: 'funnel',
@@ -15,7 +20,7 @@
                 series: {
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b> ({point.y:,.0f})',
+                        format: '<b>{point.name}</b> ({point.y:,.0f} lbs)',
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
                         softConnector: true
                     },
@@ -26,6 +31,9 @@
                     // height: pixels or percent
                     // width: pixels or percent
                 }
+            },
+            tooltip: {
+              valueSuffix: " lbs"
             },
             legend: {
                 enabled: false
