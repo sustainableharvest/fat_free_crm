@@ -1,7 +1,3 @@
-- opps = Opportunity.weighted_amount_by_month.to_a
-- other_opps = Opportunity.weighted_amount_by_user_by_month.map {|month, values| {name: month, data: values.to_a}}
-- pyramid = Opportunity.sales_pyramid
-
 %script{:type => "text/javascript"}
   :plain
     $(function () {
@@ -23,7 +19,7 @@
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
                         softConnector: true
                     },
-                    neckWidth: '30%',
+                    neckWidth: '50%',
                     neckHeight: '25%'
 
                     //-- Other available options
@@ -36,7 +32,7 @@
             },
             series: [{
                 name: 'Total pounds',
-                data: #{pyramid}
+                data: #{@pyramid}
             }]
         });
     });
@@ -44,32 +40,10 @@
 
 = "Opportunities Reports"
 
+= column_chart @stacked_chart, stacked: true, library: {title: "#{Date.today.year} Monthly Bags in Pipeline"}
+
+= pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
+
 %div{id: 'chart_div'}
 
-= column_chart Opportunity.stacked_column_chart.map {|month, values| {name: month, data: values}}, stacked: true, library: {title: "#{Date.today.year} Monthly Bags in Pipeline"}
-
-= pie_chart Opportunity.weighted_amount_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
-
-= bar_chart opps, library: {title: "#{Date.today.year} Total Bags Monthly Pipeline"}
-
-= column_chart opps, library: {title: "#{Date.today.year} Total Bags Monthly Pipeline"}
-
-
--# %script{:type => "text/javascript", :src => "https://www.google.com/jsapi"}
--# %script{:type => "text/javascript"}
--#   :plain
--#     google.load('visualization', '1.0', {'packages':['corechart']});
--#     google.setOnLoadCallback(drawChart);
-
--#     function drawChart() {
--#       var data = new google.visualization.arrayToDataTable([['Month', 'Bags', { role: 'style'}],#{opps.each {|opp| opp}}]);
-
--#       var options = {
--#         'title' :'Pizza',
--#         'width' :400,
--#         'height' :300
--#       };
-
--#       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
--#       chart.draw(data, options);
--#     }
+= column_chart @total_monthly_opps, library: {title: "#{Date.today.year} Total Bags Monthly Pipeline"}

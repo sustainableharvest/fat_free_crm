@@ -135,7 +135,10 @@ class OpportunitiesController < EntitiesController
   end
 
   def reports
-    
+    @total_monthly_opps = Opportunity.weighted_amount_by_month.to_a
+    @stacked_chart = Opportunity.stacked_column_chart.map {|month, values| {name: month, data: values}}
+    @total_weighted_by_user = Opportunity.weighted_amount_by_user
+    @pyramid = Opportunity.sales_pyramid
   end
 
   # PUT /opportunities/1/attach
