@@ -1,5 +1,46 @@
 - opps = Opportunity.weighted_amount_by_month.to_a
 - other_opps = Opportunity.weighted_amount_by_user_by_month.map {|month, values| {name: month, data: values.to_a}}
+- pyramid = Opportunity.sales_pyramid
+
+%script{:type => "text/javascript"}
+  :plain
+    $(function () {
+
+        $('#chart_div').highcharts({
+            chart: {
+                type: 'funnel',
+                marginRight: 100
+            },
+            title: {
+                text: 'Sales funnel',
+                x: -50
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b> ({point.y:,.0f})',
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                        softConnector: true
+                    },
+                    neckWidth: '30%',
+                    neckHeight: '25%'
+
+                    //-- Other available options
+                    // height: pixels or percent
+                    // width: pixels or percent
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+                name: 'Total pounds',
+                data: #{pyramid}
+            }]
+        });
+    });
+
 
 = "Opportunities Reports"
 

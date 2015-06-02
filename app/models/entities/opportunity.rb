@@ -254,6 +254,21 @@ class Opportunity < ActiveRecord::Base
     result
   end
 
+  # Sales Pyramid
+  # ------------------------------------------------------------------------------------------------
+
+  def self.sum_total_lbs(opportunities = Opportunity.all)
+    opportunities.map(&:total_lbs).sum.to_i
+  end
+
+  def self.sales_pyramid
+    result = {}
+    ["initial_interest", "sampling", "reviewing_offer", "negotiation"].each do |stage|
+      result[stage.titleize] = Opportunity.sum_total_lbs(Opportunity.where(:stage => stage))
+    end
+    result.to_a
+  end
+
   # Sales and Cash Reports
   # NEEDS SOME SERIOUS REFACTORING
   # ------------------------------------------------------------------------------------------------
