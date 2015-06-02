@@ -228,6 +228,14 @@ class Opportunity < ActiveRecord::Base
     result
   end
 
+  def self.stacked_column_chart(year = Date.today.year)
+    result = {}
+    User.all.each do |user|
+      result[user.full_name] = user.weighted_amount_over_year.to_a
+    end
+    result
+  end
+
   def self.weighted_amount_by_user_by_month(year = Date.today.year)
     result = {}
     (1..12).each do |month|

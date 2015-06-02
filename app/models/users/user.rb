@@ -145,6 +145,18 @@ class User < ActiveRecord::Base
     [name].to_xml
   end
 
+  # Reporting
+  #----------------------------------------------------------------------------
+  def weighted_amount_over_year(year = Date.today.year)
+    result = {}
+    opps = Opportunity.where('extract(year from closes_on) = ?', year).where(:user => User.find(self.id))
+    (1..12).each do |month|
+      month_opps = opps.where('extract(month from closes_on) = ?', month)
+      result[Date::MONTHNAMES[month]] = Opportunity.sum_weighted_amount(month_opps)
+    end
+    result
+  end
+
   private
 
   # Suspend newly created user if signup requires an approval.

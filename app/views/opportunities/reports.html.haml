@@ -3,6 +3,6 @@
 - opps = Opportunity.weighted_amount_by_month
 - other_opps = Opportunity.weighted_amount_by_user_by_month.map {|month, values| {name: month, data: values.to_a}}
 
-= column_chart Opportunity.weighted_amount_by_user_by_month.map {|month, values| {name: month, data: values.to_a}}, stacked: true
+= column_chart Opportunity.stacked_column_chart.map {|month, values| {name: month, data: values}}, stacked: true
 = pie_chart Opportunity.weighted_amount_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
 = column_chart opps, library: {title: "#{Date.today.year} Total Bags Monthly Pipeline"}
