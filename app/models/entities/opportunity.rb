@@ -264,7 +264,8 @@ class Opportunity < ActiveRecord::Base
   def self.sales_pyramid
     result = {}
     ["initial_interest", "sampling", "reviewing_offer", "negotiation"].each do |stage|
-      result[stage.titleize] = Opportunity.sum_total_lbs(Opportunity.where(:stage => stage))
+      opps = Opportunity.where(:stage => stage).where.not(amount: nil).where.not(bag_weight: nil)
+      result[stage.titleize] = Opportunity.sum_total_lbs(opps)
     end
     result.to_a
   end
