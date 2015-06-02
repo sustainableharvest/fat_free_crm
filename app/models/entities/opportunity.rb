@@ -270,6 +270,12 @@ class Opportunity < ActiveRecord::Base
     result.to_a
   end
 
+  def self.stage_percentage
+    total_lbs = Opportunity.where.not(amount: nil).where.not(bag_weight: nil).map(&:total_lbs).sum
+    ii_lbs = Opportunity.where(:stage => "initial_interest").where.not(amount: nil).where.not(bag_weight: nil).map(&:total_lbs).sum
+    (ii_lbs.to_f / total_lbs.to_f ) * 100
+  end
+
   # Sales and Cash Reports
   # NEEDS SOME SERIOUS REFACTORING
   # ------------------------------------------------------------------------------------------------
