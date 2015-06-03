@@ -108,6 +108,8 @@ en-US:
 
   testing: TESTING
 
+  reports: Reports
+
 
   # Models/Activity.
   #----------------------------------------------------------------------------
@@ -609,6 +611,8 @@ en-US:
   total_revenue_weighted: (weighted)
   cash_report: Cash Report
   sales_report: Sales Report
+  opportunities_report: Opportunities Report
+
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------

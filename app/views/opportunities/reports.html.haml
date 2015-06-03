@@ -1,3 +1,10 @@
+.title= t(:opportunities_report)
+
+.report
+  = link_to t(:sales_report), sales_report_opportunities_path
+  = " | "
+  = link_to t(:cash_report), cash_report_opportunities_path
+
 %script{:type => "text/javascript"}
   :plain
     $(function () {
@@ -45,13 +52,8 @@
         });
     });
 
+= column_chart @stacked_chart, stacked: true, library: {title: "#{Date.today.year} Weighted Monthly Bags in Pipeline"}
 
-= "Opportunities Reports"
-
-= column_chart @stacked_chart, stacked: true, library: {title: "#{Date.today.year} Monthly Bags in Pipeline"}
-
-= pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
+= pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Weighted Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
 
 %div{id: 'chart_div'}
-
-= column_chart @total_monthly_opps, library: {title: "#{Date.today.year} Total Bags Monthly Pipeline"}
