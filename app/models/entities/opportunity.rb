@@ -213,7 +213,7 @@ class Opportunity < ActiveRecord::Base
   def self.weighted_amount_by_user
     result = {}
     User.all.each do |user|
-      result[user.full_name] = Opportunity.sum_weighted_amount(user.opportunities)
+      result[user.full_name] = Opportunity.sum_weighted_amount(Opportunity.where(assignee: user))
     end
     result
   end
@@ -231,7 +231,7 @@ class Opportunity < ActiveRecord::Base
   def self.stacked_column_chart(year = Date.today.year)
     result = {}
     User.all.each do |user|
-      if user.opportunities.where('extract(year from closes_on) = ?', year).length > 0
+      if Opportunity.where(assignee: user).where('extract(year from closes_on) = ?', year).length > 0
         result[user.full_name] = user.weighted_amount_over_year.to_a
       end
     end
@@ -249,7 +249,7 @@ class Opportunity < ActiveRecord::Base
   def self.weighted_amount_user_month(year = Date.today.year, month = Date.today.month)
     result = {}
     User.all.each do |user|
-      result[user.full_name] = Opportunity.sum_weighted_amount(Opportunity.where('extract(year from closes_on) = ?', year).where('extract(month from closes_on) = ?', month).where(:user => User.find(user.id)))
+      result[user.full_name] = Opportunity.sum_weighted_amount(Opportunity.where('extract(year from closes_on) = ?', year).where('extract(month from closes_on) = ?', month).where(:assignee => user))
     end
     result
   end
