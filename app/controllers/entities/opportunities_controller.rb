@@ -141,6 +141,10 @@ class OpportunitiesController < EntitiesController
     @pyramid = Opportunity.sales_pyramid
   end
 
+  def goals
+
+  end
+
   # PUT /opportunities/1/attach
   #----------------------------------------------------------------------------
   # Handled by EntitiesController :attach

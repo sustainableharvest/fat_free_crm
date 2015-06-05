@@ -133,6 +133,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :goals
+
   resources :samples, :id => /\d+/ do
     collection do
       get   :redraw
