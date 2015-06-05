@@ -158,6 +158,20 @@ class User < ActiveRecord::Base
     result
   end
 
+  def goal_total(year = Date.today)
+    goals.map(&:bags).sum.to_i
+  end
+
+  def goals_by_month(year = Date.today.year)
+    # Hash[self.goals.map{|goal| [Date::MONTHNAMES[goal.date.month], goal.bags]}]
+    result = {}
+    goals = Goal.where(user: self).where('extract(year from date) = ?', year)
+    (1..12).each do |month|
+      result[Date::MONTHNAMES[month]] = Goal.where('extract(month from date) = ?', month).empty? ? 0 : Goal.where('extract(month from date) = ?', month).first.bags
+    end
+    result
+  end
+
   private
 
   # Suspend newly created user if signup requires an approval.

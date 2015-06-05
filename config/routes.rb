@@ -133,7 +133,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :goals
+  resources :goals do
+    collection do
+      get :edit_multiple
+      put :update_multiple
+    end
+  end
 
   resources :samples, :id => /\d+/ do
     collection do

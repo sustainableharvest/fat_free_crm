@@ -51,9 +51,53 @@
             }]
         });
     });
+- (18..19).each do |num| 
+  %script{:type => "text/javascript"}
+    :plain
+      $(function () {
+      $('#goals_' + #{num.to_s}).highcharts({
+            title: {
+                text: 'Combination chart'
+            },
+            xAxis: {
+                categories: #{User.find(num).weighted_amount_over_year.keys}
+            },
+            labels: {
+                items: [{
+                    html: 'Total fruit consumption',
+                    style: {
+                        left: '50px',
+                        top: '18px',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                }]
+            },
+            series: [{
+                type: 'column',
+                name: 'Jane',
+                data: #{@user_opps.values}
+            }, {
+                type: 'spline',
+                name: 'Average',
+                data: #{User.find(num).goals_by_month.values},
+                marker: {
+                    lineWidth: 2,
+                    lineColor: Highcharts.getOptions().colors[3],
+                    fillColor: 'white'
+                }
+            }]
+          });
+        });
+
+
+
 
 = column_chart @stacked_chart, stacked: true, library: {title: "#{Date.today.year} Weighted Monthly Bags in Pipeline"}
 
 = pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Weighted Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
 
 %div{id: 'chart_div'}
+
+%div{id: 'goals_18'}
+
+%div{id: 'goals_19'}
