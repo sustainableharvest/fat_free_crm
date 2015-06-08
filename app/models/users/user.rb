@@ -167,7 +167,7 @@ class User < ActiveRecord::Base
     result = {}
     goals = Goal.where(user: self).where('extract(year from date) = ?', year)
     (1..12).each do |month|
-      result[Date::MONTHNAMES[month]] = Goal.where('extract(month from date) = ?', month).empty? ? 0 : Goal.where('extract(month from date) = ?', month).first.bags
+      result[Date::MONTHNAMES[month]] = goals.where('extract(month from date) = ?', month).empty? ? 0 : Goal.where('extract(month from date) = ?', month).first.bags
     end
     result
   end

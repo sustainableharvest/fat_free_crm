@@ -51,20 +51,19 @@
             }]
         });
     });
-- (18..19).each do |num| 
+- [@wynne, @saraz, @dane].each do |usr| 
   %script{:type => "text/javascript"}
     :plain
       $(function () {
-      $('#goals_' + #{num.to_s}).highcharts({
+      $('#{usr.full_name}').highcharts({
             title: {
-                text: 'Combination chart'
+                text: "#{usr.full_name}'s Goals vs Pipeline"
             },
             xAxis: {
-                categories: #{User.find(num).weighted_amount_over_year.keys}
+                categories: #{usr.weighted_amount_over_year.keys}
             },
             labels: {
                 items: [{
-                    html: 'Total fruit consumption',
                     style: {
                         left: '50px',
                         top: '18px',
@@ -75,11 +74,11 @@
             series: [{
                 type: 'column',
                 name: 'Jane',
-                data: #{@user_opps.values}
+                data: #{usr.weighted_amount_over_year.values}
             }, {
                 type: 'spline',
-                name: 'Average',
-                data: #{User.find(num).goals_by_month.values},
+                name: 'Goal',
+                data: #{usr.goals_by_month.values},
                 marker: {
                     lineWidth: 2,
                     lineColor: Highcharts.getOptions().colors[3],
@@ -97,7 +96,5 @@
 = pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Weighted Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
 
 %div{id: 'chart_div'}
-
-%div{id: 'goals_18'}
-
-%div{id: 'goals_19'}
+- [@wynne, @saraz, @dane].each do |usr| 
+  %div{id: '#{usr.full_name}'}
