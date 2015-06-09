@@ -231,7 +231,7 @@ class Opportunity < ActiveRecord::Base
   def self.stacked_column_chart(year = Date.today.year)
     result = {}
     User.all.each do |user|
-      if Opportunity.where(assignee: user).where('extract(year from closes_on) = ?', year).length > 0
+      if user.opportunities.pipeline.where('extract(year from closes_on) = ?', year).length > 0
         result[user.full_name] = user.weighted_amount_over_year.to_a
       end
     end
