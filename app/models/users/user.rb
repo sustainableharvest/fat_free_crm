@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
   has_many :preferences, dependent: :destroy
   has_many :lists
   has_and_belongs_to_many :groups
-  has_many    :samples
+  has_many :samples
+  has_many :goals
 
   has_paper_trail class_name: 'Version', ignore: [:last_request_at, :perishable_token]
 
@@ -153,6 +154,20 @@ class User < ActiveRecord::Base
     (1..12).each do |month|
       month_opps = opps.where('extract(month from closes_on) = ?', month)
       result[Date::MONTHNAMES[month]] = Opportunity.sum_weighted_amount(month_opps)
+    end
+    result
+  end
+
+  def goal_total(year = Date.today)
+    goals.map(&:bags).sum.to_i
+  end
+
+  def goals_by_month(year = Date.today.year)
+    # Hash[self.goals.map{|goal| [Date::MONTHNAMES[goal.date.month], goal.bags]}]
+    result = {}
+    goals = Goal.where(user: self).where('extract(year from date) = ?', year)
+    (1..12).each do |month|
+      result[Date::MONTHNAMES[month]] = goals.where('extract(month from date) = ?', month).empty? ? 0 : Goal.where('extract(month from date) = ?', month).first.bags
     end
     result
   end

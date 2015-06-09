@@ -122,6 +122,7 @@ Rails.application.routes.draw do
       get :cash_report
       get :sales_report
       get :reports
+      get :goals
     end
     member do
       put :attach
@@ -130,6 +131,13 @@ Rails.application.routes.draw do
       post :unsubscribe
       get :contacts
       get :opportunities
+    end
+  end
+
+  resources :goals do
+    collection do
+      get :edit_multiple
+      put :update_multiple
     end
   end
 

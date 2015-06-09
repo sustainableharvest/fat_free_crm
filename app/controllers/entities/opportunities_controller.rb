@@ -141,6 +141,12 @@ class OpportunitiesController < EntitiesController
     @pyramid = Opportunity.sales_pyramid
   end
 
+  def goals
+    @wynne = User.where(email: "wynne@sustainableharvest.com").first
+    @saraz = User.where(email: "sarazm@sustainableharvest.com").first
+    @dane = User.where(email: "dane@sustainableharvest.com").first   
+  end
+
   # PUT /opportunities/1/attach
   #----------------------------------------------------------------------------
   # Handled by EntitiesController :attach

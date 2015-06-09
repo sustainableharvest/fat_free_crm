@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506163906) do
+ActiveRecord::Schema.define(version: 20150603195422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,17 @@ ActiveRecord::Schema.define(version: 20150506163906) do
 
   add_index "fields", ["field_group_id"], name: "index_fields_on_field_group_id", using: :btree
   add_index "fields", ["name"], name: "index_fields_on_name", using: :btree
+
+  create_table "goals", force: :cascade do |t|
+    t.integer  "bags"
+    t.date     "date"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255

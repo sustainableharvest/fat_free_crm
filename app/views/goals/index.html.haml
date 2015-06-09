@@ -1,0 +1,6 @@
+.title_tools
+  .create_asset
+    -# = link_to ("create_goal".to_sym, send("new_goal_path") t("set_goals".to_sym))
+    = link_to t("set_goals".to_sym), edit_multiple_goals_path
+.title
+  %span{:id => "create_goal_title"} #{t "Goals".to_sym}

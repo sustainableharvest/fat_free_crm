@@ -1,0 +1,48 @@
+.title= t(:goals)
+
+- [@wynne, @saraz, @dane].each do |usr| 
+  %script{:type => "text/javascript"}
+    :plain
+      $(function () {
+      $('##{usr.id}').highcharts({
+            title: {
+                text: "#{usr.full_name}'s Goals vs Pipeline"
+            },
+            xAxis: {
+                categories: #{usr.weighted_amount_over_year.keys}
+            },
+            labels: {
+                items: [{
+                    style: {
+                        left: '50px',
+                        top: '18px',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                }]
+            },
+            series: [{
+                type: 'column',
+                name: "#{usr.name.titleize}'s Pipeline",
+                data: #{usr.weighted_amount_over_year.values},
+                tooltip: {
+                    valueSuffix: " bags"
+                }
+            }, {
+                type: 'spline',
+                name: 'Goals',
+                data: #{usr.goals_by_month.values},
+                marker: {
+                    lineWidth: 2,
+                    lineColor: Highcharts.getOptions().colors[3],
+                    fillColor: 'white'
+                },
+                tooltip: {
+                    valueSuffix: " bags"
+                }
+            }]
+          });
+        });
+
+%div{id: 'chart_div'}
+- [@wynne, @saraz, @dane].each do |usr| 
+  %div{id: usr.id.to_s}

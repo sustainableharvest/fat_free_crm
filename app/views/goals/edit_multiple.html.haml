@@ -1,0 +1,6 @@
+= "Set Goals"
+
+= form_tag update_multiple_goals_path, method: :put do
+  - @users.each do |user|
+    = user.name
+  \

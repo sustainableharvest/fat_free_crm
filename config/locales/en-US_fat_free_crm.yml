@@ -612,6 +612,8 @@ en-US:
   cash_report: Cash Report
   sales_report: Sales Report
   opportunities_report: Opportunities Report
+  goals: Goals
+  set_goals: Set Goals
 
 
   # Views -> Tasks.
