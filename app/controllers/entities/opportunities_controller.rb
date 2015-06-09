@@ -139,13 +139,12 @@ class OpportunitiesController < EntitiesController
     @stacked_chart = Opportunity.stacked_column_chart.map {|month, values| {name: month, data: values}}
     @total_weighted_by_user = Opportunity.weighted_amount_by_user
     @pyramid = Opportunity.sales_pyramid
-    @wynne = User.where(email: "wynne@sustainableharvest.com").first
-    @saraz = User.where(email: "sarazm@sustainableharvest.com").first
-    @dane = User.where(email: "dane@sustainableharvest.com").first
   end
 
   def goals
-
+    @wynne = User.where(email: "wynne@sustainableharvest.com").first
+    @saraz = User.where(email: "sarazm@sustainableharvest.com").first
+    @dane = User.where(email: "dane@sustainableharvest.com").first   
   end
 
   # PUT /opportunities/1/attach

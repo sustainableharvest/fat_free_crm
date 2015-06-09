@@ -4,6 +4,8 @@
   = link_to t(:sales_report), sales_report_opportunities_path
   = " | "
   = link_to t(:cash_report), cash_report_opportunities_path
+  = " | "
+  = link_to t(:goals), goals_opportunities_path
 
 %script{:type => "text/javascript"}
   :plain
@@ -51,50 +53,9 @@
             }]
         });
     });
-- [@wynne, @saraz, @dane].each do |usr| 
-  %script{:type => "text/javascript"}
-    :plain
-      $(function () {
-      $('#{usr.full_name}').highcharts({
-            title: {
-                text: "#{usr.full_name}'s Goals vs Pipeline"
-            },
-            xAxis: {
-                categories: #{usr.weighted_amount_over_year.keys}
-            },
-            labels: {
-                items: [{
-                    style: {
-                        left: '50px',
-                        top: '18px',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                    }
-                }]
-            },
-            series: [{
-                type: 'column',
-                name: 'Jane',
-                data: #{usr.weighted_amount_over_year.values}
-            }, {
-                type: 'spline',
-                name: 'Goal',
-                data: #{usr.goals_by_month.values},
-                marker: {
-                    lineWidth: 2,
-                    lineColor: Highcharts.getOptions().colors[3],
-                    fillColor: 'white'
-                }
-            }]
-          });
-        });
-
-
-
 
 = column_chart @stacked_chart, stacked: true, library: {title: "#{Date.today.year} Weighted Monthly Bags in Pipeline"}
 
 = pie_chart @total_weighted_by_user, library: {pieSliceText: "value-and-percentage", pieSliceTextStyle: {fontSize: "9"}, title: "Total Weighted Bags in Pipeline - #{Opportunity.sum_weighted_amount}" }
 
 %div{id: 'chart_div'}
-- [@wynne, @saraz, @dane].each do |usr| 
-  %div{id: '#{usr.full_name}'}

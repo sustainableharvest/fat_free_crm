@@ -122,6 +122,7 @@ Rails.application.routes.draw do
       get :cash_report
       get :sales_report
       get :reports
+      get :goals
     end
     member do
       put :attach
