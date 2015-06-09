@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def weighted_amount_over_year(year = Date.today.year)
     result = {}
-    opps = Opportunity.where('extract(year from closes_on) = ?', year).where(:assignee => User.find(self.id))
+    opps = Opportunity.where('extract(year from closes_on) = ?', year).where(assignee: self).pipeline
     (1..12).each do |month|
       month_opps = opps.where('extract(month from closes_on) = ?', month)
       result[Date::MONTHNAMES[month]] = Opportunity.sum_weighted_amount(month_opps)
