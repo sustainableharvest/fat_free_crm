@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_context
   before_action :clear_setting_cache
+  skip_before_action :verify_authenticity_token
   before_action "hook(:app_before_filter, self)"
   after_action "hook(:app_after_filter,  self)"
 
