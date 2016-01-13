@@ -117,7 +117,7 @@
 # By default, individual users can't pick their own locale and are presented
 # with the default locale.
 #
-:per_user_locale: false
+:per_user_locale: true
 
 
 # Default records permissions
