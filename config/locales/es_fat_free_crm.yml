@@ -17,9 +17,11 @@ es:
   tab_accounts: Cuentas
   tab_contacts: Contactos
   tab_opportunities: Oportunidades
+  tab_samples: Muestras
   admin_tab_users: Usuarios
   admin_tab_settings: Configuración
   admin_tab_plugins: Complementos
+  admin_tab_tags: Etiqueta
   users_small: usuarios
   planned: Planificada
   started: Iniciada
