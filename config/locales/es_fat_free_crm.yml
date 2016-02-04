@@ -579,3 +579,5 @@ es:
   time:
     formats:
       mmddhhss: ! '%b %e at %l:%M%p'
+
+  sh_fee: SH Margen (objetivo)

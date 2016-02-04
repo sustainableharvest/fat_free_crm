@@ -526,7 +526,7 @@ en-US:
   rits_id: RITS PC ID #
   producer: Producer
   differential: Differential
-  sh_fee: SH Fee (approx)
+  sh_fee: SH Margin (target)
   delivery_date: Delivery Date
   spot: Spot
   forward_open: Open
