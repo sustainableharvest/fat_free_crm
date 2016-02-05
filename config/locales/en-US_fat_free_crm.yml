@@ -96,6 +96,8 @@ en-US:
   closed_won: Closed/Won
   closed_lost: Closed/Lost
 
+
+  option_stage: Stage
   sample_state: Sample State
   sample_requested: Sample Requested
   sample_shipped: Sample Shipped

@@ -156,7 +156,16 @@ class EntitiesController < ApplicationController
     # Ignore this order when doing advanced search
     unless advanced_search
       order = current_user.pref[:"#{controller_name}_sort_by"] || klass.sort_by
-      scope = scope.order(order)
+      # Runs custom sorter for Opportunities stage
+      
+      if order == "opportunities.stage DESC"
+        scope = scope.sort {|a,b| a.sort_by_priority_stage(a.stage) <=> b.sort_by_priority_stage(b.stage) }
+      # Alternate order once I figure out labeling.
+      # elsif order == "opportunities.probability ASC"
+      #   scope = scope.sort {|a,b| a.sort_by_standard_stage(a.stage) <=> b.sort_by_standard_stage(b.stage) }
+      else
+        scope = scope.order(order)
+      end
     end
 
     @search_results_count = scope.count

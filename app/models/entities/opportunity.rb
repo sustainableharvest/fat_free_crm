@@ -74,7 +74,7 @@ class Opportunity < ActiveRecord::Base
   has_paper_trail class_name: 'Version', ignore: [:subscribed_users]
   has_fields
   exportable
-  sortable by: ["name ASC", "amount DESC", "amount*probability DESC", "probability DESC", "closes_on ASC", "created_at DESC", "updated_at DESC"], default: "created_at DESC"
+  sortable by: ["name ASC", "amount DESC", "amount*probability DESC", "probability DESC", "closes_on ASC", "created_at DESC", "updated_at DESC", "stage DESC"], default: "created_at DESC"
 
   has_ransackable_associations %w(account contacts tags campaign activities emails comments)
   ransack_can_autocomplete
@@ -386,6 +386,46 @@ class Opportunity < ActiveRecord::Base
       end
     end
     result
+  end
+
+  def sort_by_priority_stage(stage)
+    result = 0 
+    case self.stage
+      when 'negotiation'
+        result = 0
+      when 'reviewing_offer'
+        result = 1
+      when 'sampling'
+        result = 2
+      when 'initial_interest'
+        result = 3
+      when 'closed_won'
+        result = 4
+      when 'closed_lost'
+        result = 5
+      else
+        result = 6
+    end
+  end
+
+  def sort_by_standard_stage(stage)
+    result = 0 
+    case self.stage
+      when 'initial_interest'
+        result = 0
+      when 'sampling'
+        result = 1
+      when 'reviewing_offer'
+        result = 2
+      when 'negotiation'
+        result = 3
+      when 'closed_won'
+        result = 4
+      when 'closed_lost'
+        result = 5
+      else
+        result = 6
+    end
   end
 
   # def self.value_by_stage
