@@ -581,3 +581,21 @@ es:
       mmddhhss: ! '%b %e at %l:%M%p'
 
   sh_fee: SH Margen (objetivo)
+  tab_team: Grupo
+  global_lists: Listas Globales
+  personal_lists: Listas Personales
+  no_saved_lists: No listas guardaradas
+  my_tasks: Mis Tareas
+  my_opportunities: Mis Oportunidades
+  my_accounts: Mis Cuentas
+  local: Local
+  regional: Regional
+  basic_search: Búsqueda Básica
+  advanced_search: Búsqueda Avanzada
+  type: Tipo
+  tags: Etiquetas
+  select_or_create_tags: Seleccionar o crear etiquetas
+  international: Internacional
+  national: Nacional
+  total_accounts: Total Cuentas
+  account_categories: Cuenta Categorías
