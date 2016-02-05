@@ -581,7 +581,7 @@ es:
       mmddhhss: ! '%b %e at %l:%M%p'
 
   sh_fee: SH Margen (objetivo)
-  tab_team: Grupo
+  tab_team: Equipo
   global_lists: Listas Globales
   personal_lists: Listas Personales
   no_saved_lists: No listas guardaradas
