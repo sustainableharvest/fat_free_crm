@@ -6,15 +6,15 @@
     == <!-- #{controller.controller_name} : #{controller.action_name} -->
     = stylesheet_link_tag :application
     = stylesheet_link_tag :print, :media => 'print'
+    = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = hook(:stylesheet_includes, self) do
       #{yield :stylesheet_includes}
     %style= yield :styles
 
-    = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = javascript_include_tag :application
     %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"}
-    %script{:src => "http://code.highcharts.com/highcharts.js"}
-    %script{:src => "http://code.highcharts.com/modules/funnel.js"}
+    %script{:src => "https://code.highcharts.com"}
+    %script{:src => "http://highcharts.com/modules/funnel.js"}
 
     - unless tabless_layout? || %w(en-US en-GB).include?(I18n.locale.to_s)
       = javascript_include_tag "jquery_ui_datepicker/jquery.ui.datepicker-#{I18n.locale}"
