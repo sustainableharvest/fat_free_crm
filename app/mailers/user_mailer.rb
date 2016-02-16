@@ -23,6 +23,13 @@ class UserMailer < ActionMailer::Base
          from: from_address
   end
 
+  def new_signup_notification(admin, new_user)
+    @new_email = new_user.email
+    mail subject: "#{new_user.email} wants to create an account",
+         to: admin.email,
+         from: from_address
+  end
+
   private
 
   def from_address

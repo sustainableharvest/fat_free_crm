@@ -33,6 +33,9 @@ class UsersController < ApplicationController
     if @user.save
       if Setting.user_signup == :needs_approval
         flash[:notice] = t(:msg_account_created)
+        User.where(admin: true).each do |admin|
+          UserMailer.new_signup_notification(admin, @user).deliver_now
+        end
         redirect_to login_url
       else
         flash[:notice] = t(:msg_successful_signup)
