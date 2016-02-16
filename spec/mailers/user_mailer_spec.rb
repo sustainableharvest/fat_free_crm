@@ -139,13 +139,13 @@ describe UserMailer do
 
   describe "new_signup_notification" do
     let(:admin_first)   { FactoryGirl.create(:user, admin: true, id: 65, email: "admin1@business1.com") }
-    let(:admin_second)  { FactoryGirl.create(:user, admin: true, id: 65, email: "admin2@business2.com") }
+    let(:admin_second)  { FactoryGirl.create(:user, admin: true, id: 99, email: "admin2@business2.com") }
 
     it "generates emails for admins when new user requests account" do
       allow(Setting).to receive(:user_signup).and_return(:needs_approval)
       @user = FactoryGirl.create(:user, suspended_at: nil, email: "new_user@newguy.com", username: "new_user")
-      @mail = UserMailer.new_signup_notification([admin_second, admin_first], @user)
-      binding.pry
+      @mail1 = UserMailer.new_signup_notification(admin_first, @user)
+      @mail2 = UserMailer.new_signup_notification(admin_second, @user)
     end
   end
 end
