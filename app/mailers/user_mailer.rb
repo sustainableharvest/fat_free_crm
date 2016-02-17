@@ -30,6 +30,14 @@ class UserMailer < ActionMailer::Base
          from: from_address
   end
 
+  def reactivate_notification(user)
+    binding.pry
+    @root_url = url_for(root)
+    mail subject: "Your CATS Account has been activated!",
+         to: user.email,
+         from: from_address
+  end
+
   private
 
   def from_address

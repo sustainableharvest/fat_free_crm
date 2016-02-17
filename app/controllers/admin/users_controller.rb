@@ -96,7 +96,8 @@ class Admin::UsersController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def reactivate
     @user.update_attribute(:suspended_at, nil)
-
+    UserMailer.reactivate_notification(@user)
+    
     respond_with(@user)
   end
 

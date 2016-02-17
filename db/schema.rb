@@ -506,7 +506,6 @@ ActiveRecord::Schema.define(version: 20150603195422) do
     t.string   "password_salt",       limit: 255, default: "",    null: false
     t.string   "persistence_token",   limit: 255, default: "",    null: false
     t.string   "perishable_token",    limit: 255, default: "",    null: false
-    t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
     t.string   "last_login_ip",       limit: 255
@@ -521,7 +520,6 @@ ActiveRecord::Schema.define(version: 20150603195422) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["perishable_token"], name: "index_users_on_perishable_token", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_remember_token", using: :btree
   add_index "users", ["username", "deleted_at"], name: "index_users_on_username_and_deleted_at", unique: true, using: :btree
@@ -541,6 +539,7 @@ ActiveRecord::Schema.define(version: 20150603195422) do
 
   add_index "versions", ["created_at"], name: "index_versions_on_created_at", using: :btree
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+  add_index "versions", ["related_id", "related_type"], name: "index_versions_on_related_id_and_related_type", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
   add_index "versions", ["whodunnit"], name: "index_versions_on_whodunnit", using: :btree
 
