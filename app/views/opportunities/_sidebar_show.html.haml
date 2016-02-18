@@ -52,12 +52,16 @@
     %dt= @opportunity.assigned_to ? link_to(truncate(@opportunity.assignee.full_name, :length => 20), @opportunity.assignee, :title => @opportunity.assignee) : t(:n_a)
     %tt #{t :assigned_to}:
   %li
-    %dt
-      - if @opportunity.account
-        = link_to(truncate(@opportunity.account.name, :length => 20), @opportunity.account, :title => @opportunity.account.name)
-      - else
-        #{t :n_a}
-    %tt #{t :account}:
+    - if @opportunity.account
+      %dt= link_to(truncate(@opportunity.account.name, :length => 20), @opportunity.account, :title => @opportunity.account.name)
+      %tt #{t :account}:
+      - if @opportunity.account.main_interest.present?
+        %li
+          %tt #{t :main_interest}:
+          %dt= @opportunity.account.main_interest
+    - else
+      %tt #{t :account}:
+      %dt #{t :n_a}
   %li.last
     %dt
       - if @opportunity.campaign

@@ -24,6 +24,10 @@
   %div= render "shared/address_show", :asset => @account, :type => 'billing', :title => :billing_address
   %div= render "shared/address_show", :asset => @account, :type => 'shipping', :title => :shipping_address
 
+  - if @account.main_interest.present?
+    .caption #{t :main_interest}
+    <em>#{@account.main_interest}</em><br />
+
   .caption #{t :account_summary}
   / %li
   /   %dt= pipeline != 0.0 ? number_to_currency(pipeline, :precision => 0) : t(:n_a)

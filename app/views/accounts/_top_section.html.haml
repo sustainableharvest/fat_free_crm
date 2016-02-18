@@ -21,6 +21,11 @@
         %td
           .label #{t :status}
           = f.select :status, Setting.unroll(:account_status), {:selected => (@account.status || "customer").to_sym}, { :style => "width:160px" }
+      %tr
+        %td(colspan="5")
+          .label #{t :main_interest}:
+          = f.text_area :main_interest, { :style => "width: 100%"}
+
       / %tr
       /   %td
       /     .label #{t :source}:
