@@ -599,3 +599,39 @@ es:
   national: Nacional
   total_accounts: Total Cuentas
   account_categories: Cuenta Categorías
+  no_opportunity_records: No oportunidades archivos
+  all: Todas
+  reviewing_offer: Revisando oferta
+  initial_interest: Interés inicial
+  sampling: Probar
+  delivery_month: Mes de entrega
+  origin: Origen
+  terms: Condiciones
+  sales_price_per_lb: Precio de venta por libra
+  closed_won: Cerrado ganado
+  closed_lost: Cerrado perdido
+  opportunity_stages: Oportunidades etapas
+  open_opportunities: Oportunidades abiertas
+  bags_small: (Sacos|Opos)
+  option_stage: Etapa opción
+  peru: Perú
+  mexico: México
+  colombia: Colombia
+  nicaragua: Nicaragua
+  costa_rica: Costa Rica
+  honduras: Honduras
+  guatemala: Guatemala
+  ethiopia: Etiopía
+  brazil: Brasil
+  el_salvador: El Salvador
+  tanzania: Tanzania
+  ecuador: Ecuador
+  malawi: Malawi
+  rwanda: Ruanda
+  india: India
+  unassigned: Sin asignar
+  select_a_campaign: Seleccione una campaña
+  comment_intro: Se pueden añadir comentarios más adelante.
+  comment: Comentario
+  cash: Efectivo
+  
