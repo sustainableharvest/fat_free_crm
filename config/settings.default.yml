@@ -216,11 +216,6 @@
   :url:
     :controller: campaigns
 - :active: false
-  :text: :tab_leads
-  :icon: :fa-tasks
-  :url:
-    :controller: leads
-- :active: false
   :text: :tab_accounts
   :icon: :fa-users
   :url:

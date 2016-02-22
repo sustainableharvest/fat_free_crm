@@ -45,7 +45,6 @@
 
     # TODO: code for when viewing a single contact, not just index
     # need to refresh the page or just the segment
-
     $('a[data-view]').removeClass('active')
     $(this).addClass('active')
 

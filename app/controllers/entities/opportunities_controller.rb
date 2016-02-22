@@ -8,7 +8,7 @@ class OpportunitiesController < EntitiesController
   before_action :get_data_for_sidebar, only: :index
   before_action :set_params, only: [:index, :redraw, :filter]
   before_action :set_hidden_vars, only: [:create, :update]
-  before_action :set_current_tab, only: [:reports, :goals]
+  before_action :set_current_tab, only: [:reports, :goals, :index, :show]
 
   # GET /opportunities
   #----------------------------------------------------------------------------
