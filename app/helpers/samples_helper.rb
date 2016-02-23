@@ -17,8 +17,11 @@ module SamplesHelper
 
   def rits_pc_hash
     pc_hash = {}
-    rits_purchase_contracts.each {|pc| pc_hash[pc["contract_number"]] = {:country => pc["country"], :ssp => pc["ssp"], :fob_price => pc["fob"], :rits_id => pc["id"], :producer => pc["producer"]}}
+    rits_purchase_contracts.each {|pc| pc_hash[pc["contract_number"]] = {:country => pc["country"], :ssp => pc["ssp"], :fob_price => pc["fob"], :rits_id => pc["id"], :producer => pc["producer"], :month => name_to_month(pc["contract_number"])}}
     pc_hash
   end
 
+  def name_to_month(name)
+    Date.strptime(name.gsub(/[A-z]/,""), '%m-%d-%Y')
+  end
 end
