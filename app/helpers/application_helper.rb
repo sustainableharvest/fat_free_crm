@@ -564,4 +564,8 @@ module ApplicationHelper
     options = { renderer: RemoteLinkPaginationHelper::LinkRenderer }.merge(options)
     will_paginate(collection, options)
   end
+
+  def pc_name_to_month(name)
+    Date.strptime(name.gsub(/[A-z]/,""), '%m-%d-%Y')
+  end
 end

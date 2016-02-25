@@ -37,3 +37,13 @@
           = @opportunity_stage_total[key]
         = opportunity_stage_checkbox(key, @opportunity_stage_total[key])
         = label_tag(key, value)
+
+.filters#pcs
+  .caption
+    = (t :spot_contracts)
+  - @spot_contracts.each do |spot|
+    %div
+      %a(href="https://rits.sustainableharvest.com/purchase_contracts/") #{spot.contract_number}
+      = " | " + spot.country
+      - if spot.ssp
+        = " | " + number_to_currency(spot.ssp, locale: :en)

@@ -14,6 +14,7 @@ class OpportunitiesController < EntitiesController
   #----------------------------------------------------------------------------
   def index
     @opportunities = get_opportunities(page: params[:page], per_page: params[:per_page])
+    @spot_contracts = PurchaseContract.recent_spots
 
     respond_with @opportunities do |format|
       format.xls { render layout: 'header' }
