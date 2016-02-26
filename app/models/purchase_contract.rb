@@ -31,4 +31,14 @@ class PurchaseContract < ActiveRecord::Base
     PurchaseContract.where("arrival_month > ?", 3.months.ago)
   end
 
+  def certification_symbol
+    result = ""
+    result += "FT" if fair_trade
+    result += "O" if organic
+    result += " USA" if fair_trade_usa
+    result += " RFA" if rainforest
+    result += " FFL" if fair_for_life
+    result.strip
+  end
+
 end
