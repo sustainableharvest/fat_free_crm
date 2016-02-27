@@ -42,12 +42,7 @@
   .caption
     = (t :spot_contracts)
   - @spot_contracts.each do |spot|
-    %div
-      %a(href="https://rits.sustainableharvest.com/purchase_contracts/") #{spot.contract_number}
+    %div{:style => "border-bottom: 1px solid lightgrey; margin: 2px 0 3px;"}
+      %a(href="#{spot.rits_url}" target="_blank") #{spot.contract_number}
       %br
-      - if !spot.certification_symbol.blank?
-        = spot.certification_symbol
-      - if spot.average_score
-        = " | " + spot.average_score.round(1).to_s
-      - if spot.ssp
-        = " | " + number_to_currency(spot.ssp, locale: :en)
+      = pc_index_formatter(spot)

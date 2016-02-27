@@ -31,6 +31,7 @@ class PurchaseContract < ActiveRecord::Base
     PurchaseContract.where("arrival_month > ?", 3.months.ago)
   end
 
+  # Returns commonly used notation for certifications
   def certification_symbol
     result = ""
     result += "FT" if fair_trade
@@ -39,6 +40,10 @@ class PurchaseContract < ActiveRecord::Base
     result += " RFA" if rainforest
     result += " FFL" if fair_for_life
     result.strip
+  end
+
+  def rits_url
+    "https://rits.sustainableharvest.com/purchase_contracts/" + rits_id.to_s
   end
 
 end
