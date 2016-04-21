@@ -16,7 +16,7 @@
     %script{:src => "http://code.highcharts.com/highcharts.js"}
     %script{:src => "http://code.highcharts.com/modules/funnel.js"}
 
-    - unless tabless_layout? || %w(en-US en-GB).include?(I18n.locale.to_s)
+    - unless tabless_layout? || %w(en-US en-GB es).include?(I18n.locale.to_s)
       = javascript_include_tag "jquery_ui_datepicker/jquery.ui.datepicker-#{I18n.locale}"
       = javascript_include_tag "jquery_ui_datepicker/jquery-ui-timepicker-#{I18n.locale}"
 
