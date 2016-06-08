@@ -48,9 +48,9 @@
 
   -# Actual Number of Leads.
   -#---------------------------------------------------------------------------
-  / %li
-  /   %dt= @campaign.leads_count || t(:n_a)
-  /   %tt== #{t :leads}: #{performance(@campaign.leads_count, @campaign.target_leads)}
+  %li
+    %dt= @campaign.leads_count || t(:n_a)
+    %tt== #{t :leads}: #{performance(@campaign.leads_count, @campaign.target_leads)}
 
   -# Actual Conversion Ratio: calculated based on actual number of leads
   -# and opportunities.
