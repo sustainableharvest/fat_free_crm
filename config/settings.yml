@@ -133,4 +133,4 @@ email_dropbox:
 #  :address_aliases:                      # Optional: List any aliases that you also want to
 #    - example_alias@example.com          #           ignore when scanning recipients
 #  :move_to_folder            : ""        # Optional: folder to move processed messages to.
-#  :move_invalid_to_folder    : ""        # Optional: folder to move invalid messages to.
+  :move_invalid_to_folder    : "Discarded"        # Optional: folder to move invalid messages to.
