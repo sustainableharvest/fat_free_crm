@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.4'
+ruby '2.2.3'
 
 # Uncomment the database that you have configured in config/database.yml
 # ----------------------------------------------------------------------
@@ -59,9 +59,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
   gem 'headless'
-  gem 'debugger', platforms: 'mri_19' unless ENV["CI"]
-  gem 'byebug', platforms: %w(mri_20 mri_21) unless ENV["CI"]
+  gem 'byebug'
   gem 'pry-rails' unless ENV["CI"]
+  gem 'factory_girl_rails'
 end
 
 group :test do
@@ -69,7 +69,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem "acts_as_fu"
-  gem 'factory_girl_rails'
   gem 'zeus' unless ENV["CI"]
   gem 'timecop'
 end

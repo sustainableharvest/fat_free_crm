@@ -404,10 +404,10 @@ ActiveRecord::Schema.define(version: 20160217235801) do
     t.integer  "opportunity_id"
     t.string   "type",                      limit: 32
     t.string   "description",               limit: 255
-    t.string   "rits_purchase_contract_id", limit: 255
+    t.string   "rits_purchase_contract_id"
     t.string   "pricing_type",              limit: 12
     t.string   "producer",                  limit: 64
-    t.string   "quoted_price",              limit: 255
+    t.string   "quoted_price"
     t.decimal  "sh_margin",                             precision: 8, scale: 2
     t.decimal  "sh_fee",                                precision: 8, scale: 2
     t.decimal  "differential",                          precision: 8, scale: 2
@@ -421,7 +421,7 @@ ActiveRecord::Schema.define(version: 20160217235801) do
     t.text     "subscribed_users"
     t.integer  "rits_id"
     t.integer  "ssp"
-    t.string   "country",                   limit: 255
+    t.string   "country"
     t.integer  "assigned_to"
     t.string   "access",                    limit: 8
   end

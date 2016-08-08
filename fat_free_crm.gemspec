@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.email = ['mike@fatfreecrm.com', 'nathan@fatfreecrm.com', 'warp@fatfreecrm.com', 'steveyken@gmail.com']
   gem.files = `git ls-files`.split("\n")
   gem.version = FatFreeCRM::VERSION::STRING
-  gem.required_ruby_version = '>= 1.9'
+  gem.required_ruby_version = '>= 2.0.0'
   gem.license = 'MIT'
 
   gem.add_dependency 'rails',               '~> 4.2.0'
@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'jquery-rails'
   gem.add_dependency 'jquery-migrate-rails'
   gem.add_dependency 'jquery-ui-rails'
-  gem.add_dependency 'select2-rails'
+  gem.add_dependency 'select2-rails', '~> 3.5.9.3'
   gem.add_dependency 'simple_form'
   gem.add_dependency 'will_paginate'
   gem.add_dependency 'paperclip'
@@ -36,7 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'haml'
   gem.add_dependency 'sass'
   gem.add_dependency 'acts_as_list'
-  gem.add_dependency 'ffaker'
+  gem.add_dependency 'ffaker',              '>= 2'
   gem.add_dependency 'cancancan'
   gem.add_dependency 'font-awesome-rails'
   gem.add_dependency 'premailer'
