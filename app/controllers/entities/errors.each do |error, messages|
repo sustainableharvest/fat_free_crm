@@ -1,6 +1,0 @@
-result = ""
-errors.each do |error, messages|
-  messages.each do |message|
-    result += error.to_s.capitalize + " " + message.to_s + ".\n"
-  end  
-end  
