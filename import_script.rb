@@ -21,10 +21,20 @@ roasters.each do |roaster|
 end
 
 newish = 0
-found = 0
+found = ""
 peeps.each do |peep|
   if Contact.where(email: peep["Email Address"]).length > 0
-    found += 1
+    
   else
-    newish += 1
+    c = Contact.create(first_name: peep["First Name"].to_s, last_name: peep["Last Name"].to_s, email: peep["Email Address"], phone: peep["Work Phone"], mobile: peep["Mobile Phone"])
+    c.addresses << Address.create(country: peep["Work Country"], address_type: "Business")
+    c.comments << Comment.create(user_id: 1, commentable_type: "Contact", comment: "FROM IMPORT\n\nCompany: " + peep["Company"].to_s + "\n\nTitle: " + peep["Title"].to_s + "\n\nType: " + peep["Contact Type"].to_s)
+    c.tag_list = "LTC2016Target"
+    c.save
+  end
 end
+
+newish = 0
+found = ""
+ngos.each do |ngo|
+  if Contact.where(email: ngo["Email Address"])

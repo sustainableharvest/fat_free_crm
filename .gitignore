@@ -40,3 +40,4 @@ Design
 *.csv
 !roasters.csv
 !africa.csv
+!ngos.csv
