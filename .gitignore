@@ -39,3 +39,4 @@ Design
 *.gem
 *.csv
 !roasters.csv
+!africa.csv

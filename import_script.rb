@@ -13,9 +13,18 @@ roasters.each do |roaster|
   match = Contact.where(email: roaster["Email Address"])
   if match
     match.each do |n|
-      n.assignee = User.where(email: roaster["Assigned to (use email)"]).first if roaster["Assigned to (use email)"].present?
+      n.assignee = User.where(email: roaster["Assigned to (use email)"].downcase).first if roaster["Assigned to (use email)"].present?
       n.tag_list.add("LTC2016Target")
       n.save
     end
   end
+end
+
+newish = 0
+found = 0
+peeps.each do |peep|
+  if Contact.where(email: peep["Email Address"]).length > 0
+    found += 1
+  else
+    newish += 1
 end
