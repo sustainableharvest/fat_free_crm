@@ -172,6 +172,16 @@ class User < ActiveRecord::Base
     result
   end
 
+  # Returns array of account IDs that have not been updated in any way in n days (default 30)
+  def salesperson_check(deadline = 30.days.ago)
+    inactive = []
+    accounts = Account.where(assigned_to: id)
+    accounts.each do |account|
+      inactive.push(account) if account.recent_history(deadline)
+    end
+    inactive
+  end
+
   private
 
   # Suspend newly created user if signup requires an approval.

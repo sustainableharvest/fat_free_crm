@@ -30,6 +30,15 @@ class UserMailer < ActionMailer::Base
          from: from_address
   end
 
+  def inactive_accounts(user)
+    @inactive_accounts = user.salesperson_check
+    user.email == "jorge@sustainableharvest.com" ? @jorge = nil : @jorge = "jorge@sustainableharvest.com"
+    mail subject: "List of Accounts Needing Followup",
+         to: user.email,
+         from: from_address,
+         bcc: @jorge
+  end
+
   private
 
   def from_address

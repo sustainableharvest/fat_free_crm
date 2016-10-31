@@ -135,6 +135,12 @@ class Account < ActiveRecord::Base
     account
   end
 
+  # add to account class
+  # returns if last activity is more recent than deadline
+  def recent_history(deadline)
+    versions.last.created_at < deadline
+  end
+
   private
 
   # Make sure at least one user has been selected if the account is being shared.

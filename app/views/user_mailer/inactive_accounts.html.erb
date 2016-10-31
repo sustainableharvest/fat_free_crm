@@ -1,0 +1,9 @@
+<%= "Below is the list of Accounts that haven't been contacted in 30 days:" %>
+
+<ul>
+  <% @inactive_accounts.each do |account| %>
+    <li>
+      <%= link_to(account.name, url_for(account)) %>
+    </li>
+  <% end %>
+</ul>

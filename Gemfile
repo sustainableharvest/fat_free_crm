@@ -38,6 +38,7 @@ remove 'fat_free_crm'
 group :development do
   # don't load these gems in travis
   unless ENV["CI"]
+    gem 'letter_opener'
     gem 'thin'
     gem 'quiet_assets'
     gem 'capistrano'
