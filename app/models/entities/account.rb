@@ -138,7 +138,7 @@ class Account < ActiveRecord::Base
   # add to account class
   # returns if last activity is more recent than deadline
   def recent_history(deadline)
-    versions.last.created_at < deadline
+    versions.where.not(event: "view").last.created_at < deadline
   end
 
   private
